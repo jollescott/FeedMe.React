@@ -1,10 +1,20 @@
 import React from 'react';
+import {Provider} from 'react-redux';
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
 import './App.css';
 import logo from './logo.svg';
+import rootReducer from './store';
+
+const store = createStore( 
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <Provider store={store}>
+      <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -20,6 +30,7 @@ const App: React.FC = () => {
         </a>
       </header>
     </div>
+    </Provider>
   );
 }
 
