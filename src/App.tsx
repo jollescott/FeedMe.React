@@ -4,7 +4,7 @@ import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import './App.css';
 import logo from './logo.svg';
-import rootReducer from './store';
+import { rootReducer } from './store';
 
 const store = createStore( 
   rootReducer,
