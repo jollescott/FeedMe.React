@@ -1,10 +1,4 @@
-export interface IRecipe{
-    recipeId: string;
-}
-
-export interface IIngredient{
-    ingredientId: string;
-}
+import { IRecipe } from "../types";
 
 export interface ISearchState{
     results: IRecipe[],
