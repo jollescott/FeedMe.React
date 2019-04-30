@@ -1,6 +1,7 @@
 import React from 'react';
 
 declare global {
+// tslint:disable-next-line: interface-name
   interface Window {
     adsbygoogle: any;
   }
