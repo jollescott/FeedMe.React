@@ -3,24 +3,21 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import './App.css';
-import Slider from 'react-slick';
+import Slider, { Settings as SliderSettings } from 'react-slick';
 import { rootReducer } from './store';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const App: React.FC = () => {
-  const settings = {
-    className: "center",
-    centerMode: true,
+  const settings : SliderSettings = {
+    dots: true,
     infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 1,
     speed: 500,
-    dots: true
+    slidesToShow: 1,
+    slidesToScroll: 1
 };
 
   return (
-    <Provider store={store}>
       <div>
         <h2>Center Mode</h2>
         <Slider {...settings}>
@@ -44,7 +41,6 @@ const App: React.FC = () => {
           </div>
         </Slider>
       </div>
-    </Provider>
   );
 };
 
