@@ -1,0 +1,14 @@
+.main {
+    position: absolute;
+    margin: 10px;
+    padding: 0;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0);
+    width: 50%;
+    box-shadow: 0 2px 6px #000000;
+    background-color: white;
+}
+
+.page {
+}

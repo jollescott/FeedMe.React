@@ -8,19 +8,22 @@ import { rootReducer } from './store';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+
 const App: React.FC = () => {
-  const settings : SliderSettings = {
+  const settings: SliderSettings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
-};
+    slidesToScroll: 1,
+    arrows: true, // true if on computer
+  };
 
   return (
-      <div>
-        <h2>Center Mode</h2>
-        <Slider {...settings}>
+    <Provider store={store}>
+      <div className="main">
+        <h2>Simple Slider</h2>
+        <Slider {...settings} className="page">
           <div>
             <h3>1</h3>
           </div>
@@ -41,6 +44,7 @@ const App: React.FC = () => {
           </div>
         </Slider>
       </div>
+    </Provider>
   );
 };
 
