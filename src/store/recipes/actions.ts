@@ -2,6 +2,8 @@ import { RecipeActionTypes } from "./types";
 import { IRecipe } from "../types";
 import { ThunkAction } from "redux-thunk";
 import axios from 'axios';
+import { AppState } from "..";
+import { Action } from "redux";
 
 //#region Search
 
