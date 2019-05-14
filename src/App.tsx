@@ -35,9 +35,9 @@ class App extends React.Component<any, IAppState> {
       <Provider store={store}>
         <div className="main">
           <Slider {...settings} className="pages">
-          <StartPage currentSearchMode={this.state.currentSearchMode}/>
-          <StartPage/>
-          <StartPage/>
+            <StartPage currentSearchMode={this.state.currentSearchMode}/>
+            <StartPage/>
+            <StartPage/>
           </Slider>
         </div>
       </Provider>

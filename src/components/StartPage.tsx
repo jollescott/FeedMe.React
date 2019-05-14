@@ -9,15 +9,6 @@ interface IStartState{
 }
 export default class StartPage extends React.Component<any, IStartState> {
 
-  renderButton(id: number, name: string){
-
-    return(
-      <Button variant="outlined" color="inherit">
-        {name}
-      </Button>
-    );
-  }
-
   public render() {
     return (
       <div className="page">
@@ -26,5 +17,14 @@ export default class StartPage extends React.Component<any, IStartState> {
         {this.renderButton(1, 'Recept Namn')}
       </div>
       );
+  }
+
+  private renderButton(id: number, name: string){
+
+    return(
+      <Button variant="outlined" color="inherit">
+        {name}
+      </Button>
+    );
   }
 }
