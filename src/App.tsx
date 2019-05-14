@@ -6,6 +6,8 @@ import './App.css';
 import Slider, { Settings as SliderSettings } from 'react-slick';
 import { rootReducer } from './store';
 import StartPage from './components/StartPage';
+import NameSearchPage from './components/NameSearchPage';
+import IngredientsSearchPage from './components/IngredientSearchPage';
 import {SearchMode} from './misc/Enums';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -14,11 +16,18 @@ interface IAppState{
   currentSearchMode: SearchMode,
 }
 class App extends React.Component<any, IAppState> {
-  constructor(props: any){
+  private slider: Slider | null;
+
+  constructor(props: {}){
     super(props);
+
+    this.slider = null;
+
     this.state = {
       currentSearchMode: SearchMode.Ingredients
     };
+    
+    this.changeSearchMode = this.changeSearchMode.bind(this);
   }
 
   public render(){
@@ -28,16 +37,27 @@ class App extends React.Component<any, IAppState> {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      arrows: true, // true if on computer
+      draggable: false,
+      swipe: false,
+      arrows: false,
     };
+
+    const pages: any[] = [
+      <StartPage currentSearchMode={this.state.currentSearchMode} changeSearchMode={this.changeSearchMode} key={0}/>,
+    ];
+
+    if (this.state.currentSearchMode === SearchMode.Ingredients){
+      pages.push(<IngredientsSearchPage/>);
+    }
+    else {
+      pages.push(<NameSearchPage/>);
+    }
 
     return (
       <Provider store={store}>
         <div className="main">
-          <Slider {...settings} className="pages">
-            <StartPage currentSearchMode={this.state.currentSearchMode} searchMode={this.setSearchMode}/>
-            <StartPage/>
-            <StartPage/>
+          <Slider {...settings} ref={c => (this.slider = c)} className="pages">
+            {pages}
           </Slider>
         </div>
       </Provider>
@@ -45,10 +65,20 @@ class App extends React.Component<any, IAppState> {
   }
 
   
-  private setSearchMode(searchMode: SearchMode){
+  private changeSearchMode(searchMode: SearchMode): void {
     this.setState({
-      currentSearchMode: SearchMode.Ingredients
+      currentSearchMode: searchMode
     })
+
+    if(this.slider !== null) {
+      this.slider.slickNext();
+    }
+  }
+
+  private goBack(): void {
+    if(this.slider !== null){
+      this.slider.slickPrev();
+    }
   }
 };
 

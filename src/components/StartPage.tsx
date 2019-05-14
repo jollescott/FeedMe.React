@@ -4,11 +4,11 @@ import './StartPage.css';
 import { SearchMode } from '../misc/Enums';
 import Button from '@material-ui/core/Button';
 
-interface IStartState {
+interface IStartProps {
   currentSearchMode: SearchMode;
-  setSearchMode: any;
+  changeSearchMode: (mode: SearchMode) => void;
 }
-export default class StartPage extends React.Component<any, IStartState> {
+export default class StartPage extends React.Component<IStartProps> {
   public render() {
     return (
       <div className="page">
@@ -24,14 +24,16 @@ export default class StartPage extends React.Component<any, IStartState> {
 
     if (isActivated) {
       return ( 
-        <Button variant="extendedFab" color="primary" onClick={() => this.props.setSearchMode(searchMode)}>
+// tslint:disable-next-line: jsx-no-lambda
+        <Button variant="extendedFab" color="primary" onClick={() => this.props.changeSearchMode(searchMode)}>
           {name}
         </Button>
       );
     }
     else {
       return ( 
-        <Button variant="extendedFab" color="default">
+// tslint:disable-next-line: jsx-no-lambda
+        <Button variant="extendedFab" color="default" onClick={() => this.props.changeSearchMode(searchMode)}>
           {name}
         </Button>
       )

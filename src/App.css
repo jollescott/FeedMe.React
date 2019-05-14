@@ -36,3 +36,7 @@ button {
     height: 100px;
     width: 300px;
 }
+
+.slick-dots li button{
+    pointer-events: none;
+}
