@@ -7,23 +7,23 @@ import { Action } from "redux";
 
 //#region Search
 
-export function loadStart(): RecipeActionTypes{
+export function loadRecipeStart(): RecipeActionTypes{
     return {
-        type: 'LOAD_START',
+        type: 'LOAD_RECIPE_START',
     }
 }
 
-export function loadSuccess(recipe: IRecipe) : RecipeActionTypes{
+export function loadRecipeSuccess(recipe: IRecipe) : RecipeActionTypes{
     return {
         recipe,
-        type: 'LOAD_SUCCESS'
+        type: 'LOAD_RECIPE_SUCCESS'
     }
 }
 
-export function loadFailure(error: string) : RecipeActionTypes{
+export function loadRecipeFailure(error: string) : RecipeActionTypes{
     return {
         error,
-        type: 'LOAD_FAILURE'
+        type: 'LOAD_RECIPE_FAILURE'
     }
 }
 
@@ -31,13 +31,51 @@ export const loadRecipe = (recipeId: string): ThunkAction<void, AppState, null, 
     axios.post<IRecipe>(`https://api.feedmeapp.se/v2/recipe/retreive?id=${recipeId}`)
         .then(resp => {
             if(resp.status === 200){
-                dispatch(loadSuccess(resp.data));
+                dispatch(loadRecipeSuccess(resp.data));
             } else{
-                dispatch(loadFailure(resp.statusText));
+                dispatch(loadRecipeFailure(resp.statusText));
             }
         })
         .catch(e => {
-            dispatch(loadFailure(e));
+            dispatch(loadRecipeFailure(e));
+        });
+}
+
+//#endregion
+
+//#region Count
+
+export function loadCountStart(): RecipeActionTypes{
+    return {
+        type: 'LOAD_COUNT_START',
+    }
+}
+
+export function loadCountSuccess(count: number) : RecipeActionTypes{
+    return {
+        count,
+        type: 'LOAD_COUNT_SUCCESS'
+    }
+}
+
+export function loadCountFailure(error: string) : RecipeActionTypes{
+    return {
+        error,
+        type: 'LOAD_COUNT_FAILURE'
+    }
+}
+
+export const refreshRecipeCount = (): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+    axios.post<number>(`https://api.feedmeapp.se/v2/recipe/retreive?`)
+        .then(resp => {
+            if(resp.status === 200){
+                dispatch(loadCountSuccess(resp.data));
+            } else{
+                dispatch(loadCountFailure(resp.statusText));
+            }
+        })
+        .catch(e => {
+            dispatch(loadRecipeFailure(e));
         });
 }
 

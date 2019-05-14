@@ -17,7 +17,7 @@ class App extends React.Component<any, IAppState> {
   constructor(props: any){
     super(props);
     this.state = {
-      currentSearchMode: SearchMode.Name
+      currentSearchMode: SearchMode.Ingredients
     };
   }
 
@@ -35,13 +35,20 @@ class App extends React.Component<any, IAppState> {
       <Provider store={store}>
         <div className="main">
           <Slider {...settings} className="pages">
-            <StartPage currentSearchMode={this.state.currentSearchMode}/>
+            <StartPage currentSearchMode={this.state.currentSearchMode} searchMode={this.setSearchMode}/>
             <StartPage/>
             <StartPage/>
           </Slider>
         </div>
       </Provider>
     );
+  }
+
+  
+  private setSearchMode(searchMode: SearchMode){
+    this.setState({
+      currentSearchMode: SearchMode.Ingredients
+    })
   }
 };
 

@@ -23,7 +23,7 @@ export function ingredientReducer(state = initialState, action: IngredientAction
         case 'SEARCH_SUCCESS':
             return {
                 ...state,
-                results: state.ingredients,
+                results: action.recipes,
                 loading: false
             }
         case 'ADD_INGREDIENT':
