@@ -56,7 +56,7 @@ class App extends React.Component<any, IAppState> {
     return (
       <Provider store={store}>
         <div className="main">
-          <Slider {...settings} ref={c => (this.slider = c)} className="pages">
+          <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
             {pages}
           </Slider>
         </div>
