@@ -34,7 +34,7 @@ class App extends React.Component<any, IAppState> {
     const settings: SliderSettings = {
       dots: true,
       infinite: false,
-      speed: 500,
+      speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
       draggable: false,
