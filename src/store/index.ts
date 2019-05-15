@@ -4,10 +4,13 @@ import { ISearchState } from './search/types';
 import { ingredientReducer } from './ingredients/reducers';
 import { IIngredientState } from './ingredients/types';
 import { IRecipeState } from './recipes/types';
-
-export type AppState = ISearchState | IIngredientState | IRecipeState;
+import { recipesReducer } from './recipes/reducers';
 
 export const rootReducer = combineReducers({
   search: searchReducer,
-  ingredients: ingredientReducer
+  ingredients: ingredientReducer,
+  recipes: recipesReducer
 });
+
+export type AppState = ReturnType<typeof rootReducer>
+

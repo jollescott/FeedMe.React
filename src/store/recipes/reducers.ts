@@ -7,7 +7,7 @@ const initialState: IRecipeState = {
     recipe: undefined
 }
 
-export function ingredientReducer(state = initialState, action: RecipeActionTypes) : IRecipeState {
+export function recipesReducer(state = initialState, action: RecipeActionTypes) : IRecipeState {
     switch(action.type){
         case 'LOAD_RECIPE_START':
             return {

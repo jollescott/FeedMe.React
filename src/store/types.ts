@@ -1,7 +1,9 @@
 export interface IRecipe{
-    recipeId: string;
+    recipeId: number;
 }
 
 export interface IIngredient{
-    ingredientId: string;
+    ingredientId: number;
+    role: number;
+    ingredientName: string;
 }

@@ -11,10 +11,8 @@ import { searchRecipesT } from '../store/search/actions';
 interface INameSearchProps {
   search: (query: string) => void;
 }
-interface INameSearchState {
-  searchTerm: string;
-}
-class StartPage extends React.Component<INameSearchProps, INameSearchState> {
+class StartPage extends React.Component<INameSearchProps> {
+
   public render() {
     return (
       <div className="page">
