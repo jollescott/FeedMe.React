@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment, Button } from '@material-ui/core';
+import { TextField, InputAdornment, Button, StepIcon } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { searchRecipesT, searchRecipesI } from '../store/search/actions';
@@ -14,43 +14,37 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
+import AddIcon from '@material-ui/icons/Add';
+import AddedIcon from '@material-ui/icons/PlaylistAddCheck';
 
-interface IIngredientSearchProps{
+
+interface IIngredientSearchProps {
   results: IIngredient[];
   ingredients: IIngredient[];
   loading: boolean;
   error: string;
-  findIngredients: (query: string) => void; 
+  findIngredients: (query: string) => void;
 }
 class IngredientSearchPage extends React.Component<IIngredientSearchProps>
 {
-  constructor(props: Readonly<IIngredientSearchProps>){
+  constructor(props: Readonly<IIngredientSearchProps>) {
     super(props);
 
     this.textChanged = this.textChanged.bind(this);
   }
 
   public render() {
-
-    const resultStrings: string[] = [];
-    for(let i = 0; i < this.props.results.length; i++){
-      resultStrings.push(this.props.results[i].ingredientName);
-    }
-
+    // <Det här är bara temporärt för att se så att saker funkar>
     const checked: boolean[] = [];
-    for(let i = 0; i < this.props.results.length; i++){
+    for (let i = 0; i < this.props.results.length; i++) {
       checked.push(i % 2 === 0);
     }
+    // </...>
 
     return (
       <div className="page">
-      {"loading: " + this.props.loading}
-      {"error: " + this.props.error}
         <TextField
-          id="input-with-icon-textfield"
           label="Sök ingredienser"
           onChange={this.textChanged}
           InputProps={{
@@ -61,32 +55,33 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps>
             ),
           }}
         />
-        {resultStrings}
 
         <List>
-          {[0, 1, 2, 3].map(value => (
-            <ListItem key={value} role={undefined} dense button onClick={() => alert(value)}>
-              <Checkbox
-                checked={checked[value]}
-                tabIndex={-1}
-                disableRipple
-              />
-              <ListItemText primary={`Line item ${value + 1}`} />
+          {this.props.results.map((ingredient, index) => (
+            <ListItem key={index} role={undefined}>
+              <ListItemText primary={ingredient.ingredientName} />
               <ListItemSecondaryAction>
-                <IconButton aria-label="Comments">
-                  <CommentIcon />
+                <IconButton aria-label="Comments" color="primary" onClick={() => this.toggleIngredient(ingredient)}>
+                  {checked[index] ? <AddIcon color="secondary"/> : <AddedIcon color="primary"/>}
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
-
       </div>
     );
   }
 
-  private textChanged(e: React.ChangeEvent<HTMLInputElement>): void{
+
+  // Remove or ad an ingredient
+  private toggleIngredient(ingredient: IIngredient): void{
+    //this.props.addIngredient(ingredient);
+  }
+
+  // This gets called every time the search field updates
+  private textChanged(e: React.ChangeEvent<HTMLInputElement>): void {
     e.persist();
+    // start searching for matching ingredients
     this.props.findIngredients(e.target.value);
   }
 }
