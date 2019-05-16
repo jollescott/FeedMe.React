@@ -1,4 +1,5 @@
 import { IIngredientState, IngredientActionTypes } from "./types";
+import { IIngredient } from "../types";
 
 const initialState: IIngredientState = {
     error: '',
@@ -27,17 +28,21 @@ export function ingredientReducer(state = initialState, action: IngredientAction
                 loading: false
             }
         case 'ADD_INGREDIENT':
-            state.ingredients.push(action.ingredient);
+            const aIngredients = new Array<IIngredient>(...state.ingredients);
+            aIngredients.push(action.ingredient);
 
             return {
                 ...state,
+                ingredients: aIngredients
             }
         case 'REMOVE_INGREDIENT':
-            const index = state.ingredients.indexOf(action.ingredient);
-            delete state.ingredients[index];
+            const rIngredients = new Array<IIngredient>(...state.ingredients);
+            const index = rIngredients.indexOf(action.ingredient);
+            delete rIngredients[index];
 
             return {
-                ...state
+                ...state,
+                ingredients: rIngredients
             }
         default: 
             return state;
