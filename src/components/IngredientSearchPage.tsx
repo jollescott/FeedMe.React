@@ -1,15 +1,13 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment, Button, StepIcon } from '@material-ui/core';
+import { TextField, InputAdornment } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
-import { searchRecipesT, searchRecipesI } from '../store/search/actions';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { IIngredient } from '../store/types';
-import { searchIngredients } from '../store/ingredients/actions';
+import { searchIngredients, addIngredient, removeIngredient } from '../store/ingredients/actions';
 import { AppState } from '../store';
-import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -17,6 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AddedIcon from '@material-ui/icons/PlaylistAddCheck';
+import { searchRecipesI } from '../store/search/actions';
 
 
 interface IIngredientSearchProps {
@@ -25,6 +24,9 @@ interface IIngredientSearchProps {
   loading: boolean;
   error: string;
   findIngredients: (query: string) => void;
+  addIngredient: (ingredient: IIngredient) => void; //Lägg till ingrediens
+  removeIngredient: (ingredient: IIngredient) => void; //Ta bort ingrediens
+  findRecipes: (query: IIngredient[]) => void;
 }
 class IngredientSearchPage extends React.Component<IIngredientSearchProps>
 {
@@ -33,7 +35,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps>
 
     this.textChanged = this.textChanged.bind(this);
   }
-
+  
   public render() {
     // <Det här är bara temporärt för att se så att saker funkar>
     const checked: boolean[] = [];
@@ -76,6 +78,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps>
   // Remove or ad an ingredient
   private toggleIngredient(ingredient: IIngredient): void{
     //this.props.addIngredient(ingredient);
+    this.props.addIngredient(ingredient);
   }
 
   // This gets called every time the search field updates
@@ -97,7 +100,10 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
-    findIngredients: (query: string) => dispatch(searchIngredients(query))
+    findIngredients: (query: string) => dispatch(searchIngredients(query)),
+    addIngredient: (ingredient: IIngredient) => dispatch(addIngredient(ingredient)), //Lägg till dispatchen för injection in i props
+    removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), //Lägg till dispatchen för injection in i props
+    findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query))
   }
 };
 

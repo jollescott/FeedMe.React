@@ -27,7 +27,7 @@ export function ingredientReducer(state = initialState, action: IngredientAction
                 loading: false
             }
         case 'ADD_INGREDIENT':
-            state.ingredients.push(action.ingredient)
+            state.ingredients.push(action.ingredient);
 
             return {
                 ...state,
