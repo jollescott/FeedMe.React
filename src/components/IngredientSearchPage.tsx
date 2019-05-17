@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField, InputAdornment, Divider } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -119,11 +119,15 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                 <h1 className="StartPageButtons">Lägg till ingredienser</h1>
               }
 
+              <Divider variant="fullWidth" />
+
               {this.state.searchTerm.length === 0 ?
                 this.props.ingredients.length === 0 ?
                   <div>
+                    <br />
                     <h3 className="info">Dina tillagda ingredienser kommer att visas här.</h3>
                     <h4 className="info"> Lägg till ingredienser genom att söka i sökfältet.</h4>
+                    <br />
                   </div>
                   :
                   <List>
@@ -145,7 +149,11 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                   </List>
                 :
                 !this.props.loading && this.props.results.length === 0 ?
-                  <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
+                  <div>
+                    <br />
+                    <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
+                    <br />
+                  </div>
                   :
                   <List>
                     {this.props.results.map((ingredient, index) => (
@@ -164,13 +172,15 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                   </List>
               }
 
+              <Divider variant="fullWidth" />
+
               <br />
 
               <Button variant="extendedFab" color="primary" onClick={this.nextPage} className="StartPageButtons" fullWidth disabled={!readyToFindRecipes}>
                 Hämta Recept
               </Button>
 
-              <div className="extraPageHeight"/>
+              <div className="extraPageHeight" />
             </div>
           </div>
         </div>

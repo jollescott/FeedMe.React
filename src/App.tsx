@@ -6,8 +6,8 @@ import './App.css';
 import Slider, { Settings as SliderSettings } from 'react-slick';
 import { rootReducer } from './store';
 import StartPage from './components/StartPage';
-import NameSearchPage from './components/NameSearchPage';
 import IngredientsSearchPage from './components/IngredientSearchPage';
+import NameSearchPage from './components/NameSearchPage';
 import { SearchMode } from './misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -60,6 +60,9 @@ class App extends React.Component<any, IAppState> {
     // Add pages
     if (this.state.currentSearchMode === SearchMode.Ingredients) {
       pages.push(<IngredientsSearchPage />);
+      pages.push(<NameSearchPage />);
+      pages.push(<NameSearchPage />);
+      pages.push(<NameSearchPage />);
     }
     else {
       pages.push(<NameSearchPage />);
