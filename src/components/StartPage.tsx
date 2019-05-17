@@ -12,9 +12,25 @@ export default class StartPage extends React.Component<IStartProps> {
   public render() {
     return (
       <div className="page">
-        <h1 className="StartPageButtons">Sök recept med...</h1>
-        {this.renderButton(SearchMode.Ingredients, 'Ingredienser')}
-        {this.renderButton(SearchMode.Name, 'Recept Namn')}
+
+        <div className="pageContent">
+          <div className="usablePage">
+            <div className="slimDiv">
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <h1 className="centerText">Sök recept med...</h1>
+              <br />
+              <br />
+              {this.renderButton(SearchMode.Ingredients, 'Ingredienser')}
+              <br />
+              <br />
+              {this.renderButton(SearchMode.Name, 'Recept Namn')}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -23,17 +39,17 @@ export default class StartPage extends React.Component<IStartProps> {
     const isActivated = searchMode === this.props.currentSearchMode;
 
     if (isActivated) {
-      return ( 
-// tslint:disable-next-line: jsx-no-lambda
-        <Button variant="extendedFab" color="primary" onClick={() => this.props.changeSearchMode(searchMode)} className="StartPageButtons">
+      return (
+        // tslint:disable-next-line: jsx-no-lambda
+        <Button variant="contained" color="primary" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth>
           {name}
         </Button>
       );
     }
     else {
-      return ( 
-// tslint:disable-next-line: jsx-no-lambda
-        <Button variant="extendedFab" color="default" onClick={() => this.props.changeSearchMode(searchMode)} className="StartPageButtons">
+      return (
+        // tslint:disable-next-line: jsx-no-lambda
+        <Button variant="contained" color="default" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth>
           {name}
         </Button>
       )

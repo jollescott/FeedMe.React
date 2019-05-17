@@ -82,9 +82,10 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
           <div className="usablePage">
             <div className="slimDiv">
               <TextField
-                className="searchBar"
                 fullWidth
                 label="Lägg till ingredienser"
+                type="search"
+                variant="standard"
                 onChange={this.textChanged}
                 InputProps={{
                   startAdornment: (
