@@ -33,7 +33,6 @@ export function ingredientReducer(state = initialState, action: IngredientAction
 
             if(exists.length <= 0) {
                 aIngredients.push(action.ingredient);
-                alert('ingredient added');
             }
 
             return {
