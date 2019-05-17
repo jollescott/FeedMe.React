@@ -15,26 +15,21 @@
 .page {
     display: flex;
     flex-direction: column;
-    qjustify-content: flex-start;
     align-items: center;
     height: 100vh;
-    qbackground-color: purple;
 }
 
 .pageHeader {
     padding-top: 30px;
     padding-bottom: 10px;
     width: 100%;
-    box-shadow: 0 1px 4px #000000;
+    box-shadow: 0 1px 3px #000000;
     background-color: #FFFFFF;
 }
 
 .pageContent {
     height: inherit;
     width: 100%;
-    qtop: 50px;
-    qbottom: 0px;
-    qbackground-color: aqua;
     overflow-y: scroll;
 }
 
@@ -42,7 +37,7 @@
 /* div formatting */
 
 .usablePage {
-    height: 100%;
+    qheight: 100%;
     max-width: 300mm;
     width: 100%;
     margin-left: auto;
@@ -68,7 +63,7 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 150mm;
-    width: 100%;
+    width: calc(100% - 20px);
 }
 
 
@@ -76,9 +71,8 @@
 
 .info {
     color: gray;
-    qfont-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 200;
-    margin: 3px;
+    margin: 4px;
 }
 
 
@@ -88,18 +82,40 @@
     pointer-events: none;
 }
 
-.ingredientListButton {}
+.ingredientListItem {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+}
 
 .ingredientListItem:hover {
     box-shadow: 0 1px 3px #000000;
     background-color: #ffffff6c;
 }
 
-.searchBar {
-    width: 80% !important;
-    max-width: 400px !important;
+.endSearchButton {
+    transform: translate(0, -18px) !important;
 }
 
-.endSearchButton {
-    box-shadow: 0 0 3px black;
+
+/*
+Extra page height
+On iOS
+*/
+
+@supports (-webkit-overflow-scrolling: touch) {
+    .extraPageHeight {
+        height: 120px;
+    }
+}
+
+
+/*
+Extra page height
+Not iOS
+*/
+
+@supports not (-webkit-overflow-scrolling: touch) {
+    .extraPageHeight {
+        height: 50px;
+    }
 }

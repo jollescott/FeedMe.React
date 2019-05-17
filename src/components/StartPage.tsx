@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import './StartPage.css';
 import { SearchMode } from '../misc/Enums';
 import Button from '@material-ui/core/Button';
 
