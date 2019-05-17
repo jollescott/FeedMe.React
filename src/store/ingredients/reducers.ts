@@ -29,7 +29,11 @@ export function ingredientReducer(state = initialState, action: IngredientAction
             }
         case 'ADD_INGREDIENT':
             const aIngredients = new Array<IIngredient>(...state.ingredients);
-            aIngredients.push(action.ingredient);
+            const exists = aIngredients.map(x => x.ingredientId === action.ingredient.ingredientId);
+
+            if(exists.length <= 0) {
+                aIngredients.push(action.ingredient);
+            }
 
             return {
                 ...state,
@@ -37,9 +41,8 @@ export function ingredientReducer(state = initialState, action: IngredientAction
             }
         case 'REMOVE_INGREDIENT':
             const rIngredients = new Array<IIngredient>(...state.ingredients);
-            const index = rIngredients.indexOf(action.ingredient);
-            delete rIngredients[index];
-
+            rIngredients.splice(rIngredients.indexOf(action.ingredient), 1);
+        
             return {
                 ...state,
                 ingredients: rIngredients
