@@ -178,9 +178,11 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
   private toggleIngredient(ingredient: IIngredient): void {
     if (this.ingredientExistsInList(this.props.ingredients, ingredient)) {
       this.props.removeIngredient(ingredient);
+      alert("remove " + ingredient.ingredientName)
     }
     else {
       this.props.addIngredient(ingredient);
+      alert("add " + ingredient.ingredientName)
     }
   }
 
