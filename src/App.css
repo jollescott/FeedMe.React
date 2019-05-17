@@ -90,6 +90,11 @@
     transform: translate(0, -18px) !important;
 }
 
+.menuButton {
+    padding: 12px !important;
+    border-radius: 50px !important;
+}
+
 
 /*
 On iOS

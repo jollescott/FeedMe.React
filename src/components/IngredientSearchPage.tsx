@@ -33,7 +33,7 @@ interface IIngredientSearchProps {
   findIngredients: (query: string) => void; // Börja söka efter ingredienser
   addIngredient: (ingredient: IIngredient) => void; // Lägg till ingrediens
   removeIngredient: (ingredient: IIngredient) => void; // Ta bort ingrediens
-  findRecipes: (query: IIngredient[]) => void;  // Börja säka efter recept
+  findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
 }
 interface IIngredientSearchState {
   searchTerm: string;
