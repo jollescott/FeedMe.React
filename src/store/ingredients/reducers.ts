@@ -29,10 +29,11 @@ export function ingredientReducer(state = initialState, action: IngredientAction
             }
         case 'ADD_INGREDIENT':
             const aIngredients = new Array<IIngredient>(...state.ingredients);
-            const exists = aIngredients.map(x => x.ingredientId === action.ingredient.ingredientId);
+            const exists = aIngredients.filter(x => x.ingredientId === action.ingredient.ingredientId);
 
             if(exists.length <= 0) {
                 aIngredients.push(action.ingredient);
+                alert('ingredient added');
             }
 
             return {
