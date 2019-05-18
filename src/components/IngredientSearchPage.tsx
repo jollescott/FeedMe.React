@@ -32,6 +32,8 @@ interface IIngredientSearchProps {
   addIngredient: (ingredient: IIngredient) => void; // Lägg till ingrediens
   removeIngredient: (ingredient: IIngredient) => void; // Ta bort ingrediens
   findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
+  goForward: () => void;
+  goBack: () => void; 
 }
 interface IIngredientSearchState {
   searchTerm: string;
@@ -47,6 +49,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     }
 
     this.textChanged = this.textChanged.bind(this);
+    this.nextPage = this.nextPage.bind(this);
   }
 
   public render() {
@@ -189,6 +192,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
   // Gå till nästa sida
   private nextPage(): void {
+    this.props.goForward();
   }
 
 

@@ -28,10 +28,10 @@ interface IAllPagesProps{
 interface IAllPagesState {
   currentSearchMode: SearchMode,
 }
-class AllPages extends React.Component<any, IAllPagesState> {
+class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
   private slider: Slider | null;
 
-  constructor(props: {}) {
+  constructor(props: Readonly<IAllPagesProps>) {
     super(props);
 
     this.slider = null;
@@ -62,23 +62,26 @@ class AllPages extends React.Component<any, IAllPagesState> {
     // Add pages
     if (this.state.currentSearchMode === SearchMode.Ingredients) {
       pages.push(<IngredientsSearchPage/>);
-      //pages.push(<RecipeListPage />);
+      pages.push(<RecipeListPage/>);
     }
     else {
       pages.push(<NameSearchPage />);
     }
 
+    if (this.slider != null){
+      this.slider.slickGoTo(this.props.pageIndex, false);
+    }
+
     return (
         <MuiThemeProvider theme={AppTheme}>
           <div className="main">
-            <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
+           <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
               {pages}
             </Slider>
           </div>
         </MuiThemeProvider>
     );
   }
-
 
   private changeSearchMode(searchMode: SearchMode): void {
     this.setState({

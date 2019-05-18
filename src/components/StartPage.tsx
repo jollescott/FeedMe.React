@@ -2,13 +2,19 @@ import React from 'react';
 import '../App.css';
 import { SearchMode } from '../misc/Enums';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+import { AppState } from '../store';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { goForward, goBack } from '../store/carousel/actions';
+import { StandardProps, PropTypes } from '@material-ui/core/index.d';
 
 
 interface IStartProps {
   currentSearchMode: SearchMode;
   changeSearchMode: (mode: SearchMode) => void;
 }
-export default class StartPage extends React.Component<IStartProps> {
+class StartPage extends React.Component<IStartProps> {
   public render() {
     return (
       <div className="page">
@@ -38,23 +44,31 @@ export default class StartPage extends React.Component<IStartProps> {
   }
 
   private renderButton(searchMode: SearchMode, name: string) {
-    const isActivated = searchMode === this.props.currentSearchMode;
+    return (
+      <Button
+        variant="contained"
+        color={searchMode === this.props.currentSearchMode ? "primary" : "default"}
+        onClick={() => this.nextPage(searchMode)}
+        fullWidth
+        className="menuButton"
+      >
+        {name}
+      </Button>
+    );
+  }
 
-    if (isActivated) {
-      return (
-        // tslint:disable-next-line: jsx-no-lambda
-        <Button variant="contained" color="primary" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth={true} className="menuButton">
-          {name}
-        </Button>
-      );
-    }
-    else {
-      return (
-        // tslint:disable-next-line: jsx-no-lambda
-        <Button variant="contained" color="default" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth={true} className="menuButton">
-          {name}
-        </Button>
-      )
-    }
+  private nextPage(searchMode: SearchMode): void {
+    this.props.changeSearchMode(searchMode);
   }
 }
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+  return {
+    goForward: () => dispatch(goForward()),
+    goBack: () => dispatch(goBack())
+  }
+};
+
+export default connect(
+  mapDispatchToProps,
+)(StartPage);
