@@ -33,7 +33,7 @@ interface IIngredientSearchProps {
   removeIngredient: (ingredient: IIngredient) => void; // Ta bort ingrediens
   findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
   goForward: () => void;
-  goBack: () => void; 
+  goBack: () => void;
 }
 interface IIngredientSearchState {
   searchTerm: string;
@@ -48,7 +48,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     }
 
     this.textChanged = this.textChanged.bind(this);
-    this.nextPage = this.nextPage.bind(this);
+    this.getRecipesButtonClickHandler = this.getRecipesButtonClickHandler.bind(this);
   }
 
   public render() {
@@ -176,8 +176,15 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
               <br />
 
-              <Button variant="extendedFab" color="primary" onClick={this.nextPage} className="StartPageButtons" fullWidth={true} disabled={!readyToFindRecipes}>
+              <Button variant="extendedFab" color="primary" onClick={this.getRecipesButtonClickHandler} fullWidth={true} disabled={!readyToFindRecipes}>
                 Hämta Recept
+              </Button>
+
+              <br/>
+              <br/>
+
+              <Button variant="outlined" color="default" onClick={this.props.goBack}>
+                {"< Föregående sida"}
               </Button>
 
               <div className="extraPageHeight" />
@@ -190,7 +197,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
   }
 
   // Gå till nästa sida
-  private nextPage(): void {
+  private getRecipesButtonClickHandler(): void {
     this.props.goForward();
   }
 
