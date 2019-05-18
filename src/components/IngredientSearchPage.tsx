@@ -40,7 +40,6 @@ interface IIngredientSearchState {
 }
 class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngredientSearchState>
 {
-
   constructor(props: Readonly<IIngredientSearchProps>) {
     super(props);
 

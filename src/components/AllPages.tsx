@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider, connect } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
+import { applyMiddleware, createStore, AnyAction } from 'redux';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import '../App.css';
 import Slider, { Settings as SliderSettings } from 'react-slick';
 import { rootReducer, AppState } from '../store';
@@ -11,6 +11,7 @@ import IngredientsSearchPage from '../components/IngredientSearchPage';
 import NameSearchPage from '../components/NameSearchPage';
 import { SearchMode } from '../misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { goForward } from '../store/carousel/actions';
 
 
 const AppTheme = createMuiTheme({
@@ -23,6 +24,7 @@ const AppTheme = createMuiTheme({
 
 interface IAllPagesProps{
   pageIndex: number;
+  goForward: () => void;
 }
 
 interface IAllPagesState {
@@ -88,9 +90,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
       currentSearchMode: searchMode
     })
 
-    if (this.slider !== null) {
-      this.slider.slickNext();
-    }
+    this.props.goForward();
   }
 
   private goBack(): void {
@@ -106,7 +106,16 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export default connect(mapStateToProps)(AllPages);
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+  return {
+    goForward: () => dispatch(goForward()),
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AllPages);
 
 
 
