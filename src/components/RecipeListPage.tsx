@@ -13,8 +13,11 @@ interface IRecipeListProps {
 
   findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
 }
+interface IRecipeListState {
 
-class RecipeListPage extends React.Component<IRecipeListProps>
+}
+
+class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
 {
   constructor(props: Readonly<IRecipeListProps>) {
     super(props);
@@ -46,4 +49,8 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export default connect(mapStateToProps)(RecipeListPage);
+
+
+export default connect(
+  mapStateToProps,
+  )(RecipeListPage);
