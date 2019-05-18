@@ -1,15 +1,8 @@
 import React from 'react';
 import '../App.css';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { IIngredient, IRecipe } from '../store/types';
-import { searchIngredients, addIngredient, removeIngredient } from '../store/ingredients/actions';
 import { AppState } from '../store';
-import { searchRecipesI } from '../store/search/actions';
-import { render } from 'react-dom';
-import { returnStatement } from '@babel/types';
-
+import { connect } from 'react-redux';
 
 interface IRecipeListProps {
   ingredients: IIngredient[];
@@ -40,10 +33,7 @@ class RecipeListPage extends React.Component<IRecipeListProps>
       </div>
     );
   }
-
-  // Gå till nästa sida
-  private nextPage(): void {
-  }
+}
 
  
 const mapStateToProps = (state: AppState) => {
@@ -56,7 +46,4 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-
-export default connect(
-  mapStateToProps,
-)(RecipeListPage);
+export default connect(mapStateToProps)(RecipeListPage);
