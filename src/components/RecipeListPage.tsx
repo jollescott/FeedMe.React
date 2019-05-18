@@ -7,7 +7,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { searchRecipesI } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
-import { Button } from '@material-ui/core';
+import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -37,7 +37,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.loadCount();
   }
 
@@ -51,15 +51,15 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
               {"< Föregående sida"}
             </Button>
 
-            <br/>
+            <br />
             {"Recipe count: " + this.props.recipeCount}
-            <br/>
+            <br />
             {"Loading: " + this.props.loading}
-            <br/>
+            <br />
             {"Error: " + this.props.error}
-            <br/>
+            <br />
             {"Error är null: " + String(this.props.error === null)}
-            <br/>
+            <br />
             {"Antal recpt: " + this.props.results.length}
 
             <List>
@@ -70,7 +70,37 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
               ))}
             </List>
 
+            <div className="gridListContainer">
+              {["test", "test", "test", "test", "test", "test", "test", "test"].map((test, index) => (
+                <div className="gridListItemContainer">
+                  <Card className="gridListItem">
+
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        image="https://www.kungsornen.se/Global/Recept/saffranspasta-med-sparris.jpg"
+                        title="Recept"  // TODO: byt title till receptets namn
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">Recept namn</Typography>
+                        <Typography component="p">Du har 87% av alla ingredienser</Typography>
+                      </CardContent>
+                    </CardActionArea>
+
+                    <CardActions>
+                      <Button size="small" color="primary">
+                        Recept.se
+                     </Button>
+                    </CardActions>
+                    
+                  </Card>
+                </div>
+              ))}
+            </div>
+
           </div>
+        
+          <div className="extraPageHeight"></div>
         </div>
       </div>
     );
