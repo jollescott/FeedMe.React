@@ -43,7 +43,7 @@ export default class StartPage extends React.Component<IStartProps> {
     if (isActivated) {
       return (
         // tslint:disable-next-line: jsx-no-lambda
-        <Button variant="contained" color="primary" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth className="menuButton">
+        <Button variant="contained" color="primary" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth={true} className="menuButton">
           {name}
         </Button>
       );
@@ -51,7 +51,7 @@ export default class StartPage extends React.Component<IStartProps> {
     else {
       return (
         // tslint:disable-next-line: jsx-no-lambda
-        <Button variant="contained" color="default" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth className="menuButton">
+        <Button variant="contained" color="default" onClick={() => this.props.changeSearchMode(searchMode)} fullWidth={true} className="menuButton">
           {name}
         </Button>
       )

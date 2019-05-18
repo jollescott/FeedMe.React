@@ -10,19 +10,16 @@ import { searchIngredients, addIngredient, removeIngredient } from '../store/ing
 import { AppState } from '../store';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AddedIcon from '@material-ui/icons/Check';
 import RemoveIcon from '@material-ui/icons/Remove';
-import RemovedIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import RemovedIcon from '@material-ui/icons/Close';
 import EndSearchIcon from '@material-ui/icons/Close';
 import { searchRecipesI } from '../store/search/actions';
-import { render } from 'react-dom';
-import { returnStatement } from '@babel/types';
 
 
 interface IIngredientSearchProps {
@@ -53,10 +50,10 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
   public render() {
 
-    var isAdded: boolean[] = []; // En bool för varje ingrediens i "props.results" som anger om ingrediensen redan är tillagd i "props.ingreedients" eller inte.
+    const isAdded: boolean[] = []; // En bool för varje ingrediens i "props.results" som anger om ingrediensen redan är tillagd i "props.ingreedients" eller inte.
 
     // Lägg till världen i isAdded[] och tilldela de resultatingredinser som redan är tillagada deras "roles"
-    for (var i = 0; i < this.props.results.length; i++) {
+    for (let i = 0; i < this.props.results.length; i++) {
       const index = this.ingredientListIndex(this.props.ingredients, this.props.results[i]);
       if (index !== -1) {
         this.props.results[i].role = this.props.ingredients[index].role;
@@ -64,11 +61,11 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
       isAdded.push(index !== -1);
     }
 
-    var readyToFindRecipes = false; // Anger om det finns ingredienser som går att söka recept med.
+    let readyToFindRecipes = false; // Anger om det finns ingredienser som går att söka recept med.
 
     // Kolla om det finns ingredienser som går att söka recept med.
-    for (var i = 0; i < this.props.ingredients.length; i++) {
-      if (this.props.ingredients[i].role === 1) {
+    for (let j = 0; j < this.props.ingredients.length; j++) {
+      if (this.props.ingredients[j].role === 1) {
         readyToFindRecipes = true;
         break;
       }
@@ -82,7 +79,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
           <div className="usablePage">
             <div className="slimDiv">
               <TextField
-                fullWidth
+                fullWidth={true}
                 label="Lägg till ingredienser"
                 type="search"
                 variant="standard"
@@ -176,7 +173,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
               <br />
 
-              <Button variant="extendedFab" color="primary" onClick={this.nextPage} className="StartPageButtons" fullWidth disabled={!readyToFindRecipes}>
+              <Button variant="extendedFab" color="primary" onClick={this.nextPage} className="StartPageButtons" fullWidth={true} disabled={!readyToFindRecipes}>
                 Hämta Recept
               </Button>
 
@@ -193,20 +190,11 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
   private nextPage(): void {
   }
 
-  // Kollar om en ingredienslista innehåller en specifik ingrediens
-  private ingredientExistsInList(ingredientList: IIngredient[], ingredient: IIngredient): boolean {
-    for (var i = 0; i < ingredientList.length; i++) {
-      if (ingredientList[i] != undefined && ingredientList[i].ingredientId === ingredient.ingredientId) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   // Returerar indexen för en specifik ingrediens i en ingredienslissta
   private ingredientListIndex(ingredientList: IIngredient[], ingredient: IIngredient): number {
-    for (var i = 0; i < ingredientList.length; i++) {
-      if (ingredientList[i] != undefined && ingredientList[i].ingredientId === ingredient.ingredientId) {
+    for (let i = 0; i < ingredientList.length; i++) {
+      if (ingredientList[i] !== undefined && ingredientList[i].ingredientId === ingredient.ingredientId) {
         return i;
       }
     }
@@ -276,8 +264,8 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     findIngredients: (query: string) => dispatch(searchIngredients(query)),
-    addIngredient: (ingredient: IIngredient) => dispatch(addIngredient(ingredient)), //Lägg till dispatchen för injection in i props
-    removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), //Lägg till dispatchen för injection in i props
+    addIngredient: (ingredient: IIngredient) => dispatch(addIngredient(ingredient)), // Lägg till dispatchen för injection in i props
+    removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), // Lägg till dispatchen för injection in i props
     findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query))
   }
 };
