@@ -11,6 +11,7 @@ import { Button } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { refreshRecipeCount } from '../store/recipes/actions';
 
 interface IRecipeListProps {
   results: IRecipe[];
@@ -20,6 +21,7 @@ interface IRecipeListProps {
   findRecipes: (query: IIngredient[]) => void;
   goForward: () => void;
   goBack: () => void;
+  loadCount: () => void;
 }
 interface IRecipeListState {
   test: string;
@@ -33,6 +35,10 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     this.state = ({
       test: "test"
     });
+  }
+
+  componentDidMount(){
+    this.props.loadCount();
   }
 
   public render() {
@@ -85,7 +91,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query)),
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack())
+    goBack: () => dispatch(goBack()),
+    loadCount: () => dispatch(refreshRecipeCount())
   }
 };
 

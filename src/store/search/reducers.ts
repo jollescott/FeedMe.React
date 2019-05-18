@@ -22,7 +22,7 @@ export function searchReducer(state = initialState, action: SearchActionTypes) :
         case 'SEARCH_SUCCESS':
             return {
                 ...state,
-                results: state.results,
+                results: action.recipes,
                 loading: false
             }
         default: 

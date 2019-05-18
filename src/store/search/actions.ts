@@ -42,8 +42,9 @@ export const searchRecipesT = (searchTerm: string, start: number = 25): ThunkAct
 }
 
 export const searchRecipesI = (ingredients: IIngredient[], start: number = 25): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
-    axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/suggest?start=${start}}]`, ingredients)
+    axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/suggest?start=${start}`, ingredients)
         .then(resp => {
+            console.log(resp.data);
             if(resp.status === 200) {
                 dispatch(searchSuccess(resp.data));
             }

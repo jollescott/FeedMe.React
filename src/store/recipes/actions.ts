@@ -66,7 +66,7 @@ export function loadCountFailure(error: string) : RecipeActionTypes{
 }
 
 export const refreshRecipeCount = (): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
-    axios.post<number>(`https://api.feedmeapp.se/v2/meta/recipeCount`)
+    axios.post<any>(`https://api.feedmeapp.se/v2/meta/recipeCount`)
         .then(resp => {
             if(resp.status === 200){
                 dispatch(loadCountSuccess(resp.data));
