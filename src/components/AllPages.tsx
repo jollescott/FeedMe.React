@@ -1,10 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import '../App.css';
 import Slider, { Settings as SliderSettings } from 'react-slick';
-import { rootReducer } from '../store';
+import { rootReducer, AppState } from '../store';
 import StartPage from '../components/StartPage';
 import RecipeListPage from '../components/RecipeListPage';
 import IngredientsSearchPage from '../components/IngredientSearchPage';
@@ -21,6 +21,9 @@ const AppTheme = createMuiTheme({
   typography: { useNextVariants: true },
 });
 
+interface IAllPagesProps{
+  pageIndex: number;
+}
 
 interface IAllPagesState {
   currentSearchMode: SearchMode,
@@ -58,7 +61,7 @@ class AllPages extends React.Component<any, IAllPagesState> {
     ];
     // Add pages
     if (this.state.currentSearchMode === SearchMode.Ingredients) {
-      pages.push(<IngredientsSearchPage />);
+      pages.push(<IngredientsSearchPage/>);
       //pages.push(<RecipeListPage />);
     }
     else {
@@ -94,7 +97,13 @@ class AllPages extends React.Component<any, IAllPagesState> {
   }
 };
 
-export default AllPages;
+const mapStateToProps = (state: AppState) => {
+  return {
+    pageIndex: state.carousel.pageIndex
+  };
+};
+
+export default connect(mapStateToProps)(AllPages);
 
 
 

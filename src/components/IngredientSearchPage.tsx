@@ -20,6 +20,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import RemovedIcon from '@material-ui/icons/Close';
 import EndSearchIcon from '@material-ui/icons/Close';
 import { searchRecipesI } from '../store/search/actions';
+import { goForward, goBack } from '../store/carousel/actions';
 
 
 interface IIngredientSearchProps {
@@ -266,7 +267,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     findIngredients: (query: string) => dispatch(searchIngredients(query)),
     addIngredient: (ingredient: IIngredient) => dispatch(addIngredient(ingredient)), // Lägg till dispatchen för injection in i props
     removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), // Lägg till dispatchen för injection in i props
-    findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query))
+    findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query)),
+    goForward: () => dispatch(goForward()),
+    goBack: () => dispatch(goBack())
   }
 };
 
