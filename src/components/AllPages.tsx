@@ -9,6 +9,7 @@ import StartPage from '../components/StartPage';
 import RecipeListPage from '../components/RecipeListPage';
 import IngredientsSearchPage from '../components/IngredientSearchPage';
 import NameSearchPage from '../components/NameSearchPage';
+import RecipePage from '../components/RecipePage';
 import { SearchMode } from '../misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { goForward } from '../store/carousel/actions';
@@ -65,6 +66,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     if (this.state.currentSearchMode === SearchMode.Ingredients) {
       pages.push(<IngredientsSearchPage/>);
       pages.push(<RecipeListPage/>);
+      pages.push(<RecipePage/>);
     }
     else {
       pages.push(<NameSearchPage />);

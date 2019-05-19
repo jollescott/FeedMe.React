@@ -75,7 +75,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 <div className="gridListItemContainer">
                   <Card className="gridListItem">
 
-                    <CardActionArea>
+                    <CardActionArea onClick={this.props.goForward}>
                       <CardMedia
                         component="img"
                         image="https://www.kungsornen.se/Global/Recept/saffranspasta-med-sparris.jpg"
