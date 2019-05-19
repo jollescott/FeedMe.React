@@ -22,6 +22,7 @@ export interface IRecipe{
     owner: number;
     ownerLogo: string;
     image: string;
+    coverage: number | undefined;
 
     ingredients: IIngredient[];
     directions: string[];

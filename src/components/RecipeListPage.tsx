@@ -72,7 +72,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
 
             <div className="gridListContainer">
               {["test", "test", "test", "test", "test", "test", "test", "test"].map((test, index) => (
-                <div className="gridListItemContainer">
+                <div className="gridListItemContainer" key={index}>
                   <Card className="gridListItem">
 
                     <CardActionArea onClick={this.props.goForward}>
