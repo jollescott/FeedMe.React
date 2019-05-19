@@ -1,0 +1,144 @@
+.main {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slick-slider {
+    height: calc(100% - 30px);
+    width: 100%;
+}
+
+
+/* page formating */
+
+.page {
+    height: calc(100vh - 40px);
+    margin: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+    overflow: hidden;
+}
+
+.pageHeader {
+    padding-top: 40px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.pageContent {
+    height: inherit;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+
+/* div formatting */
+
+.usablePage {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.paddedPage {
+    background-color: yellow;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.slimDiv {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 150mm;
+    width: calc(100% - 20px);
+}
+
+
+/* texts */
+
+.info {
+    color: gray;
+    font-weight: 200;
+    margin: 5px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+
+/* grid list */
+
+.gridListContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.gridListItemContainer {
+    width: calc(33.33333% - 10px);
+    padding: 5px;
+}
+
+@media screen and (max-width: 280mm) {
+    .gridListItemContainer {
+        width: calc(50% - 10px);
+    }
+}
+
+@media screen and (max-width: 160mm) {
+    .gridListItemContainer {
+        width: calc(100% - 10px);
+    }
+}
+
+
+/* ingredient list */
+
+.ingredientListItem {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+}
+
+.ingredientListItem:hover {
+    box-shadow: 0 1px 3px #000000;
+    background-color: #ffffff6c;
+}
+
+
+/* other */
+
+.slick-dots li button {
+    pointer-events: none;
+}
+
+.endSearchButton {
+    transform: translate(0, -18px) !important;
+}
+
+.menuButton {
+    padding: 12px !important;
+    border-radius: 50px !important;
+}
+
+
+/* on iOS safari */
+
+@supports (-webkit-overflow-scrolling: touch) {
+    /* extra page height */
+    .extraPageHeight {
+        height: 320px;
+    }
+}
+
+
+/* not iOS safari */
+
+@supports not (-webkit-overflow-scrolling: touch) {
+    /* extra page height */
+    .extraPageHeight {
+        height: 250px;
+    }
+}
