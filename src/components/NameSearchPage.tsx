@@ -9,6 +9,7 @@ import { AppState } from '../store';
 import { searchRecipesT } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 import { IRecipe } from '../store/types';
+import { loadRecipe } from '../store/recipes/actions';
 
 interface INameSearchProps {
   results: IRecipe[];
@@ -17,6 +18,7 @@ interface INameSearchProps {
   goBack: () => void;
   goForward: () => void;
   findRecipes: (query: string) => void;
+  openRecipe: (recipeId: string) => void;
 }
 interface INameSearchState {
   searchTerm: string;
@@ -30,6 +32,7 @@ class NameSearchPage extends React.Component<
     super(props);
 
     this.textChanged = this.textChanged.bind(this);
+    this.openRecipe = this.openRecipe.bind(this);
 
     this.state = {
       searchTerm: ''
@@ -77,7 +80,7 @@ class NameSearchPage extends React.Component<
                 {this.props.results.map((recipe, index) => (
                   <div className="gridListItemContainer" key={index}>
                     <Card className="gridListItem">
-                      <CardActionArea onClick={this.props.goForward}>
+                      <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
                         <CardMedia
                           component="img"
                           image={recipe.image}
@@ -118,6 +121,11 @@ class NameSearchPage extends React.Component<
 
     this.props.findRecipes(e.target.value);
   }
+
+  private openRecipe(recipeId: string){
+    this.props.openRecipe(recipeId);
+    this.props.goForward();
+  }
 }
 
 const mapStateToProps = (state: AppState) => {
@@ -133,6 +141,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     findRecipes: (query: string) => dispatch(searchRecipesT(query)),
     goForward: () => dispatch(goForward()),
     goBack: () => dispatch(goBack()),
+    openRecipe: (recipeId: string) => dispatch(loadRecipe(recipeId))
   };
 };
 

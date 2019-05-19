@@ -15,7 +15,7 @@ export interface IRecipeTag{
 }
 
 export interface IRecipe{
-    recipeId: number;
+    recipeId: string;
     name: string;
     desc: string;
     source: string;

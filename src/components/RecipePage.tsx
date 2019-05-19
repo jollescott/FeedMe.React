@@ -1,17 +1,12 @@
 import React from 'react';
 import '../App.css';
-import { IIngredient, IRecipe } from '../store/types';
+import { IRecipe } from '../store/types';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { searchRecipesI } from '../store/search/actions';
-import { goForward, goBack } from '../store/carousel/actions';
-import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { refreshRecipeCount } from '../store/recipes/actions';
+import { goBack } from '../store/carousel/actions';
+import { Button } from '@material-ui/core';
 
 interface IRecipeProps {
     recipe: IRecipe | undefined;
