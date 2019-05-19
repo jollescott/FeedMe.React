@@ -27,7 +27,7 @@ export function searchFailure(error: string) : SearchActionTypes{
     }
 }
 
-export const searchRecipesT = (searchTerm: string, start: number = 25): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+export const searchRecipesT = (searchTerm: string, start: number = 0): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
     axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/text?search=${searchTerm}&start=${start}`)
         .then(resp => {
             if(resp.status === 200){
@@ -41,10 +41,9 @@ export const searchRecipesT = (searchTerm: string, start: number = 25): ThunkAct
         });
 }
 
-export const searchRecipesI = (ingredients: IIngredient[], start: number = 25): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
-    axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/suggest?start=${start}`, ingredients)
+export const searchRecipesI = (ingredients: IIngredient[], start: number = 0): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+    axios.post<IRecipe[]>(`https://localhost:44312/v2/recipe/suggest?start=${start}`, ingredients)
         .then(resp => {
-            console.log(resp.data);
             if(resp.status === 200) {
                 dispatch(searchSuccess(resp.data));
             }
