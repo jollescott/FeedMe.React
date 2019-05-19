@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
-import { IIngredient } from '../store/types';
+import { IIngredient, IngredientRole } from '../store/types';
 import { searchIngredients, addIngredient, removeIngredient } from '../store/ingredients/actions';
 import { AppState } from '../store';
 import List from '@material-ui/core/List';
@@ -68,7 +68,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
     // Kolla om det finns ingredienser som går att söka recept med.
     for (let j = 0; j < this.props.ingredients.length; j++) {
-      if (this.props.ingredients[j].role === 1) {
+      if (this.props.ingredients[j].role === IngredientRole.Include) {
         readyToFindRecipes = true;
         break;
       }
@@ -130,12 +130,13 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                     <br />
                   </div>
                   :
+                  // Tillagda ingredienser lista
                   <List>
                     {this.props.ingredients.map((ingredient, index) => (
                       <ListItem key={index} className="ingredientListItem">
                         <ListItemText primary={ingredient.ingredientName} />
                         <IconButton onClick={() => this.toggleIngredientRole(this.props.ingredients, ingredient)}>
-                          {ingredient.role ?
+                          {ingredient.role === IngredientRole.Include ?
                             <AddedIcon color="primary" />
                             :
                             <RemovedIcon color="error" />
@@ -155,17 +156,18 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                     <br />
                   </div>
                   :
+                  // Ingrediens sök lista
                   <List>
                     {this.props.results.map((ingredient, index) => (
                       <ListItem key={index} className="ingredientListItem">
                         <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
 
-                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, 0)} className="ingredientListButton">
-                          {isAdded[index] && ingredient.role === 0 ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
+                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
+                          {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
                         </IconButton>
 
-                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, 1)} className="ingredientListButton">
-                          {isAdded[index] && ingredient.role === 1 ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
+                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
+                          {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
                         </IconButton>
                       </ListItem>
                     ))}
@@ -180,8 +182,8 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                 Hämta Recept
               </Button>
 
-              <br/>
-              <br/>
+              <br />
+              <br />
 
               <Button variant="outlined" color="default" onClick={this.props.goBack}>
                 {"< Föregående sida"}
@@ -215,6 +217,9 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
   // Förkortar en sträng så att den inte blir överdrivet lång och förstör gränssnittet
   private formatListName(str: string): string {
+    if (str === undefined) {
+      return "";
+    }
     const stringLength: number = 50;
     if (str.length > stringLength) {
       str = str.substring(0, stringLength - 3);
@@ -233,7 +238,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
   }
 
   // Tar bort, lägger till eller byter "role" på en ingrediens beroende på inparametrar
-  private toggleIngredient(ingredient: IIngredient, role: number): void {
+  private toggleIngredient(ingredient: IIngredient, role: IngredientRole): void {
     const index = this.ingredientListIndex(this.props.ingredients, ingredient);
 
     if (index !== -1) { // Lägg till ingrediens eller byt role
