@@ -7,37 +7,37 @@
 
 .slick-slider {
     height: calc(100% - 40px);
+    width: 100%;
 }
 
 
 /* page formating */
 
 .page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+    height: 90vh;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 20%;
+    margin-right: 20%;
+    overflow: hidden;
 }
 
 .pageHeader {
     padding-top: 40px;
     padding-bottom: 10px;
     width: 100%;
-    box-shadow: 0 1px 3px #000000;
-    background-color: #FFFFFF;
 }
 
 .pageContent {
     height: inherit;
-    width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 
 /* div formatting */
 
 .usablePage {
-    max-width: 300mm;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -130,7 +130,7 @@
 @supports (-webkit-overflow-scrolling: touch) {
     /* extra page height */
     .extraPageHeight {
-        height: 120px;
+        height: 320px;
     }
 }
 
@@ -140,6 +140,6 @@
 @supports not (-webkit-overflow-scrolling: touch) {
     /* extra page height */
     .extraPageHeight {
-        height: 50px;
+        height: 250px;
     }
 }

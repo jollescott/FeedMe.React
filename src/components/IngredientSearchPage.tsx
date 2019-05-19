@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment, Divider } from '@material-ui/core';
+import { TextField, InputAdornment, Divider, Paper } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -75,10 +75,10 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     }
 
     return (
-      <div className="page">
+      <Paper className="page">
 
         {/* Header */}
-        <div className="pageHeader">
+        <Paper className="pageHeader">
           <div className="usablePage">
             <div className="slimDiv">
               <TextField
@@ -105,7 +105,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
             </div>
           </div>
-        </div>
+        </Paper>
 
         {/* Content */}
         <div className="pageContent">
@@ -192,7 +192,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
           </div>
         </div>
 
-      </div>
+      </Paper>
     );
   }
 

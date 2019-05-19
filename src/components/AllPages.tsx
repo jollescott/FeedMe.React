@@ -13,6 +13,7 @@ import RecipePage from '../components/RecipePage';
 import { SearchMode } from '../misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { goForward } from '../store/carousel/actions';
+import { Paper } from '@material-ui/core';
 
 
 const AppTheme = createMuiTheme({
@@ -23,7 +24,7 @@ const AppTheme = createMuiTheme({
   typography: { useNextVariants: true },
 });
 
-interface IAllPagesProps{
+interface IAllPagesProps {
   pageIndex: number;
   goForward: () => void;
 }
@@ -64,26 +65,26 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     ];
     // Add pages
     if (this.state.currentSearchMode === SearchMode.Ingredients) {
-      pages.push(<IngredientsSearchPage/>);
-      pages.push(<RecipeListPage/>);
-      pages.push(<RecipePage/>);
+      pages.push(<IngredientsSearchPage />);
+      pages.push(<RecipeListPage />);
+      pages.push(<RecipePage />);
     }
     else {
       pages.push(<NameSearchPage />);
     }
 
-    if (this.slider != null){
+    if (this.slider != null) {
       this.slider.slickGoTo(this.props.pageIndex, false);
     }
 
     return (
-        <MuiThemeProvider theme={AppTheme}>
-          <div className="main">
-           <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
+      <MuiThemeProvider theme={AppTheme}>
+        <div className="main">
+            <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
               {pages}
             </Slider>
-          </div>
-        </MuiThemeProvider>
+        </div>
+      </MuiThemeProvider>
     );
   }
 

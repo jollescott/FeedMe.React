@@ -7,7 +7,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { searchRecipesI } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
-import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions } from '@material-ui/core';
+import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions, Paper } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -43,7 +43,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
 
   public render() {
     return (
-      <div className="page">
+      <Paper className="page">
         {/* Content */}
         <div className="pageContent">
           <div className="usablePage">
@@ -102,7 +102,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
         
           <div className="extraPageHeight"></div>
         </div>
-      </div>
+      </Paper>
     );
   }
 }

@@ -7,7 +7,7 @@ import { AppState } from '../store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { goForward, goBack } from '../store/carousel/actions';
-import { StandardProps, PropTypes } from '@material-ui/core/index.d';
+import { Paper } from '@material-ui/core';
 
 
 interface IStartProps {
@@ -17,7 +17,7 @@ interface IStartProps {
 class StartPage extends React.Component<IStartProps> {
   public render() {
     return (
-      <div className="page">
+      <Paper className="page">
 
         <div className="pageContent">
           <div className="usablePage">
@@ -39,7 +39,7 @@ class StartPage extends React.Component<IStartProps> {
             </div>
           </div>
         </div>
-      </div>
+      </Paper>
     );
   }
 
