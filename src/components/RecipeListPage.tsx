@@ -65,7 +65,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
             <List>
               {this.props.results.map((recipe, index) => (
                 <ListItem key={index} className="ingredientListItem">
-                  <ListItemText primary={recipe.recipeId} />
+                  {"recipe name: " + recipe.name}
                 </ListItem>
               ))}
             </List>
