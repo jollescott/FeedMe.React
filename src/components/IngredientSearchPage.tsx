@@ -76,121 +76,123 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
     return (
       <div className="page">
+        <div className="headedPageContainer">
 
-        {/* Header */}
-        <Paper className="pageHeader">
-          <div className="usablePage">
-            <div className="slimDiv">
-              <TextField
-                fullWidth={true}
-                label="Lägg till ingredienser"
-                type="search"
-                variant="standard"
-                onChange={this.textChanged}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Icon>search</Icon>
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end" >
-                      <Button variant="fab" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
-                        <EndSearchIcon color="default" />
-                      </Button>
-                    </InputAdornment>
-                  )
-                }}
-              />
 
+          {/* Header */}
+          <Paper className="pageHeader">
+            <div className="usablePage">
+              <div className="slimDiv">
+                <TextField
+                  fullWidth={true}
+                  label="Lägg till ingredienser"
+                  type="search"
+                  variant="standard"
+                  onChange={this.textChanged}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Icon>search</Icon>
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="end" >
+                        <Button variant="fab" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
+                          <EndSearchIcon color="default" />
+                        </Button>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+
+              </div>
             </div>
-          </div>
-        </Paper>
+          </Paper>
 
-        {/* Content */}
-        <div className="pageContent">
-          <div className="usablePage">
-            <div className="slimDiv">
+          {/* Content */}
+          <div className="pageContent">
+            <div className="usablePage">
+              <div className="slimDiv">
 
-
-              {this.state.searchTerm.length === 0 ?
-                <h1 className="StartPageButtons">Tillagda ingredinser</h1>
-                :
-                <h1 className="StartPageButtons">Lägg till ingredienser</h1>
-              }
-
-              <Divider variant="fullWidth" />
-
-              {this.state.searchTerm.length === 0 ?
-                this.props.ingredients.length === 0 ?
-                  <div>
-                    <br />
-                    <h3 className="info">Dina tillagda ingredienser kommer att visas här.</h3>
-                    <h4 className="info"> Lägg till ingredienser genom att söka i sökfältet.</h4>
-                    <br />
-                  </div>
+                <br/>
+                {this.state.searchTerm.length === 0 ?
+                  <h1 className="StartPageButtons">Tillagda ingredinser</h1>
                   :
-                  // Tillagda ingredienser lista
-                  <List>
-                    {this.props.ingredients.map((ingredient, index) => (
-                      <ListItem key={index} className="ingredientListItem">
-                        <ListItemText primary={ingredient.ingredientName} />
-                        <IconButton onClick={() => this.toggleIngredientRole(this.props.ingredients, ingredient)}>
-                          {ingredient.role === IngredientRole.Include ?
-                            <AddedIcon color="primary" />
-                            :
-                            <RemovedIcon color="error" />
-                          }
-                        </IconButton>
-                        <IconButton color="default" onClick={() => this.props.removeIngredient(ingredient)}>
-                          <DeleteIcon color="default" />
-                        </IconButton>
-                      </ListItem>
-                    ))}
-                  </List>
-                :
-                !this.props.loading && this.props.results.length === 0 ?
-                  <div>
-                    <br />
-                    <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
-                    <br />
-                  </div>
+                  <h1 className="StartPageButtons">Lägg till ingredienser</h1>
+                }
+
+                <Divider variant="fullWidth" />
+
+                {this.state.searchTerm.length === 0 ?
+                  this.props.ingredients.length === 0 ?
+                    <div>
+                      <br />
+                      <h3 className="info">Dina tillagda ingredienser kommer att visas här.</h3>
+                      <h4 className="info"> Lägg till ingredienser genom att söka i sökfältet.</h4>
+                      <br />
+                    </div>
+                    :
+                    // Tillagda ingredienser lista
+                    <List>
+                      {this.props.ingredients.map((ingredient, index) => (
+                        <ListItem key={index} className="ingredientListItem">
+                          <ListItemText primary={ingredient.ingredientName} />
+                          <IconButton onClick={() => this.toggleIngredientRole(this.props.ingredients, ingredient)}>
+                            {ingredient.role === IngredientRole.Include ?
+                              <AddedIcon color="primary" />
+                              :
+                              <RemovedIcon color="error" />
+                            }
+                          </IconButton>
+                          <IconButton color="default" onClick={() => this.props.removeIngredient(ingredient)}>
+                            <DeleteIcon color="default" />
+                          </IconButton>
+                        </ListItem>
+                      ))}
+                    </List>
                   :
-                  // Ingrediens sök lista
-                  <List>
-                    {this.props.results.map((ingredient, index) => (
-                      <ListItem key={index} className="ingredientListItem">
-                        <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
+                  !this.props.loading && this.props.results.length === 0 ?
+                    <div>
+                      <br />
+                      <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
+                      <br />
+                    </div>
+                    :
+                    // Ingrediens sök lista
+                    <List>
+                      {this.props.results.map((ingredient, index) => (
+                        <ListItem key={index} className="ingredientListItem">
+                          <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
 
-                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
-                          {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
-                        </IconButton>
+                          <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
+                            {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
+                          </IconButton>
 
-                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
-                          {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
-                        </IconButton>
-                      </ListItem>
-                    ))}
-                  </List>
-              }
+                          <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
+                            {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
+                          </IconButton>
+                        </ListItem>
+                      ))}
+                    </List>
+                }
 
-              <Divider variant="fullWidth" />
+                <Divider variant="fullWidth" />
 
-              <br />
+                <br />
 
-              <Button variant="extendedFab" color="primary" onClick={this.getRecipesButtonClickHandler} fullWidth={true} disabled={!readyToFindRecipes}>
-                Hämta Recept
+                <Button variant="extendedFab" color="primary" onClick={this.getRecipesButtonClickHandler} fullWidth={true} disabled={!readyToFindRecipes}>
+                  Hämta Recept
               </Button>
 
-              <br />
-              <br />
+                <br />
+                <br />
 
 
-              <div className="extraPageHeight" />
+                <div className="extraPageHeight" />
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     );
   }
