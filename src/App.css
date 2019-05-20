@@ -6,12 +6,25 @@
 
 .siteHeader {
     background-color: #00CC66;
+    display: grid;
+    grid-template-columns: 200px auto 200px;
+    align-items: center;
 }
 
 .siteContent {}
 
 .siteFooter {
     background-color: #00CC66;
+}
+
+.headerBackButton {
+    height: 100%;
+}
+
+.headerMainText {
+    text-align: center;
+    color: white;
+    font-size: 4vh;
 }
 
 .slick-slider {
@@ -35,7 +48,7 @@
 .pageContent {
     height: inherit;
     overflow-y: auto;
-    padding: 20px;
+    qpadding: 20px;
 }
 
 
@@ -168,7 +181,7 @@
 @supports (-webkit-overflow-scrolling: touch) {
     /* extra page height */
     .extraPageHeight {
-        height: 320px;
+        qheight: 320px;
     }
 }
 
@@ -178,6 +191,6 @@
 @supports not (-webkit-overflow-scrolling: touch) {
     /* extra page height */
     .extraPageHeight {
-        height: 250px;
+        qheight: 250px;
     }
 }

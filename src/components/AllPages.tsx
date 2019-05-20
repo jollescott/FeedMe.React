@@ -13,7 +13,9 @@ import RecipePage from '../components/RecipePage';
 import { SearchMode } from '../misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { goForward, goBack } from '../store/carousel/actions';
-import { Paper, Button } from '@material-ui/core';
+import { Paper, Button, IconButton } from '@material-ui/core';
+import GoBackIcon from '@material-ui/icons/ArrowBackIos';
+
 
 
 const AppTheme = createMuiTheme({
@@ -85,17 +87,25 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
         <div className="site">
 
           <div className="siteHeader">
-            <Button variant="outlined" color="default" onClick={this.props.goBack} disabled={this.props.pageIndex <= 0}>
-              {"< Föregående sida"}
+
+            <Button color="default" onClick={this.props.goBack} disabled={this.props.pageIndex <= 0} className="headerBackButton">
+              <GoBackIcon color="default" />
+              Tillbaka
             </Button>
+
+            <h1 className="headerMainText">FeedMe</h1>
+
           </div>
+
           <div className="siteContent">
             <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
               {pages}
             </Slider>
           </div>
+
           <div className="siteFooter">
           </div>
+
         </div>
       </MuiThemeProvider>
     );
