@@ -75,7 +75,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     }
 
     return (
-      <Paper className="page">
+      <div className="page">
 
         {/* Header */}
         <Paper className="pageHeader">
@@ -194,7 +194,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
           </div>
         </div>
 
-      </Paper>
+      </div>
     );
   }
 
