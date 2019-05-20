@@ -16,6 +16,9 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
+            "linux": {
+                "runtimeExecutable": "/var/lib/snapd/snap/bin/chromium",
+            },
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         }

@@ -10,6 +10,7 @@ import { searchRecipesT } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 import { IRecipe } from '../store/types';
 import { loadRecipe } from '../store/recipes/actions';
+import { any } from 'prop-types';
 
 interface INameSearchProps {
   results: IRecipe[];
@@ -80,7 +81,7 @@ class NameSearchPage extends React.Component<
                 {this.props.results.map((recipe, index) => (
                   <div className="gridListItemContainer" key={index}>
                     <Card className="gridListItem">
-                      <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
+                      <CardActionArea onClick={() => this.openRecipe((recipe as any)['recipeId'])} /* TODO: byt tillbaka till recipeId */> 
                         <CardMedia
                           component="img"
                           image={recipe.image}
