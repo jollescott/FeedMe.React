@@ -67,7 +67,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                                 <div className="recipeIngredientListRow">
                                                     <div className="recipeIngredientListLeftColumn">
                                                         <Typography component="p">
-                                                            {recipePart.quantity + recipePart.unit}
+                                                            {this.formatIngredientQuantityAndUnit(recipePart.quantity, recipePart.unit)}
                                                         </Typography>
                                                     </div>
                                                     <div className="recipeIngredientListRightColumn">
@@ -106,6 +106,17 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
             return (
                 <h1>Kunde inte hämta receptet</h1>
             );
+        }
+    }
+
+
+    // Funktion som ser till att en mängd och enhet ser bra ut
+    private formatIngredientQuantityAndUnit(quantity: number, unit: string):string{
+        if (quantity === 0){
+            return "";
+        }
+        else{
+            return quantity + " " + unit;
         }
     }
 

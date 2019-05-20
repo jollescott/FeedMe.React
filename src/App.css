@@ -17,6 +17,9 @@
     background-color: #00CC66;
 }
 
+
+/* header */
+
 .headerBackButton {
     height: 100%;
 }
@@ -26,6 +29,9 @@
     color: white;
     font-size: 4vh;
 }
+
+
+/* content */
 
 .slick-slider {
     width: 100vw;
@@ -40,7 +46,7 @@
 }
 
 .pageHeader {
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 10px;
     width: 100%;
 }
@@ -48,7 +54,6 @@
 .pageContent {
     height: inherit;
     overflow-y: auto;
-    qpadding: 20px;
 }
 
 
@@ -56,21 +61,15 @@
 
 .usablePage {
     width: 100%;
+    max-width: 300mm;
     margin-left: auto;
     margin-right: auto;
-}
-
-.paddedPage {
-    background-color: yellow;
-    padding-left: 2%;
-    padding-right: 2%;
 }
 
 .slimDiv {
     margin-left: auto;
     margin-right: auto;
     max-width: 150mm;
-    width: calc(100% - 20px);
 }
 
 .doubleColumnContainer {
@@ -153,10 +152,13 @@
 
 .recipeIngredientListLeftColumn {
     flex: 20%;
+    text-align: right;
+    padding-right: 8px;
 }
 
 .recipeIngredientListRightColumn {
     flex: 80%;
+    padding-left: 8px;
 }
 
 
@@ -181,7 +183,7 @@
 @supports (-webkit-overflow-scrolling: touch) {
     /* extra page height */
     .extraPageHeight {
-        qheight: 320px;
+        /* height: 320px; */
     }
 }
 
@@ -191,6 +193,6 @@
 @supports not (-webkit-overflow-scrolling: touch) {
     /* extra page height */
     .extraPageHeight {
-        qheight: 250px;
+        /* height: 250px; */
     }
 }
