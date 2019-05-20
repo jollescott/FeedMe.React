@@ -37,12 +37,26 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                         <Button variant="outlined" color="default" onClick={this.props.goBack}>
                             {"< Föregående sida"}
                         </Button>
+                        {this.renderRecipe()}
                     </div>
 
                     <div className="extraPageHeight"></div>
                 </div>
             </div>
         );
+    }
+
+    private renderRecipe() {
+        if (this.props.recipe !== undefined) {
+            return (
+                <h1>{this.props.recipe.name}</h1>
+            );
+        }
+        else {
+            return (
+                <h1>Hejj</h1>
+            );
+        }
     }
 }
 

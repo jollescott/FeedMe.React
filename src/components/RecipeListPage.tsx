@@ -33,13 +33,11 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
   constructor(props: Readonly<IRecipeListProps>) {
     super(props);
 
+    this.openRecipe = this.openRecipe.bind(this);
+
     this.state = ({
       test: "test"
     });
-  }
-
-  componentDidMount() {
-    this.props.loadCount();
   }
 
   public render() {
@@ -56,7 +54,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
             {this.props.results.map((recipe, index) => (
                   <div className="gridListItemContainer" key={index}>
                     <Card className="gridListItem">
-                      <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
+                      <CardActionArea onClick={() => this.openRecipe(recipe)}>
                         <CardMedia
                           component="img"
                           image={recipe.image}
@@ -87,8 +85,9 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     );
   }
 
-  private openRecipe(recipeId: string){
-    this.props.openRecipe(recipeId);
+  private openRecipe(recipe: IRecipe){
+    alert(recipe.recipeId);
+    this.props.openRecipe(recipe.recipeId);
     this.props.goForward();
   }
 }
