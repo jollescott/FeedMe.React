@@ -56,6 +56,15 @@
     width: calc(100% - 20px);
 }
 
+.doubleColumnContainer {
+    display: flex;
+    width: 100%;
+}
+
+.doubleColumnColumn {
+    flex: 50%;
+}
+
 
 /* texts */
 
@@ -110,6 +119,27 @@
 .ingredientListItem:hover {
     box-shadow: 0 1px 3px #000000;
     background-color: #ffffff6c;
+}
+
+
+/* recipe page */
+
+.recipeInstructionCard {
+    margin: 10px;
+}
+
+.recipeIngredientListRow {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+}
+
+.recipeIngredientListLeftColumn {
+    flex: 20%;
+}
+
+.recipeIngredientListRightColumn {
+    flex: 80%;
 }
 
 
