@@ -71,6 +71,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     }
     else {
       pages.push(<NameSearchPage />);
+      pages.push(<RecipePage/>);
     }
 
     if (this.slider != null) {
