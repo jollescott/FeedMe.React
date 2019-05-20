@@ -11,7 +11,7 @@ import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardA
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { refreshRecipeCount } from '../store/recipes/actions';
+import { refreshRecipeCount, loadRecipe } from '../store/recipes/actions';
 
 interface IRecipeListProps {
   results: IRecipe[];
@@ -22,6 +22,7 @@ interface IRecipeListProps {
   goForward: () => void;
   goBack: () => void;
   loadCount: () => void;
+  openRecipe: (recipeId: string) => void;
 }
 interface IRecipeListState {
   test: string;
@@ -51,51 +52,31 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
               {"< Föregående sida"}
             </Button>
 
-            <br />
-            {"Recipe count: " + this.props.recipeCount}
-            <br />
-            {"Loading: " + this.props.loading}
-            <br />
-            {"Error: " + this.props.error}
-            <br />
-            {"Error är null: " + String(this.props.error === null)}
-            <br />
-            {"Antal recpt: " + this.props.results.length}
-
-            <List>
-              {this.props.results.map((recipe, index) => (
-                <ListItem key={index} className="ingredientListItem">
-                  {"recipe name: " + recipe.name}
-                </ListItem>
-              ))}
-            </List>
-
             <div className="gridListContainer">
-              {["test", "test", "test", "test", "test", "test", "test", "test"].map((test, index) => (
-                <div className="gridListItemContainer" key={index}>
-                  <Card className="gridListItem">
+            {this.props.results.map((recipe, index) => (
+                  <div className="gridListItemContainer" key={index}>
+                    <Card className="gridListItem">
+                      <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
+                        <CardMedia
+                          component="img"
+                          image={recipe.image}
+                          title={recipe.name} // TODO: byt title till receptets name
+                        />
+                        <CardContent>
+                          <Typography gutterBottom={true} variant="h5" component="h2">
+                            {recipe.name}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
 
-                    <CardActionArea onClick={this.props.goForward}>
-                      <CardMedia
-                        component="img"
-                        image="https://www.kungsornen.se/Global/Recept/saffranspasta-med-sparris.jpg"
-                        title="Recept"  // TODO: byt title till receptets namn
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">Recept namn</Typography>
-                        <Typography component="p">Du har 87% av alla ingredienser</Typography>
-                      </CardContent>
-                    </CardActionArea>
-
-                    <CardActions>
-                      <Button size="small" color="primary">
-                        Recept.se
-                     </Button>
-                    </CardActions>
-                    
-                  </Card>
-                </div>
-              ))}
+                      <CardActions>
+                        <Button size="small" color="primary">
+                          Recept.se
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </div>
+                ))}
             </div>
 
           </div>
@@ -104,6 +85,11 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
         </div>
       </Paper>
     );
+  }
+
+  private openRecipe(recipeId: string){
+    this.props.openRecipe(recipeId);
+    this.props.goForward();
   }
 }
 
@@ -122,7 +108,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query)),
     goForward: () => dispatch(goForward()),
     goBack: () => dispatch(goBack()),
-    loadCount: () => dispatch(refreshRecipeCount())
+    loadCount: () => dispatch(refreshRecipeCount()),
+    openRecipe: (recipeId: string) => dispatch(loadRecipe(recipeId)),
   }
 };
 
