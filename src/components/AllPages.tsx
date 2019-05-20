@@ -12,8 +12,8 @@ import NameSearchPage from '../components/NameSearchPage';
 import RecipePage from '../components/RecipePage';
 import { SearchMode } from '../misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { goForward } from '../store/carousel/actions';
-import { Paper } from '@material-ui/core';
+import { goForward, goBack } from '../store/carousel/actions';
+import { Paper, Button } from '@material-ui/core';
 
 
 const AppTheme = createMuiTheme({
@@ -27,6 +27,7 @@ const AppTheme = createMuiTheme({
 interface IAllPagesProps {
   pageIndex: number;
   goForward: () => void;
+  goBack: () => void;
 }
 
 interface IAllPagesState {
@@ -57,6 +58,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
       draggable: false,
       swipe: false,
       arrows: false,
+      adaptiveHeight: false
     };
 
     // Pages to display in the Slider
@@ -71,7 +73,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     }
     else {
       pages.push(<NameSearchPage />);
-      pages.push(<RecipePage/>);
+      pages.push(<RecipePage />);
     }
 
     if (this.slider != null) {
@@ -80,10 +82,20 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
 
     return (
       <MuiThemeProvider theme={AppTheme}>
-        <div className="main">
+        <div className="site">
+
+          <div className="siteHeader">
+            <Button variant="outlined" color="default" onClick={this.props.goBack} disabled={this.props.pageIndex <= 0}>
+              {"< Föregående sida"}
+            </Button>
+          </div>
+          <div className="siteContent">
             <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
               {pages}
             </Slider>
+          </div>
+          <div className="siteFooter">
+          </div>
         </div>
       </MuiThemeProvider>
     );
@@ -113,6 +125,7 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     goForward: () => dispatch(goForward()),
+    goBack: () => dispatch(goBack()),
   }
 };
 

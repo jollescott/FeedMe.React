@@ -17,7 +17,7 @@ interface IStartProps {
 class StartPage extends React.Component<IStartProps> {
   public render() {
     return (
-      <Paper className="page">
+      <div className="page">
 
         <div className="pageContent">
           <div className="usablePage">
@@ -39,7 +39,7 @@ class StartPage extends React.Component<IStartProps> {
             </div>
           </div>
         </div>
-      </Paper>
+      </div>
     );
   }
 

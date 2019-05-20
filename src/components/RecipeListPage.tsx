@@ -43,7 +43,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
 
   public render() {
     return (
-      <Paper className="page">
+      <div className="page">
         {/* Content */}
         <div className="pageContent">
           <div className="usablePage">
@@ -86,7 +86,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
 
           <div className="extraPageHeight"></div>
         </div>
-      </Paper>
+      </div>
     );
   }
 

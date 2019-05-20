@@ -42,7 +42,7 @@ class NameSearchPage extends React.Component<
 
   public render() {
     return (
-      <Paper className="page">
+      <div className="page">
         {/* Header */}
         <Paper className="pageHeader">
           <div className="usablePage">
@@ -108,7 +108,7 @@ class NameSearchPage extends React.Component<
             </div>
           </div>
         </div>
-      </Paper>
+      </div>
     );
   }
 
