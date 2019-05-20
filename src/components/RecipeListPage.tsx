@@ -100,8 +100,8 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
   }
 
   private openRecipe(recipe: IRecipe) {
-    alert(recipe.recipeId);
-    this.props.openRecipe(recipe.recipeId);
+    alert(recipe.recipeID);
+    this.props.openRecipe(recipe.recipeID);
     this.props.goForward();
   }
 }
