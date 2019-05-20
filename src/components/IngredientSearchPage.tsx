@@ -200,8 +200,15 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
   // Gå till nästa sida
   private getRecipesButtonClickHandler(): void {
+    // börja söka efter recept
     this.props.findRecipes(this.props.ingredients);
+    // gå till nästa sida
     this.props.goForward();
+    // stäng sökläget
+    this.setState({
+      ...this.state,
+      searchTerm: ""
+    })
   }
 
 
