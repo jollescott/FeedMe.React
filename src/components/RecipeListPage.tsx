@@ -12,6 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { refreshRecipeCount, loadRecipe } from '../store/recipes/actions';
+import { string } from 'prop-types';
 
 interface IRecipeListProps {
   results: IRecipe[];
@@ -51,41 +52,54 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
             </Button>
 
             <div className="gridListContainer">
-            {this.props.results.map((recipe, index) => (
-                  <div className="gridListItemContainer" key={index}>
-                    <Card className="gridListItem">
-                      <CardActionArea onClick={() => this.openRecipe(recipe)}>
-                        <CardMedia
-                          component="img"
-                          image={recipe.image}
-                          title={recipe.name} // TODO: byt title till receptets name
-                        />
-                        <CardContent>
-                          <Typography gutterBottom={true} variant="h5" component="h2">
-                            {recipe.name}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
+              {this.props.results.map((recipe, index) => (
+                <div className="gridListItemContainer" key={index}>
+                  <Card className="gridListItem">
+                    <CardActionArea onClick={() => this.openRecipe(recipe)}>
+                      <CardMedia
+                      className="cardImage"
+                        component="img"
+                        image={recipe.image}
+                        title={recipe.name} // TODO: byt title till receptets name
+                      />
+                      <CardContent className="cardText">
+                        <Typography gutterBottom={true} variant="h6" noWrap>
+                          {recipe.name}
+                        </Typography>
+                        <Typography component="p">
+                          {this.coverageMessage(recipe)}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
 
-                      <CardActions>
-                        <Button size="small" color="primary">
-                          Recept.se
+                    <CardActions>
+                      <Button size="small" color="primary">
+                        Recept.se
                         </Button>
-                      </CardActions>
-                    </Card>
-                  </div>
-                ))}
+                    </CardActions>
+                  </Card>
+                </div>
+              ))}
             </div>
 
           </div>
-        
+
           <div className="extraPageHeight"></div>
         </div>
       </Paper>
     );
   }
 
-  private openRecipe(recipe: IRecipe){
+  private coverageMessage(recipe: IRecipe) : string {
+    if (recipe.coverage === undefined){
+      return "";
+    }
+    else {
+      return "Du har " + Math.round(recipe.coverage * 100) + "% av alla ingrediensser";
+    }
+  }
+
+  private openRecipe(recipe: IRecipe) {
     alert(recipe.recipeId);
     this.props.openRecipe(recipe.recipeId);
     this.props.goForward();

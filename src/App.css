@@ -79,20 +79,24 @@
 }
 
 .gridListItemContainer {
-    width: calc(33.33333% - 10px);
-    padding: 5px;
+    width: calc(33.33333% - 20px);
+    padding: 10px;
 }
 
 @media screen and (max-width: 280mm) {
     .gridListItemContainer {
-        width: calc(50% - 10px);
+        width: calc(50% - 20px);
     }
 }
 
 @media screen and (max-width: 160mm) {
     .gridListItemContainer {
-        width: calc(100% - 10px);
+        width: calc(100% - 20px);
     }
+}
+
+.cardImage {
+    height: 300px !important;
 }
 
 
