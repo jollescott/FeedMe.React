@@ -47,15 +47,11 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
         {/* Content */}
         <div className="pageContent">
           <div className="usablePage">
-            <Button variant="outlined" color="default" onClick={this.props.goBack}>
-              {"< Föregående sida"}
-            </Button>
-
             <div className="gridListContainer">
               {this.props.results.map((recipe, index) => (
                 <div className="gridListItemContainer" key={index}>
                   <Card className="gridListItem">
-                    <CardActionArea onClick={() => this.openRecipe(recipe)}>
+                    <CardActionArea onClick={() => this.openRecipe(recipe.recipeID)}>
                       <CardMedia
                       className="cardImage"
                         component="img"
@@ -99,9 +95,8 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     }
   }
 
-  private openRecipe(recipe: IRecipe) {
-    alert(recipe.recipeID);
-    this.props.openRecipe(recipe.recipeID);
+  private openRecipe(recipeID: string) {
+    this.props.openRecipe(recipeID);
     this.props.goForward();
   }
 }

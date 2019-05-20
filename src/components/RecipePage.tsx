@@ -35,9 +35,6 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 {/* Content */}
                 <div className="pageContent">
                     <div className="usablePage">
-                        <Button variant="outlined" color="default" onClick={this.props.goBack}>
-                            {"< Föregående sida"}
-                        </Button>
                         {this.renderRecipe()}
                     </div>
 

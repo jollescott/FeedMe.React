@@ -69,13 +69,6 @@ class NameSearchPage extends React.Component<
         <div className="pageContent">
           <div className="usablePage">
             <div className="slimDiv">
-              <Button
-                variant="outlined"
-                color="default"
-                onClick={this.props.goBack}
-              >
-                {'< Föregående sida'}
-              </Button>
 
               <div className="gridListContainer">
                 {this.props.results.map((recipe, index) => (
