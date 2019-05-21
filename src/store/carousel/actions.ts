@@ -11,3 +11,9 @@ export function goBack(): CarouselActionTypes{
         'type': 'GO_BACK'
     }
 }
+
+export function goHome(): CarouselActionTypes{
+    return{
+        'type': 'GO_HOME'
+    }
+}

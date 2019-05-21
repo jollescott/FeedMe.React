@@ -12,7 +12,7 @@ import NameSearchPage from '../components/NameSearchPage';
 import RecipePage from '../components/RecipePage';
 import { SearchMode } from '../misc/Enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { goForward, goBack } from '../store/carousel/actions';
+import { goForward, goBack, goHome } from '../store/carousel/actions';
 import { Paper, Button, IconButton } from '@material-ui/core';
 import GoBackIcon from '@material-ui/icons/ArrowBackIos';
 
@@ -30,6 +30,7 @@ interface IAllPagesProps {
   pageIndex: number;
   goForward: () => void;
   goBack: () => void;
+  goHome: () => void;
 }
 
 interface IAllPagesState {
@@ -48,7 +49,6 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     };
 
     this.changeSearchMode = this.changeSearchMode.bind(this);
-    this.gotoHome = this.gotoHome.bind(this);
   }
 
   public render() {
@@ -94,7 +94,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
               Tillbaka
             </Button>
 
-            <h1 className="headerMainText" onClick={this.gotoHome}>FeedMe</h1>
+            <h1 className="headerMainText" onClick={this.props.goHome}>FeedMe</h1>
 
           </div>
 
@@ -109,10 +109,6 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
         </div>
       </MuiThemeProvider>
     );
-  }
-
-  private gotoHome() {
-    // TOOD: set pageindex to 0
   }
 
   private changeSearchMode(searchMode: SearchMode): void {
@@ -140,6 +136,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     goForward: () => dispatch(goForward()),
     goBack: () => dispatch(goBack()),
+    goHome: () => dispatch(goHome()),
   }
 };
 
