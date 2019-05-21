@@ -7,7 +7,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { searchRecipesI } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
-import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions } from '@material-ui/core';
+import { Button, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions, CircularProgress } from '@material-ui/core';
 import { refreshRecipeCount, loadRecipe } from '../store/recipes/actions';
 
 interface IRecipeListProps {
@@ -38,34 +38,38 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     public render() {
         return (
             <div className="gridListContainer">
-                {this.props.results.map((recipe, index) => (
-                    <div className="gridListItemContainer" key={index}>
-                        <Card className="gridListItem">
-                            <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
-                                <CardMedia
-                                    className="cardImage"
-                                    component="img"
-                                    image={recipe.image}
-                                    title={recipe.name} // TODO: byt title till receptets name
-                                />
-                                <CardContent className="cardText">
-                                    <Typography gutterBottom={true} variant="h6" noWrap={true}>
-                                        {recipe.name}
-                                    </Typography>
-                                    <Typography component="p">
-                                        {this.coverageMessage(recipe)}
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
+                {"Loading: " + this.props.loading}
+                {true ?
+                    <CircularProgress color="primary" className="loadingIndicator"/>
+                    :
+                    this.props.results.map((recipe, index) => (
+                        <div className="gridListItemContainer" key={index}>
+                            <Card className="gridListItem">
+                                <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
+                                    <CardMedia
+                                        className="cardImage"
+                                        component="img"
+                                        image={recipe.image}
+                                        title={recipe.name} // TODO: byt title till receptets name
+                                    />
+                                    <CardContent className="cardText">
+                                        <Typography gutterBottom={true} variant="h6" noWrap={true}>
+                                            {recipe.name}
+                                        </Typography>
+                                        <Typography component="p">
+                                            {this.coverageMessage(recipe)}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
 
-                            {/* <CardActions>
+                                {/* <CardActions>
                                 <Button size="small" color="primary">
                                     Recept.se
                                 </Button>
                             </CardActions> */}
-                        </Card>
-                    </div>
-                ))}
+                            </Card>
+                        </div>
+                    ))}
             </div>
         );
     }

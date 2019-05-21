@@ -35,10 +35,11 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 {/* Content */}
                 <div className="pageContent">
                     <div className="usablePage">
+                        {"Loading: " + this.props.loading}
                         {this.renderRecipe()}
                     </div>
 
-                    <div className="extraPageHeight"/>
+                    <div className="extraPageHeight" />
                 </div>
             </div>
         );
@@ -64,10 +65,10 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                     <div className="recipeInfoBottomRow">
 
                                         <Paper className="ownerInfo" onClick={() => window.open(recipe.source)}>
-                                            <img src={recipe.ownerLogo} className="ownerLogo"/>
-                                                <Typography variant="h6">
-                                                    {"Receptet är hemtat från " + GetOwnerName(recipe.owner)}
-                                                </Typography>
+                                            <img src={recipe.ownerLogo} className="ownerLogo" />
+                                            <Typography variant="h6">
+                                                {"Receptet är hemtat från " + GetOwnerName(recipe.owner)}
+                                            </Typography>
                                         </Paper>
 
                                     </div>
