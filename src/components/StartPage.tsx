@@ -21,21 +21,18 @@ class StartPage extends React.Component<IStartProps> {
 
         <div className="pageContent">
           <div className="usablePage">
-            <div className="slimDiv">
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <h1 className="centerText">Sök recept med...</h1>
-              <br />
-              <br />
-              {this.renderButton(SearchMode.Ingredients, 'Ingredienser')}
-              <br />
-              <br />
-              {this.renderButton(SearchMode.Name, 'Recept Namn')}
-              <br />
-              <br />
+            <div className="centerdDiv">
+              <div className="slimDiv">
+                <h1 className="centerText">Sök recept med...</h1>
+                <br />
+                <br />
+                {this.renderButton(SearchMode.Ingredients, 'Ingredienser')}
+                <br />
+                <br />
+                {this.renderButton(SearchMode.Name, 'Recept Namn')}
+                <br />
+                <br />
+              </div>
             </div>
           </div>
         </div>
