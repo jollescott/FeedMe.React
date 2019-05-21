@@ -68,15 +68,17 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     return (
       <div className="fullDiv" ref={(x) => (this.container = x)}>
         {this.props.loading && this.props.results.length === 0 ? (
-          
+
           // När recepten laddar:
           <div className="centerdDiv">
-            <CircularProgress color="primary" className="loadingIndicator" />
-            <h4>Letar bland {this.props.recipeCount} recept!</h4>
+            <div className="verticalAlignment">
+              <CircularProgress color="primary" className="loadingIndicator" />
+              <h2>Letar bland {this.props.recipeCount} recept!</h2>
+            </div>
           </div>
         ) : (
             <div className="gridListContainer">
-          
+
               {/* Loopa igenom alla recepten och skapa "Cards" */}
               {this.props.results.map((recipe, index) => (
                 <div className="gridListItemContainer" key={index}>
