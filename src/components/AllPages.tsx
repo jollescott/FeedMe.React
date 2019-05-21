@@ -89,6 +89,10 @@ class AllPages extends React.Component<IAllPagesProps> {
       this.slider.slickGoTo(this.props.pageIndex, false);
     }
 
+    if(this.props.pageIndex === 0){
+      this.props.searchClear();
+    }
+
     return (
       <MuiThemeProvider theme={AppTheme}>
         <div className="site">
@@ -119,7 +123,6 @@ class AllPages extends React.Component<IAllPagesProps> {
 
   private changeSearchMode(searchMode: SearchMode): void {
     this.props.setMode(searchMode);
-    this.props.searchClear();
     this.props.goForward();
   }
 
