@@ -6,10 +6,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { goBack } from '../store/carousel/actions';
-import { Button, Card, CardMedia, CardContent, Typography, Divider, Paper, CardActionArea, CircularProgress } from '@material-ui/core';
-import { isNumber } from 'util';
-import { strict } from 'assert';
-import { string } from 'prop-types';
+import { Card, CardMedia, CardContent, Typography, Divider, CardActionArea, CircularProgress } from '@material-ui/core';
 
 interface IRecipeProps {
     recipe: IRecipe | undefined;
@@ -38,13 +35,13 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 {/* Content */}
                 <div className="pageContent">
                     <div className="usablePage">
-                        {this.props.loading ?
+                        {this.props.loading ?  // Om receptet måste laddaa
                             <div className="fullDiv">
                                 <div className="centerdDiv">
                                     <CircularProgress color="primary" className="loadingIndicator" />
                                 </div>
                             </div>
-                            :
+                            :  // Om receptet är färdigladdat
                             this.renderRecipe()
                         }
                     </div>
@@ -61,20 +58,25 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
             const recipe = this.props.recipe;
             return (
                 <div className="doubleColumnContainer">
+                    
+                    {/* Vänster sida */}
                     <div className="doubleColumnColumn">
                         <Card className="recipeInstructionCard">
+
+                            {/* Recept bild */}
                             <CardMedia
                                 component="img"
                                 image={recipe.image}
                                 title={recipe.name}
                             />
+
                             <CardContent>
+                                {/* Recept namn */}
                                 <Typography className="recipeNameText" gutterBottom={true} variant="h5">
                                     {recipe.name}
                                 </Typography>
 
-
-
+                                {/* Kort med information om sidan där receptet är hämtat från */}
                                 <Card className="ownerInfoCard" onClick={() => window.open(recipe.source)}>
                                     <CardActionArea className="ownerInfoCardContent">
                                         <Typography variant="h6" className="centerText">
@@ -96,7 +98,10 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                         </Card>
                     </div>
                     
+                    {/* Höger sida */}
                     <div className="doubleColumnColumn">
+
+                        {/* Kort med alla ingredienser */}
                         <Card className="recipeInstructionCard">
                             <CardContent className="cardText">
                                 <Typography gutterBottom={true} variant="h6">
@@ -105,7 +110,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
 
                                 <div className="recipeIngredientListLeft">
                                     <Divider variant="fullWidth" />
-                                    {recipe.recipeParts.map((recipePart, index) => (
+                                    {recipe.recipeParts.map((recipePart, index) => (  // Loopar igenom alla ingredienser
                                         <div key={index}>
                                             <div className="recipeIngredientListRow">
                                                 <div className="recipeIngredientListLeftColumn">
@@ -123,10 +128,10 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                         </div>
                                     ))}
                                 </div>
-
-
                             </CardContent>
                         </Card>
+
+                        {/* Alla kort som innehåller tillagningsinstruktioner */}
                         {recipe.directions.map((direction, index) => (
                             <Card className="recipeInstructionCard" key={index}>
                                 <CardContent className="cardText">
@@ -160,6 +165,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
     }
 
 
+    // Funktion som tar bort "https//" från länkar
     private formateLink(link: string): string {
         link = link.replace("https://", "")
         return link;
