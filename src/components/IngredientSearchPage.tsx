@@ -81,6 +81,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
           {/* Header */}
           <Paper className="pageHeader">
             <div className="usablePage">
+              <div className="centerdDiv">
               <div className="slimDiv">
                 <TextField
                   fullWidth={true}
@@ -104,6 +105,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                   }}
                 />
 
+              </div>
               </div>
             </div>
           </Paper>

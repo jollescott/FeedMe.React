@@ -28,12 +28,12 @@
 .headerMainText {
     text-align: center;
     color: white;
-    font-size: 4vh;
+    font-size: 5vh;
     width: 100%;
-    max-width: 100mm;
+    max-width: 80mm;    
     margin: auto;
     cursor: pointer;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 
@@ -57,16 +57,12 @@
     grid-template-rows: 12% 88%;
 }
 
-.headedAdnFootedPageContainer {
-    display: grid;
-    height: 100%;
-    grid-template-rows: 10% 80% 10%;
-}
-
 .pageHeader {
     display: flex;
-    align-items: flex-end;
-    qpadding-bottom: 0.5%;
+    qalign-items: flex-end;
+    qjustify-content: flex-end;
+    flex-direction: row;
+    height: 100%;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     border-bottom-left-radius: 20px !important;
@@ -92,7 +88,7 @@
     max-width: 300mm;
     margin-left: auto;
     margin-right: auto;
-    height: 100%;
+    qheight: 100%;
 }
 
 .slimDiv {
@@ -100,6 +96,7 @@
     max-width: 150mm;
     margin-left: auto;
     margin-right: auto;
+    qheight: 100%;
 }
 
 .doubleColumnContainer {
@@ -207,7 +204,7 @@
 
 .recipePageImage {
     width: calc(100% - 10px);
-    box-shadow: 2px 0 6px -1px #888;
+    box-shadow: 2px 0 6px -2px #888;
     object-fit: cover;
 }
 
@@ -264,7 +261,7 @@
 }
 
 .endSearchButton {
-    transform: translate(0, -15px) !important;
+    transform: translate(0, -6px);
 }
 
 .menuButton {
