@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { IRecipe } from '../store/types';
+import { IRecipe, IRecipePart } from '../store/types';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -49,10 +49,16 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
             const recipe = this.props.recipe;
             return (
                 <div>
-                    <div>
-                        <img src={recipe.image} />
-                        <h1>{this.props.recipe.name}</h1>
-                    </div>
+                    <Card className="recipeInstructionCard">
+                        <div className="doubleColumnContainer">
+                            <div className="doubleColumnColumn">
+                                <img src={recipe.image} className="recipePageImage" />
+                            </div>
+                            <div className="doubleColumnColumn">
+                                <h1>{this.props.recipe.name}</h1>
+                            </div>
+                        </div>
+                    </Card>
                     <div className="doubleColumnContainer">
                         <div className="doubleColumnColumn">
                             <Card className="recipeInstructionCard">
@@ -62,12 +68,13 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                     </Typography>
 
                                     <div className="recipeIngredientListLeft">
+                                        <Divider variant="fullWidth" />
                                         {recipe.recipeParts.map((recipePart, index) => (
                                             <div>
                                                 <div className="recipeIngredientListRow">
                                                     <div className="recipeIngredientListLeftColumn">
                                                         <Typography component="p">
-                                                            {this.formatIngredientQuantityAndUnit(recipePart.quantity, recipePart.unit)}
+                                                            {this.formatIngredientQuantityAndUnit(recipePart)}
                                                         </Typography>
                                                     </div>
                                                     <div className="recipeIngredientListRightColumn">
@@ -111,12 +118,15 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
 
 
     // Funktion som ser till att en mängd och enhet ser bra ut
-    private formatIngredientQuantityAndUnit(quantity: number, unit: string):string{
-        if (quantity === 0){
+    private formatIngredientQuantityAndUnit(recipePart: IRecipePart): string {
+        if (recipePart.quantity === 0) {
             return "";
         }
-        else{
-            return quantity + " " + unit;
+        else if (recipePart.unit === recipePart.ingredientName) {
+            return String(recipePart.quantity);
+        }
+        else {
+            return recipePart.quantity + " " + recipePart.unit;
         }
     }
 

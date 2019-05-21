@@ -28,6 +28,10 @@
     text-align: center;
     color: white;
     font-size: 4vh;
+    width: 100%;
+    max-width: 100mm;
+    margin: auto;
+    cursor: pointer;
 }
 
 
@@ -182,6 +186,11 @@
 .recipeIngredientListRightColumn {
     flex: 80%;
     padding-left: 8px;
+}
+
+.recipePageImage {
+    width: calc(100% - 10px);
+    box-shadow: 2px 0 6px -1px #888;
 }
 
 

@@ -48,6 +48,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     };
 
     this.changeSearchMode = this.changeSearchMode.bind(this);
+    this.gotoHome = this.gotoHome.bind(this);
   }
 
   public render() {
@@ -93,7 +94,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
               Tillbaka
             </Button>
 
-            <h1 className="headerMainText">FeedMe</h1>
+            <h1 className="headerMainText" onClick={this.gotoHome}>FeedMe</h1>
 
           </div>
 
@@ -109,6 +110,10 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
         </div>
       </MuiThemeProvider>
     );
+  }
+
+  private gotoHome() {
+    // TOOD: set pageindex to 0
   }
 
   private changeSearchMode(searchMode: SearchMode): void {
