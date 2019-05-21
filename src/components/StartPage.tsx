@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { goForward, goBack } from '../store/carousel/actions';
+import { goForward, goBack, setMode } from '../store/carousel/actions';
 import { Paper } from '@material-ui/core';
 
 
 interface IStartProps {
   currentSearchMode: SearchMode;
-  changeSearchMode: (mode: SearchMode) => void;
+  setMode: (mode: SearchMode) => void;
 }
 class StartPage extends React.Component<IStartProps> {
   public render() {
@@ -58,17 +58,25 @@ class StartPage extends React.Component<IStartProps> {
   }
 
   private nextPage(searchMode: SearchMode): void {
-    this.props.changeSearchMode(searchMode);
+    this.props.setMode(searchMode);
   }
 }
+
+const mapStateToProps = (state: AppState) => {
+  return {
+    currentSearchMode: state.carousel.currentSearchMode
+  };
+};
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack())
+    goBack: () => dispatch(goBack()),
+    setMode: (mode: SearchMode) => dispatch(setMode(mode))
   }
 };
 
 export default connect(
+  mapStateToProps,
   mapDispatchToProps,
 )(StartPage);
