@@ -133,7 +133,7 @@
 }
 
 .centerText {
-    text-align: center;
+    text-align: center !important;
 }
 
 
@@ -212,44 +212,25 @@
     object-fit: cover;
 }
 
-.recipeInfoContainer {
-    height: 100%;
-    display: grid;
-    grid-template-rows: calc(100% - 100px) 100px;
+.recipeNameText {
+    margin: 10px !important;
 }
 
-.recipeInfoTopRow {
-    padding: 30px;
-    padding-left: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.ownerInfoCardContent {
+    padding: 10px !important;
 }
 
-.recipeInfoBottomRow {
-    padding: 10px;
-}
-
-.ownerInfo {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 20% 80%;
-    align-items: center;
-    text-align: center;
-    padding-left: 20px;
-    padding-right: 10px;
-    cursor: pointer;
-    background-color: #e7e7e7 !important;
-}
-
-.ownerInfo:hover {
-    background-color: #dbdbdb !important;
+.ownerInfoLower {
+    display: grid !important;
+    grid-template-columns: 20% 80% !important;
+    column-gap: 20px;
+    align-items: center !important;
+    margin-right: 10px;
 }
 
 .ownerLogo {
-    max-width: 100%;
-    max-height: calc(100% - 20px);
+    width: 100% !important;
+    object-fit: contain;
 }
 
 
@@ -274,6 +255,11 @@
 
 .loadingIndicator {
     margin: 15px;
+}
+
+.link {
+    color: blue !important;
+    font-size: 1em !important;
 }
 
 

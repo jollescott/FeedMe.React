@@ -8,6 +8,8 @@ import { AnyAction } from 'redux';
 import { goBack } from '../store/carousel/actions';
 import { Button, Card, CardMedia, CardContent, Typography, Divider, Paper, CardActionArea, CircularProgress } from '@material-ui/core';
 import { isNumber } from 'util';
+import { strict } from 'assert';
+import { string } from 'prop-types';
 
 interface IRecipeProps {
     recipe: IRecipe | undefined;
@@ -21,6 +23,7 @@ interface IRecipeState {
 
 class RecipePage extends React.Component<IRecipeProps, IRecipeState>
 {
+    [x: string]: any;
     constructor(props: Readonly<IRecipeProps>) {
         super(props);
 
@@ -35,7 +38,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 {/* Content */}
                 <div className="pageContent">
                     <div className="usablePage">
-                        {this.props.loading?
+                        {this.props.loading ?
                             <div className="fullDiv">
                                 <div className="centerdDiv">
                                     <CircularProgress color="primary" className="loadingIndicator" />
@@ -57,79 +60,85 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
         if (this.props.recipe !== undefined && this.props.recipe != null) {
             const recipe = this.props.recipe;
             return (
-                <div>
-                    <Card className="recipeInstructionCard">
-                        <div className="doubleColumnContainer">
-                            <div className="doubleColumnColumn">
-                                <img src={recipe.image} className="recipePageImage" />
-                            </div>
-                            <div className="doubleColumnColumn">
-                                <div className="recipeInfoContainer">
-                                    <div className="recipeInfoTopRow">
-                                        <Typography variant="h4">
-                                            {recipe.name}
+                <div className="doubleColumnContainer">
+                    <div className="doubleColumnColumn">
+                        <Card className="recipeInstructionCard">
+                            <CardMedia
+                                component="img"
+                                image={recipe.image}
+                                title={recipe.name}
+                            />
+                            <CardContent>
+                                <Typography className="recipeNameText" gutterBottom={true} variant="h5">
+                                    {recipe.name}
+                                </Typography>
+
+
+
+                                <Card className="ownerInfoCard" onClick={() => window.open(recipe.source)}>
+                                    <CardActionArea className="ownerInfoCardContent">
+                                        <Typography variant="h6" className="centerText">
+                                            {"Receptet är hämtat från " + GetOwnerName(recipe.owner)}
                                         </Typography>
-                                    </div>
-                                    <div className="recipeInfoBottomRow">
-
-                                        <Paper className="ownerInfo" onClick={() => window.open(recipe.source)}>
-                                            <img src={recipe.ownerLogo} className="ownerLogo" />
-                                            <Typography variant="h6">
-                                                {"Receptet är hemtat från " + GetOwnerName(recipe.owner)}
-                                            </Typography>
-                                        </Paper>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <div className="doubleColumnContainer">
-                        <div className="doubleColumnColumn">
-                            <Card className="recipeInstructionCard">
-                                <CardContent className="cardText">
-                                    <Typography gutterBottom={true} variant="h6">
-                                        Ingredienser
-                                    </Typography>
-
-                                    <div className="recipeIngredientListLeft">
+                                        <br />
                                         <Divider variant="fullWidth" />
-                                        {recipe.recipeParts.map((recipePart, index) => (
-                                            <div key={index}>
-                                                <div className="recipeIngredientListRow">
-                                                    <div className="recipeIngredientListLeftColumn">
-                                                        <Typography component="p">
-                                                            {this.formatIngredientQuantityAndUnit(recipePart)}
-                                                        </Typography>
-                                                    </div>
-                                                    <div className="recipeIngredientListRightColumn">
-                                                        <Typography component="p">
-                                                            {recipePart.ingredientName}
-                                                        </Typography>
-                                                    </div>
-                                                </div>
-                                                <Divider variant="fullWidth" />
-                                            </div>
-                                        ))}
-                                    </div>
+                                        <br />
+                                        <div className="ownerInfoLower">
+                                            <img src={recipe.ownerLogo} className="ownerLogo" />
 
+                                            <Typography component="p" className="link">
+                                                {recipe.source}
+                                            </Typography>
+                                        </div>
+                                    </CardActionArea>
+                                </Card>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    
+                    <div className="doubleColumnColumn">
+                        <Card className="recipeInstructionCard">
+                            <CardContent className="cardText">
+                                <Typography gutterBottom={true} variant="h6">
+                                    Ingredienser
+                                </Typography>
+
+                                <div className="recipeIngredientListLeft">
+                                    <Divider variant="fullWidth" />
+                                    {recipe.recipeParts.map((recipePart, index) => (
+                                        <div key={index}>
+                                            <div className="recipeIngredientListRow">
+                                                <div className="recipeIngredientListLeftColumn">
+                                                    <Typography component="p">
+                                                        {this.formatIngredientQuantityAndUnit(recipePart)}
+                                                    </Typography>
+                                                </div>
+                                                <div className="recipeIngredientListRightColumn">
+                                                    <Typography component="p">
+                                                        {recipePart.ingredientName}
+                                                    </Typography>
+                                                </div>
+                                            </div>
+                                            <Divider variant="fullWidth" />
+                                        </div>
+                                    ))}
+                                </div>
+
+
+                            </CardContent>
+                        </Card>
+                        {recipe.directions.map((direction, index) => (
+                            <Card className="recipeInstructionCard" key={index}>
+                                <CardContent className="cardText">
+                                    <Typography variant="h6">
+                                        {"Steg " + (index + 1) + "."}
+                                    </Typography>
+                                    <Typography component="p">
+                                        {this.formatRecipeDirection(direction)}
+                                    </Typography>
                                 </CardContent>
                             </Card>
-                        </div>
-                        <div className="doubleColumnColumn">
-                            {recipe.directions.map((direction, index) => (
-                                <Card className="recipeInstructionCard" key={index}>
-                                    <CardContent className="cardText">
-                                        <Typography variant="h6">
-                                            {"Steg " + (index + 1) + "."}
-                                        </Typography>
-                                        <Typography component="p">
-                                            {this.formatRecipeDirection(direction)}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
+                        ))}
                     </div>
                 </div>
             );
@@ -148,6 +157,12 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 </div>
             );
         }
+    }
+
+
+    private formateLink(link: string): string {
+        link = link.replace("https://", "")
+        return link;
     }
 
 
