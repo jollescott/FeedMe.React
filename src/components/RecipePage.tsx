@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { IRecipe, IRecipePart } from '../store/types';
+import { IRecipe, IRecipePart, GetOwnerName } from '../store/types';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -58,16 +58,15 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                 <div className="recipeInfoContainer">
                                     <div className="recipeInfoTopRow">
                                         <Typography variant="h4">
-                                            {this.props.recipe.name}
+                                            {recipe.name}
                                         </Typography>
-
                                     </div>
                                     <div className="recipeInfoBottomRow">
 
-                                        <Paper className="ownerInfo">
+                                        <Paper className="ownerInfo" onClick={() => window.open(recipe.source)}>
                                             <img src={recipe.ownerLogo} className="ownerLogo"/>
                                                 <Typography variant="h6">
-                                                    {"Receptet är hemtat från " + recipe.owner}
+                                                    {"Receptet är hemtat från " + GetOwnerName(recipe.owner)}
                                                 </Typography>
                                         </Paper>
 

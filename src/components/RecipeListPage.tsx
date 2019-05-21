@@ -47,7 +47,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
               {this.props.results.map((recipe, index) => (
                 <div className="gridListItemContainer" key={index}>
                   <Card className="gridListItem">
-                    <CardActionArea onClick={() => this.openRecipe(recipe.recipeID)}>
+                    <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
                       <CardMedia
                       className="cardImage"
                         component="img"

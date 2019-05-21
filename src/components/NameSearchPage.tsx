@@ -73,7 +73,7 @@ class NameSearchPage extends React.Component<
                 {this.props.results.map((recipe, index) => (
                   <div className="gridListItemContainer" key={index}>
                     <Card className="gridListItem">
-                      <CardActionArea onClick={() => this.openRecipe((recipe as any)['recipeId'])} /* TODO: byt tillbaka till recipeId */> 
+                      <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)} >
                         <CardMedia
                           component="img"
                           image={recipe.image}
