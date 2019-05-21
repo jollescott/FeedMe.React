@@ -118,9 +118,9 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
                 <br />
                 {this.state.searchTerm.length === 0 ?
-                  <h1 className="StartPageButtons">Tillagda ingredinser</h1>
+                  <h2 className="StartPageButtons">Tillagda ingredinser</h2>
                   :
-                  <h1 className="StartPageButtons">Lägg till ingredienser</h1>
+                  <h2 className="StartPageButtons">Lägg till ingredienser</h2>
                 }
 
                 <Divider variant="fullWidth" />

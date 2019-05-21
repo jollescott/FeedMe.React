@@ -32,7 +32,6 @@
     max-width: 80mm;
     margin: auto;
     cursor: pointer;
-    font-weight: 500;
 }
 
 
@@ -247,6 +246,8 @@
 
 .endSearchButton {
     transform: translate(0, -7px);
+    display: none;
+    visibility: hidden;
 }
 
 .menuButton {
@@ -276,6 +277,14 @@
     bottom: 0px;
 }
 
+h1 {
+    font-weight: 500;
+}
+
+h2 {
+    font-weight: 500;
+}
+
 
 /* on iOS safari */
 
@@ -288,6 +297,17 @@
     }
     .page {
         height: calc(92vh - 100px);
+    }
+}
+
+
+/* on fire fox */
+
+@-moz-document url-prefix() {
+    .endSearchButton {
+        transform: translate(0, -7px);
+        display: block;
+        visibility: visible;
     }
 }
 
