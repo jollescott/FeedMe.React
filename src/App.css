@@ -82,7 +82,7 @@
 /* div formatting */
 
 .usablePage {
-    width: 100%;
+    width: calc(100% - 20px);
     max-width: 300mm;
     margin-left: auto;
     margin-right: auto;
