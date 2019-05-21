@@ -19,7 +19,6 @@ import { refreshRecipeCount } from '../store/recipes/actions';
 import { searchClear } from '../store/search/actions';
 
 
-
 const AppTheme = createMuiTheme({
   palette: {
     primary: { main: '#00CC66' }, // The FeedMe green
