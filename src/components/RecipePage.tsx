@@ -87,7 +87,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                             <img src={recipe.ownerLogo} className="ownerLogo" />
 
                                             <Typography component="p" className="link">
-                                                {recipe.source}
+                                                {this.formateLink(recipe.source)}
                                             </Typography>
                                         </div>
                                     </CardActionArea>
@@ -168,7 +168,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
 
     // Funktion som ser till att en mängd och enhet ser bra ut
     private formatIngredientQuantityAndUnit(recipePart: IRecipePart): string {
-        if (recipePart.quantity === 0) {
+        if (recipePart.quantity === 0 ||recipePart.unit === "odefinierad") {
             return "";
         }
         else if (recipePart.unit === recipePart.ingredientName) {

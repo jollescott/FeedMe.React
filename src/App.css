@@ -104,11 +104,12 @@
     flex: 50%;
 }
 
-@media screen and (max-width: 180mm) {
+
+/* @media screen and (max-width: 180mm) {
     .doubleColumnContainer {
         flex-direction: column;
     }
-}
+} */
 
 .fullDiv {
     height: 100%;
@@ -150,7 +151,8 @@
     padding: 10px;
 }
 
-@media screen and (max-width: 280mm) {
+
+/* @media screen and (max-width: 280mm) {
     .gridListItemContainer {
         width: calc(50% - 20px);
     }
@@ -160,7 +162,7 @@
     .gridListItemContainer {
         width: calc(100% - 20px);
     }
-}
+} */
 
 .cardImage {
     height: 300px !important;
@@ -324,7 +326,7 @@ h2 {
 
 /* slim view */
 
-@media screen and (max-width: 280mm) {
+@media screen and (max-width: 270mm) {
     .gridListItemContainer {
         width: calc(50% - 20px);
     }
@@ -339,5 +341,11 @@ h2 {
     }
     .pageHeader {
         border-radius: 0 !important;
+    }
+}
+
+@media screen and (max-width: 250mm) {
+    .doubleColumnContainer {
+        flex-direction: column;
     }
 }
