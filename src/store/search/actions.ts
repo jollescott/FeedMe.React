@@ -13,10 +13,11 @@ export function searchStart(): SearchActionTypes{
     }
 }
 
-export function searchSuccess(recipes: IRecipe[]) : SearchActionTypes{
+export function searchSuccess(recipes: IRecipe[], fresh: boolean = true) : SearchActionTypes{
     return {
         recipes,
-        type: 'SEARCH_SUCCESS'
+        type: 'SEARCH_SUCCESS',
+        fresh
     }
 }
 
@@ -32,7 +33,7 @@ export const searchRecipesT = (searchTerm: string, start: number = 0): ThunkActi
     axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/text?search=${searchTerm}&start=${start}`)
         .then(resp => {
             if(resp.status === 200){
-                dispatch(searchSuccess(resp.data));
+                dispatch(searchSuccess(resp.data, start === 0));
             } else{
                 dispatch(searchFailure(resp.statusText));
             }
@@ -47,7 +48,7 @@ export const searchRecipesI = (ingredients: IIngredient[], start: number = 0): T
     axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/suggest?start=${start}`, ingredients)
         .then(resp => {
             if(resp.status === 200) {
-                dispatch(searchSuccess(resp.data));
+                dispatch(searchSuccess(resp.data, start === 0));
             }
             else{
                 dispatch(searchFailure(resp.statusText));
@@ -56,6 +57,13 @@ export const searchRecipesI = (ingredients: IIngredient[], start: number = 0): T
         .catch(e => {
             dispatch(searchFailure(e));
         });
+}
+
+export function setQuery(query: string): SearchActionTypes {
+    return{
+        type: 'SET_QUERY',
+        query
+    }
 }
 
 //#endregion

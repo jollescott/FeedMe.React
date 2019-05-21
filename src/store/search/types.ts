@@ -2,6 +2,7 @@ import { IRecipe } from "../types";
 
 export interface ISearchState{
     results: IRecipe[],
+    query: string,
     loading: boolean,
     error: string
 }
@@ -16,7 +17,8 @@ export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 
 interface ISearchSuccessAction {
     type: typeof SEARCH_SUCCESS,
-    recipes: IRecipe[]
+    recipes: IRecipe[],
+    fresh: boolean
 }
 
 export const SEARCH_FAILURE = 'SEARCH_FAILURE';
@@ -26,4 +28,11 @@ interface ISearchFailureAction {
     error: string
 }
 
-export type SearchActionTypes = ISearchStartAction | ISearchSuccessAction | ISearchFailureAction;
+export const SET_QUERY = 'SET_QUERY';
+
+interface ISetQueryAction{
+    type: typeof SET_QUERY,
+    query: string
+}
+
+export type SearchActionTypes = ISearchStartAction | ISearchSuccessAction | ISearchFailureAction | ISetQueryAction;
