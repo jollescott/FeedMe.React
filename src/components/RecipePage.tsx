@@ -64,43 +64,38 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                     <div className="doubleColumnColumn">
                         <Card className="recipeInstructionCard">
                             <CardMedia
-                                className="cardImage"
                                 component="img"
                                 image={recipe.image}
                                 title={recipe.name}
                             />
-                            <CardContent className="cardText">
-                                <Typography
-                                    gutterBottom={true}
-                                    variant="h6"
-                                    noWrap={true}
-                                >
+                            <CardContent>
+                                <Typography className="recipeNameText" gutterBottom={true} variant="h5">
                                     {recipe.name}
                                 </Typography>
 
-                            </CardContent>
 
 
-                            <Card className="ownerInfoCard" onClick={() => window.open(recipe.source)}>
-                                <CardActionArea className="ownerInfoCardContent">
-                                    <Typography variant="h6" className="centerText">
-                                        {"Receptet är hämtat från " + GetOwnerName(recipe.owner)}
-                                    </Typography>
-                                    <br/>
-                                    <Divider variant="fullWidth"/>
-                                    <br />
-                                    <div className="ownerInfoLower">
-                                        <img src={recipe.ownerLogo} className="ownerLogo" />
-
-                                        <Typography component="p" className="link">
-                                            {recipe.source}
+                                <Card className="ownerInfoCard" onClick={() => window.open(recipe.source)}>
+                                    <CardActionArea className="ownerInfoCardContent">
+                                        <Typography variant="h6" className="centerText">
+                                            {"Receptet är hämtat från " + GetOwnerName(recipe.owner)}
                                         </Typography>
-                                    </div>
-                                </CardActionArea>
-                            </Card>
+                                        <br />
+                                        <Divider variant="fullWidth" />
+                                        <br />
+                                        <div className="ownerInfoLower">
+                                            <img src={recipe.ownerLogo} className="ownerLogo" />
 
+                                            <Typography component="p" className="link">
+                                                {recipe.source}
+                                            </Typography>
+                                        </div>
+                                    </CardActionArea>
+                                </Card>
+                            </CardContent>
                         </Card>
                     </div>
+                    
                     <div className="doubleColumnColumn">
                         <Card className="recipeInstructionCard">
                             <CardContent className="cardText">
@@ -146,81 +141,6 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                         ))}
                     </div>
                 </div>
-                // <div>
-                //     <Card className="recipeInstructionCard">
-                //         <div className="doubleColumnContainer">
-                //             <div className="doubleColumnColumn">
-                //                 <img src={recipe.image} className="recipePageImage" />
-                //             </div>
-                //             <div className="doubleColumnColumn">
-                //                 <div className="recipeInfoContainer">
-                //                     <div className="recipeInfoTopRow">
-                //                         <Typography variant="h4">
-                //                             {recipe.name}
-                //                         </Typography>
-                //                     </div>
-                //                     <div className="recipeInfoBottomRow">
-
-                //                         <Paper className="ownerInfo" onClick={() => window.open(recipe.source)}>
-                //                             <img src={recipe.ownerLogo} className="ownerLogo" />
-                //                             <Typography variant="h6">
-                //                                 {"Receptet är hemtat från " + GetOwnerName(recipe.owner)}
-                //                             </Typography>
-                //                         </Paper>
-
-                //                     </div>
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     </Card>
-                //     <div className="doubleColumnContainer">
-                //         <div className="doubleColumnColumn">
-                //             <Card className="recipeInstructionCard">
-                //                 <CardContent className="cardText">
-                //                     <Typography gutterBottom={true} variant="h6">
-                //                         Ingredienser
-                //                     </Typography>
-
-                //                     <div className="recipeIngredientListLeft">
-                //                         <Divider variant="fullWidth" />
-                //                         {recipe.recipeParts.map((recipePart, index) => (
-                //                             <div key={index}>
-                //                                 <div className="recipeIngredientListRow">
-                //                                     <div className="recipeIngredientListLeftColumn">
-                //                                         <Typography component="p">
-                //                                             {this.formatIngredientQuantityAndUnit(recipePart)}
-                //                                         </Typography>
-                //                                     </div>
-                //                                     <div className="recipeIngredientListRightColumn">
-                //                                         <Typography component="p">
-                //                                             {recipePart.ingredientName}
-                //                                         </Typography>
-                //                                     </div>
-                //                                 </div>
-                //                                 <Divider variant="fullWidth" />
-                //                             </div>
-                //                         ))}
-                //                     </div>
-
-                //                 </CardContent>
-                //             </Card>
-                //         </div>
-                //         <div className="doubleColumnColumn">
-                //             {recipe.directions.map((direction, index) => (
-                //                 <Card className="recipeInstructionCard" key={index}>
-                //                     <CardContent className="cardText">
-                //                         <Typography variant="h6">
-                //                             {"Steg " + (index + 1) + "."}
-                //                         </Typography>
-                //                         <Typography component="p">
-                //                             {this.formatRecipeDirection(direction)}
-                //                         </Typography>
-                //                     </CardContent>
-                //                 </Card>
-                //             ))}
-                //         </div>
-                //     </div>
-                // </div>
             );
         }
         // Om receptet inte hämtats ordentligt

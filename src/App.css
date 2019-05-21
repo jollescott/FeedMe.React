@@ -214,27 +214,8 @@
     object-fit: cover;
 }
 
-.recipeInfoContainer {
-    height: 100%;
-    display: grid;
-    grid-template-rows: calc(100% - 100px) 100px;
-}
-
-.recipeInfoTopRow {
-    padding: 30px;
-    padding-left: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.recipeInfoBottomRow {
-    padding: 10px;
-}
-
-.ownerInfoCard {
-    margin: 20px;
+.recipeNameText {
+    margin: 10px !important;
 }
 
 .ownerInfoCardContent {
