@@ -1,13 +1,13 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment, Button, Paper, Card, CardMedia, Typography, CardContent, CardActionArea, CardActions } from '@material-ui/core';
+import { TextField, InputAdornment, Paper } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { searchRecipesT, setQuery } from '../store/search/actions';
-import { goForward, goBack } from '../store/carousel/actions';
+import { goForward } from '../store/carousel/actions';
 import { IRecipe } from '../store/types';
 import { loadRecipe } from '../store/recipes/actions';
 import RecipeList from '../components/RecipeList';
@@ -17,7 +17,6 @@ interface INameSearchProps {
   results: IRecipe[];
   loading: boolean;
   error: string;
-  goBack: () => void;
   goForward: () => void;
   findRecipes: (query: string) => void;
   openRecipe: (recipeId: string) => void;
@@ -72,6 +71,8 @@ class NameSearchPage extends React.Component<
     );
   }
 
+
+  // Funktion som ska köras när texten i sökbaren ändras
   private textChanged(e: React.ChangeEvent<HTMLInputElement>): void {
     e.persist();
 
@@ -79,6 +80,7 @@ class NameSearchPage extends React.Component<
     this.props.findRecipes(e.target.value);
   }
 
+  // Funktion som hämtar ett recept och gåt till nästa sida
   private openRecipe(recipeId: string) {
     this.props.openRecipe(recipeId);
     this.props.goForward();
@@ -97,7 +99,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     findRecipes: (query: string) => dispatch(searchRecipesT(query)),
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack()),
     openRecipe: (recipeId: string) => dispatch(loadRecipe(recipeId)),
     setQuery: (query: string) => dispatch(setQuery(query))
   };
