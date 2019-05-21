@@ -43,7 +43,7 @@ interface IRecipeListState {
 
 // En komponent som listar alla recept i en list eller ett grid. När man trycker på ett recept så kommer receptet att hämtass från serverm och funktionen goForward() kommer att köras.
 class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState> {
-  container: HTMLDivElement | null;
+  public container: HTMLDivElement | null;
 
   constructor(props: Readonly<IRecipeListProps>) {
     super(props);
