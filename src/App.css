@@ -193,6 +193,39 @@
     box-shadow: 2px 0 6px -1px #888;
 }
 
+.recipeInfoContainer {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
+
+.recipeInfoTopRow {
+    padding: 30px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.recipeInfoBottomRow {
+    padding: 10px;
+}
+
+.ownerInfo {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    align-items: center;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.ownerLogo {
+    width: 100%;
+}
+
 
 /* other */
 

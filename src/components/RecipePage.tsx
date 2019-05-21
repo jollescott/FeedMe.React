@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { goBack } from '../store/carousel/actions';
-import { Button, Card, CardMedia, CardContent, Typography, Divider } from '@material-ui/core';
+import { Button, Card, CardMedia, CardContent, Typography, Divider, Paper, CardActionArea } from '@material-ui/core';
 import { isNumber } from 'util';
 
 interface IRecipeProps {
@@ -55,7 +55,24 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                 <img src={recipe.image} className="recipePageImage" />
                             </div>
                             <div className="doubleColumnColumn">
-                                <h1>{this.props.recipe.name}</h1>
+                                <div className="recipeInfoContainer">
+                                    <div className="recipeInfoTopRow">
+                                        <Typography variant="h4">
+                                            {this.props.recipe.name}
+                                        </Typography>
+
+                                    </div>
+                                    <div className="recipeInfoBottomRow">
+
+                                        <Paper className="ownerInfo">
+                                            <img src={recipe.ownerLogo} className="ownerLogo"/>
+                                                <Typography variant="h6">
+                                                    {"Receptet är hemtat från " + recipe.owner}
+                                                </Typography>
+                                        </Paper>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </Card>
@@ -95,7 +112,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                             {recipe.directions.map((direction, index) => (
                                 <Card className="recipeInstructionCard">
                                     <CardContent className="cardText">
-                                        <Typography gutterBottom={true} variant="h6">
+                                        <Typography variant="h6">
                                             {"Steg " + (index + 1) + "."}
                                         </Typography>
                                         <Typography component="p">
