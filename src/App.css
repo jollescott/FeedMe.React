@@ -1,4 +1,5 @@
 .site {
+    position: fixed;
     display: grid;
     height: 100vh;
     grid-template-rows: 8vh calc(92vh - 30px) 30px;
@@ -268,18 +269,44 @@
 /* on iOS safari */
 
 @supports (-webkit-overflow-scrolling: touch) {
-    /* extra page height */
-    .extraPageHeight {
-        /* height: 320px; */
+    .site {
+        grid-template-rows: 8vh calc(92vh - 100px) 100px;
+    }
+    .slick-slider {
+        height: calc(92vh - 100px);
+    }
+    .page {
+        height: calc(92vh - 100px);
     }
 }
 
 
-/* not iOS safari */
+/* touch screen */
 
-@supports not (-webkit-overflow-scrolling: touch) {
-    /* extra page height */
-    .extraPageHeight {
-        /* height: 250px; */
+@media (hover: none) {
+    .ingredientListItem:hover {
+        box-shadow: none;
+        background-color: transparent;
+    }
+}
+
+
+/* slim view */
+
+@media screen and (max-width: 280mm) {
+    .gridListItemContainer {
+        width: calc(50% - 20px);
+    }
+}
+
+
+/* super slim view */
+
+@media screen and (max-width: 160mm) {
+    .gridListItemContainer {
+        width: calc(100% - 20px);
+    }
+    .pageHeader {
+        border-radius: 0 !important;
     }
 }
