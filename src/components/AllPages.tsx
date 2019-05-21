@@ -21,8 +21,9 @@ import { searchClear } from '../store/search/actions';
 
 const AppTheme = createMuiTheme({
   palette: {
-    primary: { main: '#00CC66' }, // The FeedMe green
-    secondary: { main: '#909090' }, // This is just grey
+    primary: { main: '#00CC66' }, // FeedMe grönt
+    secondary: { main: '#909090' }, // grå
+    error: {main: '#FF0000' }, // röd
   },
   typography: { useNextVariants: true },
 });
