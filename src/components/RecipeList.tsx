@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { IRecipe } from '../store/types';
+import { IRecipe, IIngredient } from '../store/types';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -13,9 +13,11 @@ import {
   Typography,
   CardContent,
   CircularProgress,
+  Button,
 } from '@material-ui/core';
 import { refreshRecipeCount, loadRecipe } from '../store/recipes/actions';
 import { SearchMode } from '../misc/enums';
+import { searchRecipesI, searchRecipesT } from '../store/search/actions';
 
 interface IRecipeListProps {
   results: IRecipe[];
@@ -26,76 +28,86 @@ interface IRecipeListProps {
   loadCount: () => void;
   openRecipe: (recipeId: string) => void;
   currentSearchMode: SearchMode;
+
+  query: string;
+  ingredients: IIngredient[];
+
+  searchIngredients: (ingredients: IIngredient[], start: number) => void;
+  searchText: (query: string, start: number) => void;
 }
-class RecipeListPage extends React.Component<IRecipeListProps> {
+
+interface IRecipeListState{
+  scrollY: number;
+}
+
+class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState> {
+  container: HTMLDivElement | null;
+
   constructor(props: Readonly<IRecipeListProps>) {
     super(props);
 
+    this.container = null;
+
     this.openRecipe = this.openRecipe.bind(this);
+    this.loadMore = this.loadMore.bind(this);
 
     this.state = {
-      test: 'test',
+      scrollY: 0
     };
+  }
+
+  public componentDidUpdate(){
+    if(this.container !== null){
+      this.container.scrollTop = this.state.scrollY;
+    }
   }
 
   public render() {
     return (
-      <div className="fullDiv">
+      <div className="fullDiv" ref={(x) => (this.container = x)}>
         {this.props.loading ? (
           <div className="centerdDiv">
             <CircularProgress color="primary" className="loadingIndicator" />
             <h4>Letar bland {this.props.recipeCount} recept!</h4>
           </div>
         ) : (
-          <div className="gridListContainer">
-            {this.props.results.map((recipe, index) => (
-              <div className="gridListItemContainer" key={index}>
-                <Card className="gridListItem">
-                  <CardActionArea
-                    onClick={() => this.openRecipe(recipe.recipeId)}
-                  >
-                    <CardMedia
-                      className="cardImage"
-                      component="img"
-                      image={recipe.image}
-                      title={recipe.name}
-                    />
-                    <CardContent className="cardText">
-                      <Typography
-                        gutterBottom={true}
-                        variant="h6"
-                        noWrap={true}
-                      >
-                        {recipe.name}
-                      </Typography>
-                      <Typography component="p">
-                        {this.coverageMessage(recipe)}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </div>
-            ))}
+            <div className="gridListContainer">
+              {this.props.results.map((recipe, index) => (
+                <div className="gridListItemContainer" key={index}>
+                  <Card className="gridListItem">
+                    <CardActionArea
+                      onClick={() => this.openRecipe(recipe.recipeId)}
+                    >
+                      <CardMedia
+                        className="cardImage"
+                        component="img"
+                        image={recipe.image}
+                        title={recipe.name} // TODO: byt title till receptets name
+                      />
+                      <CardContent className="cardText">
+                        <Typography
+                          gutterBottom={true}
+                          variant="h6"
+                          noWrap={true}
+                        >
+                          {recipe.name}
+                        </Typography>
+                        <Typography component="p">
+                          {this.coverageMessage(recipe)}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </div>
+              ))}
 
-            {this.props.results.length > 0 && (
-              <div className="gridListItemContainer" key={-1}>
-                <Card className="gridListItem">
-                  <CardActionArea onClick={() => this.loadMore}>
-                    <CardContent className="cardText">
-                      <Typography
-                        gutterBottom={true}
-                        variant="h6"
-                        noWrap={true}
-                      >
-                        Ladda fler.
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </div>
-            )}
-          </div>
-        )}
+              {this.props.results.length > 0 && (
+                <div className="gridListItemContainer" key={-1}>
+                  <Button onClick={() => this.loadMore()}>Ladda Fler!</Button>
+                </div>
+              )}
+            </div>
+          )}
       </div>
     );
   }
@@ -114,6 +126,17 @@ class RecipeListPage extends React.Component<IRecipeListProps> {
 
   private loadMore() {
 
+    if(this.container !== null){
+      const scroll = this.container.scrollHeight;
+
+      this.setState({
+        scrollY: scroll
+      });
+    }
+
+    const start = this.props.results.length;
+    this.props.currentSearchMode === SearchMode.Ingredients ? this.props.searchIngredients(this.props.ingredients, start) 
+    : this.props.searchText(this.props.query, start);
   }
 
   private openRecipe(recipeID: string) {
@@ -129,6 +152,9 @@ const mapStateToProps = (state: AppState) => {
     error: state.search.error,
     recipeCount: state.recipes.recipeCount,
     currentSearchMode: state.carousel.currentSearchMode,
+
+    ingredients: state.ingredients.ingredients,
+    query: state.search.query
   };
 };
 
@@ -137,6 +163,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     goForward: () => dispatch(goForward()),
     loadCount: () => dispatch(refreshRecipeCount()),
     openRecipe: (recipeId: string) => dispatch(loadRecipe(recipeId)),
+
+    searchIngredients: (ingredients: IIngredient[], start: number) => dispatch(searchRecipesI(ingredients, start)),
+    searchText: (query: string, start: number) => dispatch(searchRecipesT(query, start))
   };
 };
 

@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
-import { searchRecipesT } from '../store/search/actions';
+import { searchRecipesT, setQuery } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 import { IRecipe } from '../store/types';
 import { loadRecipe } from '../store/recipes/actions';
@@ -21,24 +21,16 @@ interface INameSearchProps {
   goForward: () => void;
   findRecipes: (query: string) => void;
   openRecipe: (recipeId: string) => void;
-}
-interface INameSearchState {
-  searchTerm: string;
+  setQuery: (query: string) => void;
 }
 class NameSearchPage extends React.Component<
-  INameSearchProps,
-  INameSearchState
-  > {
+  INameSearchProps> {
 
   constructor(props: Readonly<INameSearchProps>) {
     super(props);
 
     this.textChanged = this.textChanged.bind(this);
     this.openRecipe = this.openRecipe.bind(this);
-
-    this.state = {
-      searchTerm: ''
-    };
   }
 
   public render() {
@@ -83,11 +75,7 @@ class NameSearchPage extends React.Component<
   private textChanged(e: React.ChangeEvent<HTMLInputElement>): void {
     e.persist();
 
-    this.setState({
-      ...this.state,
-      searchTerm: e.target.value,
-    });
-
+    this.props.setQuery(e.target.value);
     this.props.findRecipes(e.target.value);
   }
 
@@ -110,7 +98,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     findRecipes: (query: string) => dispatch(searchRecipesT(query)),
     goForward: () => dispatch(goForward()),
     goBack: () => dispatch(goBack()),
-    openRecipe: (recipeId: string) => dispatch(loadRecipe(recipeId))
+    openRecipe: (recipeId: string) => dispatch(loadRecipe(recipeId)),
+    setQuery: (query: string) => dispatch(setQuery(query))
   };
 };
 
