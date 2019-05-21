@@ -101,7 +101,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 </div>
               ))}
 
-              {this.props.loading && this.props.results.length % 25 === 0 && (
+              {this.props.results.length !== 0 && this.props.results.length % 25 === 0 && (
                 <div className="gridListItemContainer" key={-1}>
                   <div className="loadMoreRecipesContainer">
                     <div className="centerdDiv">
