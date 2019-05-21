@@ -10,7 +10,6 @@ import { searchRecipesT } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 import { IRecipe } from '../store/types';
 import { loadRecipe } from '../store/recipes/actions';
-import { any } from 'prop-types';
 
 interface INameSearchProps {
   results: IRecipe[];
