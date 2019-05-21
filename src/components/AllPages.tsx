@@ -45,14 +45,9 @@ class AllPages extends React.Component<IAllPagesProps> {
     super(props);
 
     this.slider = null;
-
-    this.state = {
-      currentSearchMode: SearchMode.Ingredients
-    };
-
-    this.changeSearchMode = this.changeSearchMode.bind(this);
   }
 
+  // Ladda antalet recept när komponenten skapas
   public componentDidMount(){
     this.props.loadCount();
   }
@@ -70,66 +65,62 @@ class AllPages extends React.Component<IAllPagesProps> {
       adaptiveHeight: false
     };
 
-    // Pages to display in the Slider
+    // En lista av de sidor som kommer att visas i slidern
     const pages: any[] = [
       <StartPage key={0} />,
     ];
-    // Add pages
+    // Lägg till sidor i listan
+    // Om man har valt att söka med ingredisner:
     if (this.props.currentSearchMode === SearchMode.Ingredients) {
+      // lägg till ingreidenssöksidan
       pages.push(<IngredientsSearchPage />);
+      // sidan med alla recept
       pages.push(<RecipeListPage />);
+      // recept sidan
       pages.push(<RecipePage />);
     }
+    // Om man väljer att söka med namn:
     else {
+      // lägg till namnsöksidan
       pages.push(<NameSearchPage />);
+      // recept sidan
       pages.push(<RecipePage />);
     }
 
+    // Gå till den aktiva sidan i slidern
     if (this.slider != null) {
       this.slider.slickGoTo(this.props.pageIndex, false);
     }
 
+    // Ta bort gamla recept på man har valt att gå tillbaka till startsidan
     if(this.props.pageIndex === 0){
       this.props.searchClear();
     }
 
+    // Returerar själva komponenten
     return (
       <MuiThemeProvider theme={AppTheme}>
         <div className="site">
-
+          
           <div className="siteHeader">
-
             <Button color="default" onClick={this.props.goBack} disabled={this.props.pageIndex <= 0} className="headerBackButton">
               <GoBackIcon color="default" />
               Tillbaka
             </Button>
-
             <h1 className="headerMainText" onClick={this.props.goHome}>FeedMe</h1>
-
           </div>
 
           <div className="siteContent">
+            {/* Slidern som innehåller alla sidor: */}
             <Slider {...settings} ref={c => (this.slider = c)} className="slick-slider">
               {pages}
             </Slider>
           </div>
 
           <div className="siteFooter"/>
-
         </div>
       </MuiThemeProvider>
     );
-  }
-
-  private changeSearchMode(searchMode: SearchMode): void {
-    this.props.setMode(searchMode);
-    this.props.goForward();
-  }
-
-  private goBack(): void {
-    if (this.slider !== null) {
-      this.slider.slickPrev();
-    }
   }
 };
 
