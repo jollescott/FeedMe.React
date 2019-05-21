@@ -272,6 +272,10 @@
     border-radius: 50px !important;
 }
 
+.loadingIndicator {
+    margin: 15px;
+}
+
 
 /* on iOS safari */
 

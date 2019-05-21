@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment, Divider, Paper } from '@material-ui/core';
+import { TextField, InputAdornment, Divider, Paper, CircularProgress } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -113,7 +113,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
             <div className="usablePage">
               <div className="slimDiv">
 
-                <br/>
+                <br />
                 {this.state.searchTerm.length === 0 ?
                   <h1 className="StartPageButtons">Tillagda ingredinser</h1>
                   :
@@ -157,22 +157,29 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                       <br />
                     </div>
                     :
-                    // Ingrediens sök lista
-                    <List>
-                      {this.props.results.map((ingredient, index) => (
-                        <ListItem key={index} className="ingredientListItem">
-                          <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
+                    this.props.loading ?
+                      <div className="fullDiv">
+                        <div className="centerdDiv">
+                          <CircularProgress color="primary" className="loadingIndicator"/>
+                        </div>
+                      </div>
+                      :
+                      // Ingrediens sök lista
+                      <List>
+                        {this.props.results.map((ingredient, index) => (
+                          <ListItem key={index} className="ingredientListItem">
+                            <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
 
-                          <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
-                            {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
-                          </IconButton>
+                            <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
+                              {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
+                            </IconButton>
 
-                          <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
-                            {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
-                          </IconButton>
-                        </ListItem>
-                      ))}
-                    </List>
+                            <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
+                              {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
+                            </IconButton>
+                          </ListItem>
+                        ))}
+                      </List>
                 }
 
                 <Divider variant="fullWidth" />
