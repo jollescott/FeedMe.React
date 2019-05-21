@@ -32,7 +32,6 @@ interface IIngredientSearchProps {
   removeIngredient: (ingredient: IIngredient) => void; // Ta bort ingrediens
   findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
   goForward: () => void;
-  goBack: () => void;
   searchClear: () => void;
 }
 interface IIngredientSearchState {
@@ -77,7 +76,6 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     return (
       <div className="page">
         <div className="headedPageContainer">
-
 
           {/* Header */}
           <Paper className="pageHeader">
@@ -125,18 +123,18 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
                 <Divider variant="fullWidth" />
 
-                {this.state.searchTerm.length === 0 ?
-                  this.props.ingredients.length === 0 ?
+                {this.state.searchTerm.length === 0 ? // Om det inte står något i sökfältet:
+                  this.props.ingredients.length === 0 ?  // Om det inte finns några tillagda ingredienser:
                     <div>
                       <br />
                       <h3 className="info">Dina tillagda ingredienser kommer att visas här.</h3>
                       <h4 className="info"> Lägg till ingredienser genom att söka i sökfältet.</h4>
                       <br />
                     </div>
-                    :
-                    // Tillagda ingredienser lista
+                    : // Om det finns tillgda íngrediensser i listan:
+                    // Skapa tillagda ingredienser listan
                     <List>
-                      {this.props.ingredients.map((ingredient, index) => (
+                      {this.props.ingredients.map((ingredient, index) => (  // Loopar igenom alla tillagda ingredienser
                         <ListItem key={index} className="ingredientListItem">
                           <ListItemText primary={ingredient.ingredientName} />
                           <IconButton onClick={() => this.toggleIngredientRole(this.props.ingredients, ingredient)}>
@@ -153,23 +151,25 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                       ))}
                     </List>
                   :
-                  !this.props.loading && this.props.results.length === 0 ?
+                  !this.props.loading && this.props.results.length === 0 ? // Om ingrediensen in kan hittas:
                     <div>
                       <br />
                       <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
                       <br />
                     </div>
-                    :
-                    this.props.loading ?
+
+                    : // Om ingrediensen kan hittas:
+
+                    this.props.loading ?  // Om det ingrediensssökningen laddar:
                       <div className="fullDiv">
                         <div className="centerdDiv">
                           <CircularProgress color="primary" className="loadingIndicator" />
                         </div>
                       </div>
-                      :
-                      // Ingrediens sök lista
+                      :  // Om ingredienssökningen inte laddar:
+                      // Skapa ingrediens sök lista
                       <List>
-                        {this.props.results.map((ingredient, index) => (
+                        {this.props.results.map((ingredient, index) => (  // Loopar igenom alla hittade ingredienser
                           <ListItem key={index} className="ingredientListItem">
                             <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
 
@@ -189,15 +189,15 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
                 <br />
 
+                {/* "Hämta recept" knappen */}
                 <Button variant="extendedFab" color="primary" onClick={this.getRecipesButtonClickHandler} fullWidth={true} disabled={!readyToFindRecipes}>
                   Hämta Recept
-              </Button>
+                </Button>
 
+                {/* Lite extra höjd i botten av sidan: */}
                 <br />
                 <br />
 
-
-                <div className="extraPageHeight" />
               </div>
             </div>
           </div>
@@ -302,7 +302,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), // Lägg till dispatchen för injection in i props
     findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query)),
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack()),
     searchClear: () => dispatch(searchClear()),
   }
 };
