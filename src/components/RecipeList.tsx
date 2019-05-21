@@ -58,11 +58,11 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                                 </CardContent>
                             </CardActionArea>
 
-                            <CardActions>
+                            {/* <CardActions>
                                 <Button size="small" color="primary">
                                     Recept.se
-                        </Button>
-                            </CardActions>
+                                </Button>
+                            </CardActions> */}
                         </Card>
                     </div>
                 ))}

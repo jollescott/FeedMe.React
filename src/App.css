@@ -1,7 +1,7 @@
 .site {
     display: grid;
     height: 100vh;
-    grid-template-rows: 6vh calc(94vh - 30px) 30px;
+    grid-template-rows: 8vh calc(92vh - 30px) 30px;
     qoverflow: hidden;
 }
 
@@ -33,6 +33,7 @@
     max-width: 100mm;
     margin: auto;
     cursor: pointer;
+    font-weight: 300;
 }
 
 
@@ -40,14 +41,14 @@
 
 .slick-slider {
     width: 100vw;
-    height: calc(94vh - 30px);
+    height: calc(92vh - 30px);
 }
 
 
 /* page formating */
 
 .page {
-    height: calc(94vh - 30px);
+    height: calc(92vh - 30px);
 }
 
 .headedPageContainer {
