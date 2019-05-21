@@ -10,7 +10,7 @@ import RecipeListPage from '../components/RecipeListPage';
 import IngredientsSearchPage from '../components/IngredientSearchPage';
 import NameSearchPage from '../components/NameSearchPage';
 import RecipePage from '../components/RecipePage';
-import { SearchMode } from '../misc/Enums';
+import { SearchMode } from '../misc/enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { goForward, goBack, goHome } from '../store/carousel/actions';
 import { Paper, Button, IconButton } from '@material-ui/core';

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { SearchMode } from '../misc/Enums';
+import { SearchMode } from '../misc/enums';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
