@@ -39,7 +39,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
         return (
             <div className="gridListContainer">
                 {"Loading: " + this.props.loading}
-                {true ?
+                {this.props.loading ?
                     <CircularProgress color="primary" className="loadingIndicator"/>
                     :
                     this.props.results.map((recipe, index) => (
