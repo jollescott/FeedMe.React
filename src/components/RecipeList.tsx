@@ -101,19 +101,37 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 </div>
               ))}
 
-              {!this.props.loading && this.props.results.length > 0 && this.props.results.length % 25 === 0 && (
+              {this.props.results.length % 25 === 0 && (
                 <div className="gridListItemContainer" key={-1}>
-                  <Button onClick={() => this.loadMore()}>Ladda Fler!</Button>
+                  <div className="loadMoreRecipesContainer">
+                    <div className="centerdDiv">
+
+                      {this.props.loading ?
+                        <CircularProgress color="primary" className="loadingIndicator" />
+                        :
+                        <Button variant="extendedFab" color="primary" onClick={() => this.loadMore()}>Ladda Fler!</Button>
+                      }
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* {!this.props.loading && this.props.results.length > 0 && this.props.results.length % 25 === 0 && (
+                <div className="gridListItemContainer" key={-1}>
+                  <div className="centerdDiv">
+                    <Button variant="extendedFab" color="primary" onClick={() => this.loadMore()}>Ladda Fler!</Button>
+                  </div>
                 </div>
               )}
 
               {this.props.loading && this.props.results.length > 0 && (
-                <div className="bottomOverlay">
+
+                <div className="gridListItemContainer" key={-1}>
                   <div className="centerdDiv">
                     <CircularProgress color="primary" className="loadingIndicator" />
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           )}
       </div>

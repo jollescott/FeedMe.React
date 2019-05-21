@@ -258,6 +258,12 @@
     margin: 15px;
 }
 
+.loadMoreRecipesContainer {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    height: calc(100% - 160px);
+}
+
 .link {
     color: blue !important;
     font-size: 1em !important;
