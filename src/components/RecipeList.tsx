@@ -37,39 +37,38 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
 
     public render() {
         return (
-            <div className="gridListContainer">
-                {"Loading: " + this.props.loading}
+            <div className="fullDiv">
                 {this.props.loading ?
-                    <CircularProgress color="primary" className="loadingIndicator"/>
+                    <div className="centerdDiv">
+                        <CircularProgress color="primary" className="loadingIndicator" />
+                    </div>
                     :
-                    this.props.results.map((recipe, index) => (
-                        <div className="gridListItemContainer" key={index}>
-                            <Card className="gridListItem">
-                                <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
-                                    <CardMedia
-                                        className="cardImage"
-                                        component="img"
-                                        image={recipe.image}
-                                        title={recipe.name} // TODO: byt title till receptets name
-                                    />
-                                    <CardContent className="cardText">
-                                        <Typography gutterBottom={true} variant="h6" noWrap={true}>
-                                            {recipe.name}
-                                        </Typography>
-                                        <Typography component="p">
-                                            {this.coverageMessage(recipe)}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
+                    <div className="gridListContainer">
+                        {this.props.results.map((recipe, index) => (
+                            <div className="gridListItemContainer" key={index}>
+                                <Card className="gridListItem">
+                                    <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)}>
+                                        <CardMedia
+                                            className="cardImage"
+                                            component="img"
+                                            image={recipe.image}
+                                            title={recipe.name} // TODO: byt title till receptets name
+                                        />
+                                        <CardContent className="cardText">
+                                            <Typography gutterBottom={true} variant="h6" noWrap={true}>
+                                                {recipe.name}
+                                            </Typography>
+                                            <Typography component="p">
+                                                {this.coverageMessage(recipe)}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
 
-                                {/* <CardActions>
-                                <Button size="small" color="primary">
-                                    Recept.se
-                                </Button>
-                            </CardActions> */}
-                            </Card>
-                        </div>
-                    ))}
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                }
             </div>
         );
     }
