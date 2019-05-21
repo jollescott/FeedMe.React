@@ -48,21 +48,23 @@ class NameSearchPage extends React.Component<
           {/* Header */}
           <Paper className="pageHeader">
             <div className="usablePage">
-              <div className="slimDiv">
-                <TextField
-                  fullWidth={true}
-                  label="Skriv ett sökord"
-                  type="search"
-                  variant="standard"
-                  onChange={this.textChanged}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Icon>search</Icon>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+              <div className="centerdDiv">
+                <div className="slimDiv">
+                  <TextField
+                    fullWidth={true}
+                    label="Skriv ett sökord"
+                    type="search"
+                    variant="standard"
+                    onChange={this.textChanged}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Icon>search</Icon>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </Paper>
