@@ -1,7 +1,8 @@
 .site {
     display: grid;
     height: 100vh;
-    grid-template-rows: 6vh 91vh 3vh;
+    grid-template-rows: 6vh calc(94vh - 30px) 30px;
+    qoverflow: hidden;
 }
 
 .siteHeader {
@@ -39,14 +40,14 @@
 
 .slick-slider {
     width: 100vw;
-    height: 91vh;
+    height: calc(94vh - 30px);
 }
 
 
 /* page formating */
 
 .page {
-    height: 91vh;
+    height: calc(94vh - 30px);
 }
 
 .headedPageContainer {
