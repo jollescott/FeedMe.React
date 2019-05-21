@@ -41,6 +41,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 {this.props.loading ?
                     <div className="centerdDiv">
                         <CircularProgress color="primary" className="loadingIndicator" />
+                        <h6>Letar bland {this.props.recipeCount} recept!</h6>
                     </div>
                     :
                     <div className="gridListContainer">
