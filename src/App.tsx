@@ -3,11 +3,8 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import './App.css';
-import Slider, { Settings as SliderSettings } from 'react-slick';
 import { rootReducer } from './store';
-import NameSearchPage from './components/NameSearchPage';
 import { SearchMode } from './misc/Enums';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import AllPages from './components/AllPages';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

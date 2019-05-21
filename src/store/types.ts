@@ -15,7 +15,7 @@ export interface IRecipeTag{
 }
 
 export interface IRecipe{
-    recipeID: string; //TODO: Change back to recipeId
+    recipeID: string; // TODO: Change back to recipeId
     name: string;
     desc: string;
     source: string;

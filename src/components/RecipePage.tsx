@@ -38,7 +38,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                         {this.renderRecipe()}
                     </div>
 
-                    <div className="extraPageHeight"></div>
+                    <div className="extraPageHeight"/>
                 </div>
             </div>
         );
@@ -87,7 +87,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                     <div className="recipeIngredientListLeft">
                                         <Divider variant="fullWidth" />
                                         {recipe.recipeParts.map((recipePart, index) => (
-                                            <div>
+                                            <div key={index}>
                                                 <div className="recipeIngredientListRow">
                                                     <div className="recipeIngredientListLeftColumn">
                                                         <Typography component="p">
@@ -110,7 +110,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                         </div>
                         <div className="doubleColumnColumn">
                             {recipe.directions.map((direction, index) => (
-                                <Card className="recipeInstructionCard">
+                                <Card className="recipeInstructionCard" key={index}>
                                     <CardContent className="cardText">
                                         <Typography variant="h6">
                                             {"Steg " + (index + 1) + "."}

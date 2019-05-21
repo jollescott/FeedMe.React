@@ -49,7 +49,7 @@ class StartPage extends React.Component<IStartProps> {
         variant="contained"
         color={searchMode === this.props.currentSearchMode ? "primary" : "default"}
         onClick={() => this.nextPage(searchMode)}
-        fullWidth
+        fullWidth={true}
         className="menuButton"
       >
         {name}

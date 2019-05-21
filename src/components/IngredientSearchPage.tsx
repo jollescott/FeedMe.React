@@ -18,7 +18,6 @@ import AddedIcon from '@material-ui/icons/Check';
 import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RemovedIcon from '@material-ui/icons/Close';
-import EndSearchIcon from '@material-ui/icons/Close';
 import { searchRecipesI } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 
@@ -56,10 +55,10 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     const isAdded: boolean[] = []; // En bool för varje ingrediens i "props.results" som anger om ingrediensen redan är tillagd i "props.ingreedients" eller inte.
 
     // Lägg till världen i isAdded[] och tilldela de resultatingredinser som redan är tillagada deras "roles"
-    for (let i = 0; i < this.props.results.length; i++) {
-      const index = this.ingredientListIndex(this.props.ingredients, this.props.results[i]);
+    for (const result of this.props.results) {
+      const index = this.ingredientListIndex(this.props.ingredients, result);
       if (index !== -1) {
-        this.props.results[i].role = this.props.ingredients[index].role;
+        result.role = this.props.ingredients[index].role;
       }
       isAdded.push(index !== -1);
     }
@@ -67,8 +66,8 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     let readyToFindRecipes = false; // Anger om det finns ingredienser som går att söka recept med.
 
     // Kolla om det finns ingredienser som går att söka recept med.
-    for (let j = 0; j < this.props.ingredients.length; j++) {
-      if (this.props.ingredients[j].role === IngredientRole.Include) {
+    for (const ingredient of this.props.ingredients) {
+      if (ingredient.role === IngredientRole.Include) {
         readyToFindRecipes = true;
         break;
       }
@@ -98,7 +97,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                     endAdornment: (
                       <InputAdornment position="end" >
                         <Button variant="fab" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
-                          <EndSearchIcon color="default" />
+                          <RemovedIcon color="default" />
                         </Button>
                       </InputAdornment>
                     )
