@@ -7,7 +7,6 @@ import { AppState } from '../store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { goForward, goBack, setMode } from '../store/carousel/actions';
-import { Paper } from '@material-ui/core';
 
 
 interface IStartProps {
