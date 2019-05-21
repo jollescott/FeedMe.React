@@ -15,6 +15,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { refreshRecipeCount, loadRecipe } from '../store/recipes/actions';
+import { SearchMode } from '../misc/enums';
 
 interface IRecipeListProps {
   results: IRecipe[];
@@ -24,15 +25,9 @@ interface IRecipeListProps {
   goForward: () => void;
   loadCount: () => void;
   openRecipe: (recipeId: string) => void;
+  currentSearchMode: SearchMode;
 }
-interface IRecipeListState {
-  test: string;
-}
-
-class RecipeListPage extends React.Component<
-  IRecipeListProps,
-  IRecipeListState
-> {
+class RecipeListPage extends React.Component<IRecipeListProps> {
   constructor(props: Readonly<IRecipeListProps>) {
     super(props);
 
@@ -117,8 +112,8 @@ class RecipeListPage extends React.Component<
     }
   }
 
-  private loadMore(){
-      
+  private loadMore() {
+
   }
 
   private openRecipe(recipeID: string) {
@@ -133,6 +128,7 @@ const mapStateToProps = (state: AppState) => {
     loading: state.search.loading,
     error: state.search.error,
     recipeCount: state.recipes.recipeCount,
+    currentSearchMode: state.carousel.currentSearchMode,
   };
 };
 

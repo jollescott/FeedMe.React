@@ -13,6 +13,8 @@ import { Paper } from '@material-ui/core';
 interface IStartProps {
   currentSearchMode: SearchMode;
   setMode: (mode: SearchMode) => void;
+  goBack: () => void;
+  goForward: () => void;
 }
 class StartPage extends React.Component<IStartProps> {
   public render() {
@@ -56,6 +58,7 @@ class StartPage extends React.Component<IStartProps> {
 
   private nextPage(searchMode: SearchMode): void {
     this.props.setMode(searchMode);
+    this.props.goForward();
   }
 }
 
