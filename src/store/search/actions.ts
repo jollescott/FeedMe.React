@@ -27,6 +27,12 @@ export function searchFailure(error: string) : SearchActionTypes{
     }
 }
 
+export function searchClear(): SearchActionTypes{
+    return {
+        type: 'SEARCH_CLEAR'
+    }
+}
+
 export const searchRecipesT = (searchTerm: string, start: number = 0): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
     dispatch(searchStart());
     axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/text?search=${searchTerm}&start=${start}`)

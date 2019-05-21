@@ -26,4 +26,10 @@ interface ISearchFailureAction {
     error: string
 }
 
-export type SearchActionTypes = ISearchStartAction | ISearchSuccessAction | ISearchFailureAction;
+export const SEARCH_CLEAR = 'SEARCH_CLEAR';
+
+export interface ISearchClearAction {
+    type: typeof SEARCH_CLEAR;    
+}
+
+export type SearchActionTypes = ISearchStartAction | ISearchSuccessAction | ISearchFailureAction | ISearchClearAction;

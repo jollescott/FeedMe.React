@@ -6,8 +6,8 @@ const initialState: ISearchState = {
     results: [],
 }
 
-export function searchReducer(state = initialState, action: SearchActionTypes) : ISearchState {
-    switch(action.type){
+export function searchReducer(state = initialState, action: SearchActionTypes): ISearchState {
+    switch (action.type) {
         case 'SEARCH_START':
             return {
                 ...state,
@@ -25,7 +25,12 @@ export function searchReducer(state = initialState, action: SearchActionTypes) :
                 results: action.recipes,
                 loading: false
             }
-        default: 
+        case 'SEARCH_CLEAR':
+            return {
+                ...state,
+                results: []
+            }
+        default:
             return state;
     }
 }

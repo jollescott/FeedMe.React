@@ -16,6 +16,7 @@ import { goForward, goBack, goHome, setMode } from '../store/carousel/actions';
 import { Paper, Button, IconButton } from '@material-ui/core';
 import GoBackIcon from '@material-ui/icons/ArrowBackIos';
 import { refreshRecipeCount } from '../store/recipes/actions';
+import { searchClear } from '../store/search/actions';
 
 
 
@@ -35,6 +36,7 @@ interface IAllPagesProps {
   goHome: () => void;
   loadCount: () => void;
   setMode: (mode: SearchMode) => void;
+  searchClear: () => void;
 }
 class AllPages extends React.Component<IAllPagesProps> {
   private slider: Slider | null;
@@ -85,6 +87,10 @@ class AllPages extends React.Component<IAllPagesProps> {
 
     if (this.slider != null) {
       this.slider.slickGoTo(this.props.pageIndex, false);
+    }
+
+    if (this.props.pageIndex === 0){
+      this.props.searchClear();
     }
 
     return (
@@ -140,7 +146,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     goBack: () => dispatch(goBack()),
     goHome: () => dispatch(goHome()),
     loadCount: () => dispatch(refreshRecipeCount()),
-    setMode: (mode: SearchMode) => dispatch(setMode(mode))
+    setMode: (mode: SearchMode) => dispatch(setMode(mode)),
+    searchClear: () => dispatch(searchClear()),
   }
 };
 
