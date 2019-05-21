@@ -81,29 +81,31 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
           {/* Header */}
           <Paper className="pageHeader">
             <div className="usablePage">
-              <div className="slimDiv">
-                <TextField
-                  fullWidth={true}
-                  label="Lägg till ingredienser"
-                  type="search"
-                  variant="standard"
-                  onChange={this.textChanged}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Icon>search</Icon>
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment position="end" >
-                        <Button variant="raised" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
-                          <RemovedIcon color="default" />
-                        </Button>
-                      </InputAdornment>
-                    )
-                  }}
-                />
+              <div className="centerdDiv">
+                <div className="slimDiv">
+                  <TextField
+                    fullWidth={true}
+                    label="Lägg till ingredienser"
+                    type="search"
+                    variant="standard"
+                    onChange={this.textChanged}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Icon>search</Icon>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position="end" >
+                          <Button variant="raised" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
+                            <RemovedIcon color="default" />
+                          </Button>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
 
+                </div>
               </div>
             </div>
           </Paper>
@@ -160,7 +162,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                     this.props.loading ?
                       <div className="fullDiv">
                         <div className="centerdDiv">
-                          <CircularProgress color="primary" className="loadingIndicator"/>
+                          <CircularProgress color="primary" className="loadingIndicator" />
                         </div>
                       </div>
                       :
