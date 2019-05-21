@@ -69,6 +69,7 @@
 
 .pageContent {
     overflow-y: auto;
+    height: 100%;
 }
 
 .pageFooter {
