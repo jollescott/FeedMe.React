@@ -4,7 +4,7 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import './App.css';
 import { rootReducer } from './store';
-import { SearchMode } from './misc/Enums';
+import { SearchMode } from './misc/enums';
 import AllPages from './components/AllPages';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
