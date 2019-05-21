@@ -40,6 +40,8 @@ interface IRecipeListState {
   scrollY: number;
 }
 
+
+// En komponent som listar alla recept i en list eller ett grid. När man trycker på ett recept så kommer receptet att hämtass från serverm och funktionen goForward() kommer att köras.
 class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState> {
   container: HTMLDivElement | null;
 
@@ -66,12 +68,16 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     return (
       <div className="fullDiv" ref={(x) => (this.container = x)}>
         {this.props.loading && this.props.results.length === 0 ? (
+          
+          // När recepten laddar:
           <div className="centerdDiv">
             <CircularProgress color="primary" className="loadingIndicator" />
             <h4>Letar bland {this.props.recipeCount} recept!</h4>
           </div>
         ) : (
             <div className="gridListContainer">
+          
+              {/* Loopa igenom alla recepten och skapa "Cards" */}
               {this.props.results.map((recipe, index) => (
                 <div className="gridListItemContainer" key={index}>
                   <Card className="gridListItem">
@@ -101,6 +107,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 </div>
               ))}
 
+              {/* Knappen och laddningsbaren för att ladda in fler recept */}
               {this.props.results.length !== 0 && this.props.results.length % 25 === 0 && (
                 <div className="gridListItemContainer" key={-1}>
                   <div className="loadMoreRecipesContainer">
@@ -121,8 +128,9 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     );
   }
 
+  // En funktion som returerar en string som berättar hut många % av ingredienserna man har
   private coverageMessage(recipe: IRecipe): string {
-    if (recipe.coverage === undefined) {
+    if (recipe.coverage === undefined) { // returera en tom string om det inte finns information om coverage
       return '';
     } else {
       return (
@@ -133,20 +141,25 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     }
   }
 
+  // Funktionen som laddar in fler recept
   private loadMore() {
     if (this.container !== null) {
       const scroll = this.container.scrollHeight;
 
+      // Spara den possition man har scrollat till
       this.setState({
         scrollY: scroll
       });
     }
 
+    // Ladda in fler recept
     const start = this.props.results.length;
     this.props.currentSearchMode === SearchMode.Ingredients ? this.props.searchIngredients(this.props.ingredients, start)
       : this.props.searchText(this.props.query, start);
   }
 
+
+  // Funktion som hämtar ett recept och går vidrare till nästa sida
   private openRecipe(recipeID: string) {
     this.props.openRecipe(recipeID);
     this.props.goForward();

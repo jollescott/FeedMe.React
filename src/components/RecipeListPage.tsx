@@ -5,6 +5,7 @@ import RecipeList from '../components/RecipeList';
 
 export default class RecipeListPage extends React.Component
 {
+  // Den här sidan visar bara den aktuella receptlistan
   public render() {
     return (
       <div className="page">
