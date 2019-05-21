@@ -30,7 +30,7 @@
     color: white;
     font-size: 5vh;
     width: 100%;
-    max-width: 80mm;    
+    max-width: 80mm;
     margin: auto;
     cursor: pointer;
     font-weight: 500;
@@ -107,11 +107,10 @@
 }
 
 @media screen and (max-width: 180mm) {
-    .doubleColumnContainer{
+    .doubleColumnContainer {
         flex-direction: column;
     }
 }
-
 
 .fullDiv {
     height: 100%;
@@ -174,8 +173,8 @@
 /* ingredient list */
 
 .ingredientListItem {
-    padding-top: 7px !important;
-    padding-bottom: 7px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
 }
 
 .ingredientListItem:hover {
@@ -250,7 +249,6 @@
     background-color: #dbdbdb !important;
 }
 
-
 .ownerLogo {
     max-width: 100%;
     max-height: calc(100% - 20px);
@@ -263,7 +261,7 @@
     pointer-events: none;
 }
 
-.slick-dots:hover{
+.slick-dots:hover {
     pointer-events: none;
 }
 
