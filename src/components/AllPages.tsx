@@ -89,7 +89,7 @@ class AllPages extends React.Component<IAllPagesProps> {
       this.slider.slickGoTo(this.props.pageIndex, false);
     }
 
-    if (this.props.pageIndex === 0){
+    if (this.props.pageIndex === 0 || (this.props.currentSearchMode === SearchMode.Ingredients && this.props.pageIndex === 1)){
       this.props.searchClear();
     }
 

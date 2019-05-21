@@ -52,7 +52,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     this.loadMore = this.loadMore.bind(this);
 
     this.state = {
-      scrollY: 0
+      scrollY: 0,
     };
   }
 
@@ -65,7 +65,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
   public render() {
     return (
       <div className="fullDiv" ref={(x) => (this.container = x)}>
-        {this.props.loading ? (
+        {this.props.loading && this.props.results.length === 0 ? (
           <div className="centerdDiv">
             <CircularProgress color="primary" className="loadingIndicator" />
             <h4>Letar bland {this.props.recipeCount} recept!</h4>
@@ -101,7 +101,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 </div>
               ))}
 
-              {this.props.results.length > 0 && (
+              {this.props.results.length > 0 && this.props.results.length % 25 === 0 && (
                 <div className="gridListItemContainer" key={-1}>
                   <Button onClick={() => this.loadMore()}>Ladda Fler!</Button>
                 </div>
