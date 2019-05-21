@@ -12,9 +12,10 @@ import NameSearchPage from '../components/NameSearchPage';
 import RecipePage from '../components/RecipePage';
 import { SearchMode } from '../misc/enums';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { goForward, goBack, goHome } from '../store/carousel/actions';
+import { goForward, goBack, goHome, setMode } from '../store/carousel/actions';
 import { Paper, Button, IconButton } from '@material-ui/core';
 import GoBackIcon from '@material-ui/icons/ArrowBackIos';
+import { refreshRecipeCount } from '../store/recipes/actions';
 
 
 
@@ -28,15 +29,14 @@ const AppTheme = createMuiTheme({
 
 interface IAllPagesProps {
   pageIndex: number;
+  currentSearchMode: SearchMode;
   goForward: () => void;
   goBack: () => void;
   goHome: () => void;
+  loadCount: () => void;
+  setMode: (mode: SearchMode) => void;
 }
-
-interface IAllPagesState {
-  currentSearchMode: SearchMode,
-}
-class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
+class AllPages extends React.Component<IAllPagesProps> {
   private slider: Slider | null;
 
   constructor(props: Readonly<IAllPagesProps>) {
@@ -49,6 +49,10 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
     };
 
     this.changeSearchMode = this.changeSearchMode.bind(this);
+  }
+
+  public componentDidMount(){
+    this.props.loadCount();
   }
 
   public render() {
@@ -66,10 +70,10 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
 
     // Pages to display in the Slider
     const pages: any[] = [
-      <StartPage currentSearchMode={this.state.currentSearchMode} changeSearchMode={this.changeSearchMode} key={0} />,
+      <StartPage key={0} />,
     ];
     // Add pages
-    if (this.state.currentSearchMode === SearchMode.Ingredients) {
+    if (this.props.currentSearchMode === SearchMode.Ingredients) {
       pages.push(<IngredientsSearchPage />);
       pages.push(<RecipeListPage />);
       pages.push(<RecipePage />);
@@ -112,10 +116,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
   }
 
   private changeSearchMode(searchMode: SearchMode): void {
-    this.setState({
-      currentSearchMode: searchMode
-    })
-
+    this.props.setMode(searchMode);
     this.props.goForward();
   }
 
@@ -128,7 +129,8 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
 
 const mapStateToProps = (state: AppState) => {
   return {
-    pageIndex: state.carousel.pageIndex
+    pageIndex: state.carousel.pageIndex,
+    currentSearchMode: state.carousel.currentSearchMode
   };
 };
 
@@ -137,6 +139,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     goForward: () => dispatch(goForward()),
     goBack: () => dispatch(goBack()),
     goHome: () => dispatch(goHome()),
+    loadCount: () => dispatch(refreshRecipeCount()),
+    setMode: (mode: SearchMode) => dispatch(setMode(mode))
   }
 };
 

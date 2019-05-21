@@ -1,4 +1,5 @@
 import { CarouselActionTypes } from "./types";
+import { SearchMode } from "../../misc/enums";
 
 export function goForward() : CarouselActionTypes{
     return {
@@ -15,5 +16,12 @@ export function goBack(): CarouselActionTypes{
 export function goHome(): CarouselActionTypes{
     return{
         'type': 'GO_HOME'
+    }
+}
+
+export function setMode(mode: SearchMode): CarouselActionTypes{
+    return{
+        'type': 'SET_MODE',
+        'mode': mode
     }
 }
