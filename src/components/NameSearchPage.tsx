@@ -10,6 +10,8 @@ import { searchRecipesT } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 import { IRecipe } from '../store/types';
 import { loadRecipe } from '../store/recipes/actions';
+import RecipeList from '../components/RecipeList';
+
 
 interface INameSearchProps {
   results: IRecipe[];
@@ -26,9 +28,9 @@ interface INameSearchState {
 class NameSearchPage extends React.Component<
   INameSearchProps,
   INameSearchState
-> {
+  > {
 
-  constructor(props: Readonly<INameSearchProps>){
+  constructor(props: Readonly<INameSearchProps>) {
     super(props);
 
     this.textChanged = this.textChanged.bind(this);
@@ -42,61 +44,33 @@ class NameSearchPage extends React.Component<
   public render() {
     return (
       <div className="page">
-        {/* Header */}
-        <Paper className="pageHeader">
-          <div className="usablePage">
-            <div className="slimDiv">
-              <TextField
-                fullWidth={true}
-                label="Skriv ett sökord"
-                type="search"
-                variant="standard"
-                onChange={this.textChanged}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Icon>search</Icon>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-          </div>
-        </Paper>
-
-        {/* Content */}
-        <div className="pageContent">
-          <div className="usablePage">
-            <div className="slimDiv">
-
-              <div className="gridListContainer">
-                {this.props.results.map((recipe, index) => (
-                  <div className="gridListItemContainer" key={index}>
-                    <Card className="gridListItem">
-                      <CardActionArea onClick={() => this.openRecipe(recipe.recipeId)} >
-                        <CardMedia
-                          component="img"
-                          image={recipe.image}
-                          title={recipe.name} // TODO: byt title till receptets name
-                        />
-                        <CardContent>
-                          <Typography gutterBottom={true} variant="h5" component="h2">
-                            {recipe.name}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-
-                      <CardActions>
-                        <Button size="small" color="primary">
-                          Recept.se
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </div>
-                ))}
+        <div className="headedPageContainer">
+          {/* Header */}
+          <Paper className="pageHeader">
+            <div className="usablePage">
+              <div className="slimDiv">
+                <TextField
+                  fullWidth={true}
+                  label="Skriv ett sökord"
+                  type="search"
+                  variant="standard"
+                  onChange={this.textChanged}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Icon>search</Icon>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </div>
+            </div>
+          </Paper>
 
-              <div className="extraPageHeight" />
+          {/* Content */}
+          <div className="pageContent">
+            <div className="usablePage">
+              <RecipeList />
             </div>
           </div>
         </div>
@@ -115,7 +89,7 @@ class NameSearchPage extends React.Component<
     this.props.findRecipes(e.target.value);
   }
 
-  private openRecipe(recipeId: string){
+  private openRecipe(recipeId: string) {
     this.props.openRecipe(recipeId);
     this.props.goForward();
   }

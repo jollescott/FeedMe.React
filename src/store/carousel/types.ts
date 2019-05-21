@@ -14,4 +14,10 @@ interface IGoBackAction {
     type: typeof GO_BACK
 }
 
-export type CarouselActionTypes = IGoForwardAction | IGoBackAction;
+export const GO_HOME = 'GO_HOME';
+
+interface IGoHomeAction {
+    type: typeof GO_HOME
+}
+
+export type CarouselActionTypes = IGoForwardAction | IGoBackAction | IGoHomeAction;

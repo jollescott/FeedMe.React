@@ -5,7 +5,7 @@ const initialState: ICarouselState = {
 };
 
 export function carouselReducer(state = initialState, action: CarouselActionTypes): ICarouselState {
-    switch(action.type){
+    switch (action.type) {
         case 'GO_BACK':
             return {
                 pageIndex: state.pageIndex - 1
@@ -14,7 +14,11 @@ export function carouselReducer(state = initialState, action: CarouselActionType
             return {
                 pageIndex: state.pageIndex + 1
             }
-        default: 
+        case 'GO_HOME':
+            return {
+                pageIndex: 0
+            }
+        default:
             return state;
     }
 }

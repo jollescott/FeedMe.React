@@ -96,7 +96,7 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
                     ),
                     endAdornment: (
                       <InputAdornment position="end" >
-                        <Button variant="fab" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
+                        <Button variant="raised" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
                           <RemovedIcon color="default" />
                         </Button>
                       </InputAdornment>
