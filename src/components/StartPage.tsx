@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { goForward, goBack, setMode } from '../store/carousel/actions';
+import { goForward, setMode } from '../store/carousel/actions';
 
 
 interface IStartProps {
   currentSearchMode: SearchMode;
   setMode: (mode: SearchMode) => void;
-  goBack: () => void;
   goForward: () => void;
 }
 class StartPage extends React.Component<IStartProps> {
@@ -25,14 +24,9 @@ class StartPage extends React.Component<IStartProps> {
             <div className="centerdDiv">
               <div className="slimDiv">
                 <h1 className="centerText">Sök recept med...</h1>
-                <br />
-                <br />
+                <br/><br/>
                 {this.renderButton(SearchMode.Ingredients, 'Ingredienser')}
-                <br />
-                <br />
                 {this.renderButton(SearchMode.Name, 'Recept Namn')}
-                <br />
-                <br />
               </div>
             </div>
           </div>
@@ -41,6 +35,7 @@ class StartPage extends React.Component<IStartProps> {
     );
   }
 
+  // Renderar en knapp som byter till det specificerade SearchModet och byter sida när man trucker på den 
   private renderButton(searchMode: SearchMode, name: string) {
     return (
       <Button
@@ -55,8 +50,11 @@ class StartPage extends React.Component<IStartProps> {
     );
   }
 
+  // Gå till nästa sida
   private nextPage(searchMode: SearchMode): void {
+    // sätt sök-mode till det valda modet
     this.props.setMode(searchMode);
+    // gå till nästa sida
     this.props.goForward();
   }
 }
@@ -70,7 +68,6 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack()),
     setMode: (mode: SearchMode) => dispatch(setMode(mode))
   }
 };

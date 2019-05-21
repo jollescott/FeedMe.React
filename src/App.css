@@ -255,6 +255,7 @@
 .menuButton {
     padding: 12px !important;
     border-radius: 50px !important;
+    margin-top: 30px !important;
 }
 
 .loadingIndicator {
@@ -288,7 +289,7 @@ h2 {
 }
 
 
-/* on iOS safari */
+/* on iOS whit safari browser */
 
 @supports (-webkit-overflow-scrolling: touch) {
     .site {
@@ -303,7 +304,7 @@ h2 {
 }
 
 
-/* on fire fox */
+/* on fire fox browser */
 
 @-moz-document url-prefix() {
     .endSearchButton {
