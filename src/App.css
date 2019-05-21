@@ -104,13 +104,6 @@
     flex: 50%;
 }
 
-
-/* @media screen and (max-width: 180mm) {
-    .doubleColumnContainer {
-        flex-direction: column;
-    }
-} */
-
 .fullDiv {
     height: 100%;
     width: 100%;
@@ -151,19 +144,6 @@
     padding: 10px;
 }
 
-
-/* @media screen and (max-width: 280mm) {
-    .gridListItemContainer {
-        width: calc(50% - 20px);
-    }
-}
-
-@media screen and (max-width: 160mm) {
-    .gridListItemContainer {
-        width: calc(100% - 20px);
-    }
-} */
-
 .cardImage {
     height: 300px !important;
     object-fit: cover;
@@ -178,7 +158,7 @@
 }
 
 .ingredientListItem:hover {
-    box-shadow: 0 1px 3px #000000;
+    box-shadow: 0 1px 3px #888888;
     background-color: #ffffff6c;
 }
 
@@ -210,7 +190,7 @@
 
 .recipePageImage {
     width: 100%;
-    box-shadow: 2px 0 6px -2px #888;
+    box-shadow: 2px 0 6px -2px #888888;
     object-fit: cover;
 }
 
@@ -269,7 +249,7 @@
 }
 
 .link {
-    color: blue !important;
+    color: #0000EE !important;
     font-size: 1em !important;
 }
 
