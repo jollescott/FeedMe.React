@@ -104,8 +104,7 @@ class AllPages extends React.Component<IAllPagesProps, IAllPagesState> {
             </Slider>
           </div>
 
-          <div className="siteFooter">
-          </div>
+          <div className="siteFooter"/>
 
         </div>
       </MuiThemeProvider>

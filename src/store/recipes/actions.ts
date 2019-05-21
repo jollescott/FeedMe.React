@@ -31,7 +31,6 @@ export const loadRecipe = (recipeId: string): ThunkAction<void, AppState, null, 
     axios.post<IRecipe>(`https://api.feedmeapp.se/v2/recipe/retrieve?id=${recipeId}`)
         .then(resp => {
             if(resp.status === 200){
-                console.log(resp.data);
                 dispatch(loadRecipeSuccess(resp.data));
             } else{
                 dispatch(loadRecipeFailure(resp.statusText));

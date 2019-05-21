@@ -45,7 +45,6 @@ export const searchRecipesI = (ingredients: IIngredient[], start: number = 0): T
     axios.post<IRecipe[]>(`https://api.feedmeapp.se/v2/recipe/suggest?start=${start}`, ingredients)
         .then(resp => {
             if(resp.status === 200) {
-                console.log(resp.data);
                 dispatch(searchSuccess(resp.data));
             }
             else{
