@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { goBack } from '../store/carousel/actions';
-import { Button, Card, CardMedia, CardContent, Typography, Divider, Paper, CardActionArea } from '@material-ui/core';
+import { Button, Card, CardMedia, CardContent, Typography, Divider, Paper, CardActionArea, CircularProgress } from '@material-ui/core';
 import { isNumber } from 'util';
 
 interface IRecipeProps {
@@ -35,18 +35,26 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 {/* Content */}
                 <div className="pageContent">
                     <div className="usablePage">
-                        {"Loading: " + this.props.loading}
-                        {this.renderRecipe()}
+                        {this.props.loading?
+                            <div className="fullDiv">
+                                <div className="centerdDiv">
+                                    <CircularProgress color="primary" className="loadingIndicator" />
+                                </div>
+                            </div>
+                            :
+                            this.renderRecipe()
+                        }
                     </div>
 
-                    <div className="extraPageHeight" />
                 </div>
             </div>
         );
     }
 
+    // Renderar resept sida
     private renderRecipe() {
-        if (this.props.recipe !== undefined) {
+        // Om receptet har hämtats korrekt
+        if (this.props.recipe !== undefined && this.props.recipe != null) {
             const recipe = this.props.recipe;
             return (
                 <div>
@@ -126,9 +134,18 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                 </div>
             );
         }
+        // Om receptet inte hämtats ordentligt
         else {
             return (
-                <h1>Kunde inte hämta receptet</h1>
+                <div className="fullDiv">
+                    <div className="centerdDiv">
+                        <Card className="recipeInstructionCard">
+                            <Typography variant="h6">
+                                {"Kunde inte hämta receptet"}
+                            </Typography>
+                        </Card>
+                    </div>
+                </div>
             );
         }
     }
