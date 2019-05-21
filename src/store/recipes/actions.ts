@@ -28,6 +28,7 @@ export function loadRecipeFailure(error: string) : RecipeActionTypes{
 }
 
 export const loadRecipe = (recipeId: string): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+    dispatch(loadRecipeStart());
     axios.post<IRecipe>(`https://api.feedmeapp.se/v2/recipe/retrieve?id=${recipeId}`)
         .then(resp => {
             if(resp.status === 200){
