@@ -5,9 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "PowerShell Launch Current File",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${file}",
+            "args": [],
+            "cwd": "${file}"
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
+            "linux": {
+                "runtimeExecutable": "/var/lib/snapd/snap/bin/chromium",
+            },
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         }

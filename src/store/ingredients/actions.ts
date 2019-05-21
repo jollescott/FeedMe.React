@@ -41,7 +41,6 @@ export function searchFailure(error: string) : IngredientActionTypes{
 
 export const searchIngredients = (search: string): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
     dispatch(searchStart());
-
     axios.post<IIngredient[]>(`https://api.feedmeapp.se/v2/ingredient/suggest?search=${search}`)
         .then(resp => {
             if(resp.status === 200) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { TextField, InputAdornment, Divider, Paper } from '@material-ui/core';
+import { TextField, InputAdornment, Divider, Paper, CircularProgress } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -18,8 +18,7 @@ import AddedIcon from '@material-ui/icons/Check';
 import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RemovedIcon from '@material-ui/icons/Close';
-import EndSearchIcon from '@material-ui/icons/Close';
-import { searchRecipesI } from '../store/search/actions';
+import { searchRecipesI, searchClear } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 
 
@@ -33,7 +32,7 @@ interface IIngredientSearchProps {
   removeIngredient: (ingredient: IIngredient) => void; // Ta bort ingrediens
   findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
   goForward: () => void;
-  goBack: () => void;
+  searchClear: () => void;
 }
 interface IIngredientSearchState {
   searchTerm: string;
@@ -56,10 +55,10 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     const isAdded: boolean[] = []; // En bool för varje ingrediens i "props.results" som anger om ingrediensen redan är tillagd i "props.ingreedients" eller inte.
 
     // Lägg till världen i isAdded[] och tilldela de resultatingredinser som redan är tillagada deras "roles"
-    for (let i = 0; i < this.props.results.length; i++) {
-      const index = this.ingredientListIndex(this.props.ingredients, this.props.results[i]);
+    for (const result of this.props.results) {
+      const index = this.ingredientListIndex(this.props.ingredients, result);
       if (index !== -1) {
-        this.props.results[i].role = this.props.ingredients[index].role;
+        result.role = this.props.ingredients[index].role;
       }
       isAdded.push(index !== -1);
     }
@@ -67,141 +66,159 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
     let readyToFindRecipes = false; // Anger om det finns ingredienser som går att söka recept med.
 
     // Kolla om det finns ingredienser som går att söka recept med.
-    for (let j = 0; j < this.props.ingredients.length; j++) {
-      if (this.props.ingredients[j].role === IngredientRole.Include) {
+    for (const ingredient of this.props.ingredients) {
+      if (ingredient.role === IngredientRole.Include) {
         readyToFindRecipes = true;
         break;
       }
     }
 
     return (
-      <Paper className="page">
+      <div className="page">
+        <div className="headedPageContainer">
 
-        {/* Header */}
-        <Paper className="pageHeader">
-          <div className="usablePage">
-            <div className="slimDiv">
-              <TextField
-                fullWidth={true}
-                label="Lägg till ingredienser"
-                type="search"
-                variant="standard"
-                onChange={this.textChanged}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Icon>search</Icon>
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end" >
-                      <Button variant="fab" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
-                        <EndSearchIcon color="default" />
-                      </Button>
-                    </InputAdornment>
-                  )
-                }}
-              />
+          {/* Header */}
+          <Paper className="pageHeader">
+            <div className="usablePage">
+              <div className="centerdDiv">
+                <div className="slimDiv">
+                  <TextField
+                    fullWidth={true}
+                    label="Lägg till ingredienser"
+                    type="search"
+                    variant="standard"
+                    onChange={this.textChanged}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Icon>search</Icon>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position="end" >
+                          <Button variant="raised" disabled={this.state.searchTerm === ""} onClick={() => this.setState({ searchTerm: "" })} className="endSearchButton">
+                            <RemovedIcon color="default" />
+                          </Button>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
 
+                </div>
+              </div>
             </div>
-          </div>
-        </Paper>
+          </Paper>
 
-        {/* Content */}
-        <div className="pageContent">
-          <div className="usablePage">
-            <div className="slimDiv">
+          {/* Content */}
+          <div className="pageContent">
+            <div className="usablePage">
+              <div className="slimDiv">
 
-
-              {this.state.searchTerm.length === 0 ?
-                <h1 className="StartPageButtons">Tillagda ingredinser</h1>
-                :
-                <h1 className="StartPageButtons">Lägg till ingredienser</h1>
-              }
-
-              <Divider variant="fullWidth" />
-
-              {this.state.searchTerm.length === 0 ?
-                this.props.ingredients.length === 0 ?
-                  <div>
-                    <br />
-                    <h3 className="info">Dina tillagda ingredienser kommer att visas här.</h3>
-                    <h4 className="info"> Lägg till ingredienser genom att söka i sökfältet.</h4>
-                    <br />
-                  </div>
+                <br />
+                {this.state.searchTerm.length === 0 ?
+                  <h2 className="StartPageButtons">Tillagda ingredinser</h2>
                   :
-                  // Tillagda ingredienser lista
-                  <List>
-                    {this.props.ingredients.map((ingredient, index) => (
-                      <ListItem key={index} className="ingredientListItem">
-                        <ListItemText primary={ingredient.ingredientName} />
-                        <IconButton onClick={() => this.toggleIngredientRole(this.props.ingredients, ingredient)}>
-                          {ingredient.role === IngredientRole.Include ?
-                            <AddedIcon color="primary" />
-                            :
-                            <RemovedIcon color="error" />
-                          }
-                        </IconButton>
-                        <IconButton color="default" onClick={() => this.props.removeIngredient(ingredient)}>
-                          <DeleteIcon color="default" />
-                        </IconButton>
-                      </ListItem>
-                    ))}
-                  </List>
-                :
-                !this.props.loading && this.props.results.length === 0 ?
-                  <div>
-                    <br />
-                    <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
-                    <br />
-                  </div>
+                  <h2 className="StartPageButtons">Lägg till ingredienser</h2>
+                }
+
+                <Divider variant="fullWidth" />
+
+                {this.state.searchTerm.length === 0 ? // Om det inte står något i sökfältet:
+                  this.props.ingredients.length === 0 ?  // Om det inte finns några tillagda ingredienser:
+                    <div>
+                      <br />
+                      <h3 className="info">Dina tillagda ingredienser kommer att visas här.</h3>
+                      <h4 className="info"> Lägg till ingredienser genom att söka i sökfältet.</h4>
+                      <br />
+                    </div>
+                    : // Om det finns tillgda íngrediensser i listan:
+                    // Skapa tillagda ingredienser listan
+                    <List>
+                      {this.props.ingredients.map((ingredient, index) => (  // Loopar igenom alla tillagda ingredienser
+                        <ListItem key={index} className="ingredientListItem">
+                          <ListItemText primary={ingredient.ingredientName} />
+                          <IconButton onClick={() => this.toggleIngredientRole(this.props.ingredients, ingredient)}>
+                            {ingredient.role === IngredientRole.Include ?
+                              <AddedIcon color="primary" />
+                              :
+                              <RemovedIcon color="error" />
+                            }
+                          </IconButton>
+                          <IconButton color="default" onClick={() => this.props.removeIngredient(ingredient)}>
+                            <DeleteIcon color="default" />
+                          </IconButton>
+                        </ListItem>
+                      ))}
+                    </List>
                   :
-                  // Ingrediens sök lista
-                  <List>
-                    {this.props.results.map((ingredient, index) => (
-                      <ListItem key={index} className="ingredientListItem">
-                        <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
+                  !this.props.loading && this.props.results.length === 0 ? // Om ingrediensen in kan hittas:
+                    <div>
+                      <br />
+                      <h3 className="info">{"Ingrediensen " + this.state.searchTerm + " kan inte hittas."}</h3>
+                      <br />
+                    </div>
 
-                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
-                          {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
-                        </IconButton>
+                    : // Om ingrediensen kan hittas:
 
-                        <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
-                          {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
-                        </IconButton>
-                      </ListItem>
-                    ))}
-                  </List>
-              }
+                    this.props.loading ?  // Om det ingrediensssökningen laddar:
+                      <div className="fullDiv">
+                        <div className="centerdDiv">
+                          <CircularProgress color="primary" className="loadingIndicator" />
+                        </div>
+                      </div>
+                      :  // Om ingredienssökningen inte laddar:
+                      // Skapa ingrediens sök lista
+                      <List>
+                        {this.props.results.map((ingredient, index) => (  // Loopar igenom alla hittade ingredienser
+                          <ListItem key={index} className="ingredientListItem">
+                            <ListItemText primary={this.formatListName(ingredient.ingredientName)} />
 
-              <Divider variant="fullWidth" />
+                            <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Exclude)} className="ingredientListButton">
+                              {isAdded[index] && ingredient.role === IngredientRole.Exclude ? <RemovedIcon color="error" /> : <RemoveIcon color="default" />}
+                            </IconButton>
 
-              <br />
+                            <IconButton color="default" onClick={() => this.toggleIngredient(ingredient, IngredientRole.Include)} className="ingredientListButton">
+                              {isAdded[index] && ingredient.role === IngredientRole.Include ? <AddedIcon color="primary" /> : <AddIcon color="default" />}
+                            </IconButton>
+                          </ListItem>
+                        ))}
+                      </List>
+                }
 
-              <Button variant="extendedFab" color="primary" onClick={this.getRecipesButtonClickHandler} fullWidth={true} disabled={!readyToFindRecipes}>
-                Hämta Recept
-              </Button>
+                <Divider variant="fullWidth" />
 
-              <br />
-              <br />
+                <br />
 
-              <Button variant="outlined" color="default" onClick={this.props.goBack}>
-                {"< Föregående sida"}
-              </Button>
+                {/* "Hämta recept" knappen */}
+                <Button variant="extendedFab" color="primary" onClick={this.getRecipesButtonClickHandler} fullWidth={true} disabled={!readyToFindRecipes}>
+                  Hämta Recept
+                </Button>
 
-              <div className="extraPageHeight" />
+                {/* Lite extra höjd i botten av sidan: */}
+                <br />
+                <br />
+
+              </div>
             </div>
           </div>
         </div>
-
-      </Paper>
+      </div>
     );
   }
 
   // Gå till nästa sida
   private getRecipesButtonClickHandler(): void {
+    // ta bort gamla recept
+    this.props.searchClear();
+    // börja söka efter recept
     this.props.findRecipes(this.props.ingredients);
+    // gå till nästa sida
     this.props.goForward();
+    // stäng sökläget
+    this.setState({
+      ...this.state,
+      searchTerm: ""
+    })
   }
 
 
@@ -285,7 +302,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), // Lägg till dispatchen för injection in i props
     findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query)),
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack())
+    searchClear: () => dispatch(searchClear()),
   }
 };
 
