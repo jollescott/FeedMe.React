@@ -221,10 +221,17 @@
     text-align: center;
     padding-left: 20px;
     padding-right: 10px;
+    cursor: pointer;
 }
 
+.ownerInfo:hover {
+    background-color: #dbdbdb;
+}
+
+
 .ownerLogo {
-    width: 100%;
+    max-width: 100%;
+    max-height: calc(100% - 20px);
 }
 
 

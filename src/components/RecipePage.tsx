@@ -87,7 +87,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
                                     <div className="recipeIngredientListLeft">
                                         <Divider variant="fullWidth" />
                                         {recipe.recipeParts.map((recipePart, index) => (
-                                            <div>
+                                            <div key={index}>
                                                 <div className="recipeIngredientListRow">
                                                     <div className="recipeIngredientListLeftColumn">
                                                         <Typography component="p">
