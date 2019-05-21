@@ -58,7 +58,7 @@ class RecipeListPage extends React.Component<IRecipeListProps> {
                       className="cardImage"
                       component="img"
                       image={recipe.image}
-                      title={recipe.name} // TODO: byt title till receptets name
+                      title={recipe.name}
                     />
                     <CardContent className="cardText">
                       <Typography
