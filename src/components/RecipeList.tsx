@@ -36,7 +36,7 @@ interface IRecipeListProps {
   searchText: (query: string, start: number) => void;
 }
 
-interface IRecipeListState{
+interface IRecipeListState {
   scrollY: number;
 }
 
@@ -56,8 +56,8 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     };
   }
 
-  public componentDidUpdate(){
-    if(this.container !== null){
+  public componentDidUpdate() {
+    if (this.container !== null) {
       this.container.scrollTop = this.state.scrollY;
     }
   }
@@ -82,7 +82,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                         className="cardImage"
                         component="img"
                         image={recipe.image}
-                        title={recipe.name} // TODO: byt title till receptets name
+                        title={recipe.name}
                       />
                       <CardContent className="cardText">
                         <Typography
@@ -101,9 +101,17 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
                 </div>
               ))}
 
-              {this.props.results.length > 0 && this.props.results.length % 25 === 0 && (
+              {!this.props.loading && this.props.results.length > 0 && this.props.results.length % 25 === 0 && (
                 <div className="gridListItemContainer" key={-1}>
                   <Button onClick={() => this.loadMore()}>Ladda Fler!</Button>
+                </div>
+              )}
+
+              {this.props.loading && this.props.results.length > 0 && (
+                <div className="bottomOverlay">
+                  <div className="centerdDiv">
+                    <CircularProgress color="primary" className="loadingIndicator" />
+                  </div>
                 </div>
               )}
             </div>
@@ -125,8 +133,7 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
   }
 
   private loadMore() {
-
-    if(this.container !== null){
+    if (this.container !== null) {
       const scroll = this.container.scrollHeight;
 
       this.setState({
@@ -135,8 +142,8 @@ class RecipeListPage extends React.Component<IRecipeListProps, IRecipeListState>
     }
 
     const start = this.props.results.length;
-    this.props.currentSearchMode === SearchMode.Ingredients ? this.props.searchIngredients(this.props.ingredients, start) 
-    : this.props.searchText(this.props.query, start);
+    this.props.currentSearchMode === SearchMode.Ingredients ? this.props.searchIngredients(this.props.ingredients, start)
+      : this.props.searchText(this.props.query, start);
   }
 
   private openRecipe(recipeID: string) {

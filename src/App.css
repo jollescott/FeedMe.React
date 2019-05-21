@@ -263,6 +263,13 @@
     font-size: 1em !important;
 }
 
+.bottomOverlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+}
+
 
 /* on iOS safari */
 
