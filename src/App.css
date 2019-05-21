@@ -199,12 +199,14 @@
 .recipeIngredientListLeftColumn {
     flex: 20%;
     text-align: right;
+    padding-left: 8px;
     padding-right: 8px;
 }
 
 .recipeIngredientListRightColumn {
     flex: 80%;
     padding-left: 8px;
+    padding-right: 8px;
 }
 
 .recipePageImage {
