@@ -18,7 +18,7 @@ import AddedIcon from '@material-ui/icons/Check';
 import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RemovedIcon from '@material-ui/icons/Close';
-import { searchRecipesI } from '../store/search/actions';
+import { searchRecipesI, searchClear } from '../store/search/actions';
 import { goForward, goBack } from '../store/carousel/actions';
 
 
@@ -33,6 +33,7 @@ interface IIngredientSearchProps {
   findRecipes: (query: IIngredient[]) => void;  // Börja söka efter recept
   goForward: () => void;
   goBack: () => void;
+  searchClear: () => void;
 }
 interface IIngredientSearchState {
   searchTerm: string;
@@ -207,6 +208,8 @@ class IngredientSearchPage extends React.Component<IIngredientSearchProps, IIngr
 
   // Gå till nästa sida
   private getRecipesButtonClickHandler(): void {
+    // ta bort gamla recept
+    this.props.searchClear();
     // börja söka efter recept
     this.props.findRecipes(this.props.ingredients);
     // gå till nästa sida
@@ -299,7 +302,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     removeIngredient: (ingredient: IIngredient) => dispatch(removeIngredient(ingredient)), // Lägg till dispatchen för injection in i props
     findRecipes: (query: IIngredient[]) => dispatch(searchRecipesI(query)),
     goForward: () => dispatch(goForward()),
-    goBack: () => dispatch(goBack())
+    goBack: () => dispatch(goBack()),
+    searchClear: () => dispatch(searchClear()),
   }
 };
 
