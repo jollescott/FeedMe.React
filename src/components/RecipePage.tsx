@@ -65,6 +65,7 @@ class RecipePage extends React.Component<IRecipeProps, IRecipeState>
 
                             {/* Recept bild */}
                             <CardMedia
+                                className="recipePageImage"
                                 component="img"
                                 image={recipe.image}
                                 title={recipe.name}
