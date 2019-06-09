@@ -23,3 +23,9 @@ steps:
 - script: |
     npm test -- --watchAll=false
   displayName: 'npm test'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: 'test-*.xml'
+    testRunTitle: 'Publish test results'
