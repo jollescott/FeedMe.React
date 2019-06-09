@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite id="0" name="D:\Git\FeedMe.Web\src\tests\search.test.ts" errors="0" package="D:\Git\FeedMe.Web\src\tests\search.test.ts" hostname="localhost" tests="1" failures="1" time="2.69" timestamp="2019-06-09T21:54:31">
+    <properties>
+    </properties>
+    <testcase classname="async actions" name="Load recipes from search query" time="0">
+      <failure message="Error: [2mexpect([22m[31mreceived[39m[2m).toEqual([22m[32mexpected[39m[2m)[22m
+
+Difference:
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  Array [[22m
+[2m    Object {[22m
+[2m      &quot;type&quot;: &quot;SEARCH_START&quot;,[22m
+[2m    },[22m
+[32m-   Object {[39m
+[32m-     &quot;recipes&quot;: Array [[39m
+[32m-       Object {[39m
+[32m-         &quot;coverage&quot;: 1,[39m
+[32m-         &quot;desc&quot;: &quot;A test recipe&quot;,[39m
+[32m-         &quot;directions&quot;: Array [],[39m
+[32m-         &quot;image&quot;: &quot;&quot;,[39m
+[32m-         &quot;ingredients&quot;: Array [],[39m
+[32m-         &quot;name&quot;: &quot;test&quot;,[39m
+[32m-         &quot;owner&quot;: 1,[39m
+[32m-         &quot;ownerLogo&quot;: &quot;www.google.com&quot;,[39m
+[32m-         &quot;recipeId&quot;: &quot;test&quot;,[39m
+[32m-         &quot;recipeParts&quot;: Array [],[39m
+[32m-         &quot;source&quot;: &quot;www.google.com&quot;,[39m
+[32m-         &quot;tags&quot;: Array [],[39m
+[32m-       },[39m
+[32m-     ],[39m
+[32m-     &quot;type&quot;: &quot;SEARCH_SUCCESS&quot;,[39m
+[32m-   },[39m
+[2m  ][22m
+    at toEqual (D:\Git\FeedMe.Web\src\tests\search.test.ts:48:34)
+    at process._tickCallback (internal/process/next_tick.js:68:7)" type="AssertionError">
+      </failure>
+    </testcase>
+    <system-out/>
+    <system-err/>
+  </testsuite>
+  <testsuite id="1" name="D:\Git\FeedMe.Web\src\App.test.tsx" errors="0" package="D:\Git\FeedMe.Web\src\App.test.tsx" hostname="localhost" tests="0" failures="0" time="0" timestamp="1970-01-01T00:00:00">
+    <properties>
+    </properties>
+    <system-out/>
+    <system-err/>
+  </testsuite>
+</testsuites>
