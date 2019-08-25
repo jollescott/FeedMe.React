@@ -7,6 +7,10 @@ import { rootReducer } from './store';
 import AllPages from './components/AllPages';
 import { SearchMode } from './misc/enums';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-146469825-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 interface IAppState {
