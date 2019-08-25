@@ -58,6 +58,7 @@
     "react-autocomplete": "^1.8.1",
     "react-dev-utils": "^9.0.0",
     "react-dom": "^16.8.6",
+    "react-ga": "^2.6.0",
     "react-redux": "^7.0.2",
     "react-router": "^5.0.0",
     "react-slick": "^0.24.0",
