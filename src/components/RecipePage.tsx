@@ -19,8 +19,7 @@ interface IRecipeState {
 }
 
 class RecipePage extends React.Component<IRecipeProps, IRecipeState>
-{
-    [x: string]: any;
+{    
     constructor(props: Readonly<IRecipeProps>) {
         super(props);
 
